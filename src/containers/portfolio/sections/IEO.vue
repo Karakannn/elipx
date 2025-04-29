@@ -1,3 +1,9 @@
+<script setup>
+import { Button } from "@/components/ui/button";
+import { SvgIcon } from "@/components/ui/svg-icon";
+
+</script>
+
 <template>
     <div class="bg-white rounded-lg shadow-sm p-6 w-full max-w-[500px] mx-auto">
         <div class="flex justify-between items-center mb-6">
@@ -8,26 +14,23 @@
             </button>
         </div>
 
-        <div class="flex gap-2 mb-6 overflow-x-auto">
-            <button class="flex items-center gap-1 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">
-                <Star class="h-4 w-4" />
+        <div class="flex gap-2 text-mono-12 font-mono overflow-x-auto">
+            <Button class="px-2 py-2.5" variant="tertiary">
+                <SvgIcon name="fav" class="size-4" />
                 ALL
-            </button>
-            <button
-                class="flex items-center gap-1 px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-sm font-medium">
-                <Home class="h-4 w-4" />
+            </Button>
+            <Button class="px-2 py-2.5" variant="tertiary">
+                <SvgIcon name="fire" class="size-4" />
                 RELEASE
-            </button>
-            <button
-                class="flex items-center gap-1 px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-sm font-medium">
-                <Clock class="h-4 w-4" />
+            </Button>
+            <Button class="px-2 py-2.5" variant="tertiary">
+                <SvgIcon name="new" class="size-4" />
                 COMING SOON
-            </button>
-            <button
-                class="flex items-center gap-1 px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-sm font-medium">
-                <CheckCircle class="h-4 w-4" />
+            </Button>
+            <Button class="px-2 py-2.5" variant="tertiary">
+                <SvgIcon name="check_circle" class="size-4" />
                 COMPLETED
-            </button>
+            </Button>
         </div>
 
         <!-- Binance Exchange -->
@@ -35,8 +38,8 @@
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
                     <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center mr-3">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/placeholder-ob7miW3mUreePYfXdVwkpFWHthzoR5.svg?height=40&width=40&query=binance+logo"
-                            alt="Binance" class="w-6 h-6" />
+                        <SvgIcon name="binance" class="size-4" />
+
                     </div>
                     <span class="font-medium">Binance</span>
                 </div>
@@ -81,9 +84,7 @@
         <div class="border-t border-gray-200 pt-6">
             <div class="flex justify-between items-center mb-4">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center mr-3">
-                        <span class="text-white text-xs">bybit</span>
-                    </div>
+                    <SvgIcon name="bybit" class="size-4" />
                     <span class="font-medium">ByBit</span>
                 </div>
                 <div class="flex items-center">
@@ -106,9 +107,7 @@
     </div>
 </template>
 
-<script setup>
-import { ChevronRight, Star, Home, Clock, CheckCircle } from 'lucide-vue-next';
-</script>
+
 
 <style scoped>
 /* Additional custom styles if needed */
