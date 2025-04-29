@@ -60,32 +60,44 @@
   --color-surface-secondary-active: rgba(16, 16, 16, 0.12);
   --color-surface-secondary-active: rgba(16, 16, 16, 0.12);
 
+  --color-surface-sunken: rgba(245, 245, 245, 1);
   --color-on-sunken: rgba(16, 16, 16, 0.06);
   --color-border-on-sunken: rgba(16, 16, 16, 0.08);
+
+
+  --color-primary-inverse: rgba(255, 255, 255, 1);
+  --color-secondary-inverse: rgba(255, 255, 255, 0.45);
+
 
   --font-sans: "Suisse Int'l";
   --font-mono: "Chivo Mono", monospace;
 
   /* Headings */
+
+  --text-balance: 76px;
+  --text-balance--line-height: 100%;
+  --text-balance--letter-spacing: -3%;
+  --text-balance--font-weight: 450;
+
   --text-h1: 48px;
   --text-h1--line-height: 100%;
   --text-h1--letter-spacing: -3%;
-  --text-h1--font-weight: 400;
+  --text-h1--font-weight: 450;
 
   --text-h2: 32px;
   --text-h2--line-height: 100%;
   --text-h2--letter-spacing: -3%;
-  --text-h2--font-weight: 400;
+  --text-h2--font-weight: 450;
 
   --text-h3: 24px;
   --text-h3--line-height: 100%;
   --text-h3--letter-spacing: -2%;
-  --text-h3--font-weight: 400;
+  --text-h3--font-weight: 450;
 
   --text-h4: 20px;
   --text-h4--line-height: 100%;
   --text-h4--letter-spacing: -2%;
-  --text-h4--font-weight: 400;
+  --text-h4--font-weight: 450;
 
   /* Paragraph */
   --text-paragraph-18: 18px;
@@ -223,11 +235,41 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+.custom-container {
+  width: 100%;
+}
+
+@media (width >= 40rem /* 640px */) {
+  .custom-container {
+    max-width: 40rem /* 640px */;
+  }
+}
+@media (width >= 48rem /* 768px */) {
+  .custom-container {
+    max-width: 48rem /* 768px */;
+  }
+}
+@media (width >= 64rem /* 1024px */) {
+  .custom-container {
+    max-width: 64rem /* 1024px */;
+  }
+}
+@media (width >= 80rem /* 1280px */) {
+  .custom-container {
+    max-width: 80rem /* 1280px */;
+  }
+}
+@media (width >= 90rem /* 1440px */) {
+  .custom-container {
+    max-width: 90rem /* 1440px */;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-surface-sunken text-foreground mx-auto;
   }
 }

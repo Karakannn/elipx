@@ -41,7 +41,7 @@ const links = [
 </script>
 
 <template>
-    <header class="h-14 px-4 pt-3">
+    <header class="h-14 px-4 pt-3 border-b border-border-on-sunken">
         <div class="flex gap-[28px] items-center w-full">
             <div class="flex-1 flex items-center gap-4">
                 <img src="/public/logo.svg" alt="">

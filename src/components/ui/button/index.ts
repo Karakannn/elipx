@@ -8,7 +8,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-surface-accent text-white  focus:outline-offset-2 focus:outline-solid outline-surface-accent hover:bg-surface-accent-hover active:bg-surface-accent-active",
+          "bg-surface-accent !text-white focus:outline-offset-2 focus:outline-solid outline-surface-accent hover:bg-surface-accent-hover active:bg-surface-accent-active",
         secondary:
           "bg-surface-secondary text-primary  focus:outline-offset-2 focus:outline-solid outline-surface-accent hover:bg-surface-secondary-hover active:bg-surface-secondary-active",
         header:
