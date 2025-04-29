@@ -8,6 +8,7 @@ import Announcements from "./sections/Announcements.vue";
 import MyTokenAllocation from "./sections/MyTokenAllocation.vue";
 import Allocation from "./sections/Allocation.vue";
 import PurchaseSummary from "./sections/PurchaseSummary.vue";
+import IEOTimeline from "./sections/IEOTimeline.vue";
 
 </script>
 
@@ -31,7 +32,8 @@ import PurchaseSummary from "./sections/PurchaseSummary.vue";
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <!-- <MyTokenAllocation class="col-span-2" /> -->
             <!--    <Allocation class="col-span-2" /> -->
-            <PurchaseSummary class="col-span-2" />
+            <!--  <PurchaseSummary class="col-span-2" /> -->
+            <IEOTimeline class="col-span-2" />
         </div>
     </div>
 </template>
