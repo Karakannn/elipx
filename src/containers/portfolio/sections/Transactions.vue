@@ -243,7 +243,7 @@ const columns: ColumnDef[] = [
 
             return h('div', { class: 'flex flex-col items-end gap-1' }, [
                 h('span', {class:"text-caption-12"}, amountELX),
-                h('span', { class: 'text-mono-12 font-mono text-text-secondary' }, `$ ${amountUSD}`)
+                h('span', { class: 'text-mono-12 font-mono text-secondary' }, `$ ${amountUSD}`)
             ])
         },
     },
@@ -300,7 +300,7 @@ const table = useVueTable({
                         <TableHeader>
                             <TableRow>
                                 <TableHead v-for="column in table.getAllColumns()" :key="column.id"
-                                    class="text-mono-10 font-mono text-text-secondary uppercase p-4 text-[10px]">
+                                    class="text-mono-10 font-mono text-secondary uppercase p-4 text-[10px]">
                                     <FlexRender v-if="!column.columnDef.header" :render="column.columnDef.header"
                                         :props="column.getContext()" />
                                     <template v-else>{{ column.columnDef.header }}</template>
@@ -344,7 +344,7 @@ const table = useVueTable({
         </Tabs>
 
         <div class="flex justify-between items-center p-4 text-sm">
-            <div class="text-text-secondary font-mono text-mono-10">SHOWING 11 OF 15</div>
+            <div class="text-secondary font-mono text-mono-10">SHOWING 11 OF 15</div>
             <div class="flex items-center space-x-2">
                 <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()"
                     @click="table.previousPage()">

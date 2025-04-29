@@ -17,11 +17,15 @@ export const buttonVariants = cva(
           "bg-transparent hover:bg-surface-secondary-hover active:bg-surface-accent focus:border focus:border-surface-accent active:text-white",
         tertiary:
           "bg-surface-secondary !rounded-[8px] hover:bg-surface-secondary active:bg-surface-accent focus:border focus:border-surface-accent active:text-white",
+        "link-default": "p-0 text-primary hover:text-accent active:text-accent focus:text-primary",
+        "link-secondary": "p-0 text-secondary hover:text-primary active:text-primary focus:text-primary",
+        "link-accent": "p-0 text-accent hover:text-accent-hover active:text-accent-active focus:text-accent",
+        "link-active": "p-0 text-warning hover:text-warning-hover active:text-warning-active focus:text-warning",
 
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+
       },
       size: {
         default: "rounded-full gap-2 py-3 px-4",

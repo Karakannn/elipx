@@ -22,7 +22,7 @@ import {
     <div class="space-y-4 max-w-xl">
         <div class="flex flex-col gap-1">
             <div class="text-h3 text-primary font-[450] flex items-center gap-1">
-                <span class="text-text-muted font-[450]">Get Started,</span>
+                <span class="text-muted font-[450]">Get Started,</span>
                 <span>Jason</span>
                 <Avatar>
                     <AvatarImage src="/public/avatar.png" alt="@unovue" />
@@ -34,7 +34,7 @@ import {
                     <span>Complete</span>
                     <SvgIcon name="gg_check-o" class="size-6" />
                 </div>
-                <span class="text-text-muted font-[450]">your life ELX Dashboard</span>
+                <span class="text-muted font-[450]">your life ELX Dashboard</span>
             </div>
         </div>
 
@@ -55,10 +55,10 @@ import {
             </Select>
 
             <div class="space-y-3">
-                <h5 class="text-caption-12 text-text-secondary">Estimated Balance</h5>
+                <h5 class="text-caption-12 text-secondary">Estimated Balance</h5>
                 <Separator />
                 <div class="flex gap-2">
-                    <h1 class="text-balance">200.<span class="text-text-muted">40</span></h1>
+                    <h1 class="text-balance">200.<span class="text-muted">40</span></h1>
                     <div class="flex flex-col h-full gap-2 justify-between">
                         <Button variant="secondary" class="h-min w-min px-2 py-2">
                             <SvgIcon name="logo" />
@@ -75,17 +75,17 @@ import {
                 <div class="flex gap-3 w-full border-t border-border-on-sunken">
 
                     <div class="space-y-1.5 flex-1 pt-3 border-r border-border-on-sunken">
-                        <h5 class=" text-text-secondary text-caption-12">Token Price:</h5>
+                        <h5 class=" text-secondary text-caption-12">Token Price:</h5>
                         <span class=" text-mono-12 font-mono">0.2715$</span>
                     </div>
 
                     <div class="space-y-1.5 flex-1 pt-3 ">
-                        <h5 class=" text-text-secondary text-caption-12">Locked Token:</h5>
+                        <h5 class=" text-secondary text-caption-12">Locked Token:</h5>
                         <span class=" text-mono-12 font-mono">248 ELX</span>
                     </div>
 
                     <div class="space-y-1.5 flex-1 pt-3 border-r border-border-on-sunken">
-                        <h5 class=" text-text-secondary text-caption-12">IEO Date</h5>
+                        <h5 class=" text-secondary text-caption-12">IEO Date</h5>
                         <span class=" text-mono-12 font-mono">28 may 2025</span>
                     </div>
                 </div>
