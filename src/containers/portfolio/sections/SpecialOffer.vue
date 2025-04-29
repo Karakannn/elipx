@@ -18,24 +18,20 @@ import {
 </script>
 
 <template>
- <div class="flex gap-16">
-    <div class="space-y-4 max-w-xl">
-        <div class="flex flex-col gap-1">
-            <div class="text-h3 text-primary font-[450] flex items-center gap-1">
+ <div class="flex flex-col lg:flex-row lg:gap-16">
+    <div class="space-y-4 lg:max-w-xl p-4 pb-0">
+        <div class="text-h4 sm:text-h3 font-[450] flex items-center gap-1 flex-wrap">
                 <span class="text-muted font-[450]">Get Started,</span>
                 <span>Jason</span>
-                <Avatar>
+                <Avatar class="mx-1">
                     <AvatarImage src="/public/avatar.png" alt="@unovue" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-            </div>
-            <div class="text-h3 font-[450] flex gap-1 items-center">
-                <div class="flex items-center gap-1">
-                    <span>Complete</span>
-                    <SvgIcon name="gg_check-o" class="size-6" />
-                </div>
-                <span class="text-muted font-[450]">your life ELX Dashboard</span>
-            </div>
+               <div class="w-full flex items-center">
+                <span>Complete</span>
+                <SvgIcon name="gg_check-o" class="size-6 mr-3" />
+                <span class="text-muted font-[450]">your life ELX Dashboard</span> 
+               </div>
         </div>
 
         <div class="space-y-4">
@@ -54,7 +50,7 @@ import {
                 </SelectContent>
             </Select>
 
-            <div class="space-y-3">
+            <div class="space-y-3 mb-4">
                 <h5 class="text-caption-12 text-secondary">Estimated Balance</h5>
                 <Separator />
                 <div class="flex gap-2">
