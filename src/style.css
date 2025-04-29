@@ -103,65 +103,65 @@
   --text-paragraph-18: 18px;
   --text-paragraph-18--line-height: 130%;
   --text-paragraph-18--letter-spacing: -1%;
-  --text-paragraph-18--font-weight: 400;
+  --text-paragraph-18--font-weight: 450;
 
   --text-paragraph-16: 16px;
   --text-paragraph-16--line-height: 130%;
   --text-paragraph-16--letter-spacing: -1%;
-  --text-paragraph-16--font-weight: 400;
+  --text-paragraph-16--font-weight: 450;
 
   --text-paragraph-14: 14px;
   --text-paragraph-14--line-height: 130%;
   --text-paragraph-14--letter-spacing: -1%;
-  --text-paragraph-14--font-weight: 400;
+  --text-paragraph-14--font-weight: 450;
 
   /* Caption */
   --text-caption-12: 12px;
   --text-caption-12--line-height: 130%;
   --text-caption-12--letter-spacing: 0%;
-  --text-caption-12--font-weight: 400;
+  --text-caption-12--font-weight: 450;
 
   --text-caption-12-100: 12px;
   --text-caption-12-100--line-height: 100%;
   --text-caption-12-100--letter-spacing: 0%;
-  --text-caption-12-100--font-weight: 400;
+  --text-caption-12-100--font-weight: 450;
 
   --text-caption-10: 10px;
   --text-caption-10--line-height: 130%;
   --text-caption-10--letter-spacing: 0%;
-  --text-caption-10--font-weight: 400;
+  --text-caption-10--font-weight: 450;
 
   /* Mono */
   --text-mono-18: 12px;
   --text-mono-18--line-height: 100%;
   --text-mono-18--letter-spacing: 0%;
-  --text-mono-18--font-weight: 400;
+  --text-mono-18--font-weight: 450;
 
   --text-mono-16: 12px;
   --text-mono-16--line-height: 10%;
   --text-mono-16--letter-spacing: 0%;
-  --text-mono-16--font-weight: 400;
+  --text-mono-16--font-weight: 450;
 
   --text-mono-14: 10px;
   --text-mono-14--line-height: 100%;
   --text-mono-14--letter-spacing: 0%;
-  --text-mono-14--font-weight: 400;
+  --text-mono-14--font-weight: 450;
 
   --text-mono-12: 12px;
   --text-mono-12--line-height: 100%;
   --text-mono-12--letter-spacing: 0%;
-  --text-mono-12--font-weight: 400;
+  --text-mono-12--font-weight: 450;
 
   --text-mono-10: 10px;
   --text-mono-10--line-height: 100%;
   --text-mono-10--letter-spacing: 0%;
-  --text-mono-10--font-weight: 400;
+  --text-mono-10--font-weight: 450;
 
   /* Numbers */
   --text-number: 64px;
   --text-number--line-height: 100%;
   --text-number--letter-spacing: -4%;
-  --text-number--font-weight: 400;
+  --text-number--font-weight: 450;
 }
 
 :root {

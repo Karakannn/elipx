@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import SpecialOfferCarousel from "./SpecialOfferCarousel.vue";
+import SpecialOfferCarousel from "../components/SpecialOfferCarousel.vue";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
