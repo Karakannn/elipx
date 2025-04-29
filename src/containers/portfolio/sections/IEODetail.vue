@@ -33,7 +33,7 @@ import {
     </CardHeader>
     <CardContent class="space-y-6">
 
-      <Tabs default-value="account">
+      <Tabs default-value="round-one">
         <TabsList class="space-x-1 text-mono-12 font-mono ">
           <TabsTrigger asChild value="round-one">
             <Button class="px-2 py-2" variant="tertiary">

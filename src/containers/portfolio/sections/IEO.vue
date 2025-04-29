@@ -22,8 +22,6 @@ import {
                     <SvgIcon name="chevron-right" class="size-4" />
                 </Button>
             </CardAction>
-
-
         </CardHeader>
         <CardContent class="space-y-6">
             <div class="flex gap-2 text-mono-12 font-mono overflow-x-auto">
