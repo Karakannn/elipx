@@ -48,6 +48,7 @@
   --color-primary: rgba(16, 16, 16, 1);
   --color-secondary: rgba(16, 16, 16, 0.6);
   --color-muted: rgba(16, 16, 16, 0.4);
+
   --color-accent: rgba(0, 84, 246, 1);
   --color-accent-hover: rgba(11, 21, 218, 1);
   --color-accent-active: rgba(0, 9, 189, 1);
@@ -55,9 +56,12 @@
   --color-warning: rgba(255, 136, 0, 1);
   --color-warning-hover: rgba(244, 130, 0, 1);
   --color-warning-active: rgba(229, 123, 2, 1);
-  --color-border: rgba(16, 16, 16, 0.08);
 
+  --color-border: rgba(16, 16, 16, 0.08);
   --color-border-accent: rgba(0, 84, 246, 1);
+
+  --color-icon-green: rgba(29, 181, 89, 1);
+
 
   --color-surface-accent: #0054f6;
   --color-surface-accent-hover: #0b15da;

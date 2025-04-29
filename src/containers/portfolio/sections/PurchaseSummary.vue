@@ -1,30 +1,42 @@
+<script setup>
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Separator } from "@/components/ui/separator";
+
+</script>
+
 <template>
-    <div class="bg-white rounded-lg shadow-sm p-6 w-full max-w-[500px] mx-auto">
-      <h2 class="text-lg font-medium mb-4">Purchase Summary</h2>
-      
-      <div class="space-y-3">
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-600">Total invested:</span>
-          <span class="text-sm font-medium">450 USDT</span>
-        </div>
-        
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-600">Avg. token price:</span>
-          <span class="text-sm font-medium">$0.03</span>
-        </div>
-        
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-600">Rounds participated:</span>
-          <span class="text-sm font-medium">PRIVATE SALE</span>
-        </div>
+
+  <Card>
+    <CardHeader class="p-4 border-b">
+      <CardTitle class="text-h4">Purchase Summary</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div class="flex justify-between items-center">
+        <span class="text-caption-12 text-secondary">Total invested:</span>
+        <span class="text-mono-12 font-mono">450 USDT</span>
       </div>
-    </div>
-  </template>
-  
-  <script setup>
-  // No additional imports needed
-  </script>
-  
-  <style scoped>
-  /* Additional custom styles if needed */
-  </style>
+      <Separator class="my-2 bg-border" />
+      <div class="flex justify-between items-center">
+        <span class="text-caption-12 text-secondary">Avg. token price:</span>
+        <span class="text-mono-12 font-mono">$0.03</span>
+      </div>
+      <Separator class="my-2 bg-border" />
+      <div class="flex justify-between items-center">
+        <span class="text-caption-12 text-secondary">Rounds participated:</span>
+        <span class="text-mono-12 font-mono">PRIVATE SALE</span>
+      </div>
+      <Separator class="my-2 bg-border" />
+
+    </CardContent>
+  </Card>
+
+</template>
+
+
+
+<style scoped></style>
