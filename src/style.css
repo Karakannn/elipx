@@ -46,15 +46,22 @@
 
   /* Added */
   --color-text-primary: rgba(16, 16, 16, 1);
-  
+  --color-text-secondary: rgba(16, 16, 16, 0.6);
+  --color-text-muted: rgba(16, 16, 16, 0.4);
+
+  --color-border-accent: rgba(0, 84, 246, 1);
+
   --color-surface-accent: #0054f6;
-  --color-surface-accent-hover: #0B15DA;
-  --color-surface-accent-active: #0009BD;
+  --color-surface-accent-hover: #0b15da;
+  --color-surface-accent-active: #0009bd;
 
   --color-surface-secondary: rgba(16, 16, 16, 0.06);
   --color-surface-secondary-hover: rgba(16, 16, 16, 0.08);
   --color-surface-secondary-active: rgba(16, 16, 16, 0.12);
   --color-surface-secondary-active: rgba(16, 16, 16, 0.12);
+
+  --color-on-sunken: rgba(16, 16, 16, 0.06);
+  --color-border-on-sunken: rgba(16, 16, 16, 0.08);
 
   --font-sans: "Suisse Int'l";
   --font-mono: "Chivo Mono", monospace;
