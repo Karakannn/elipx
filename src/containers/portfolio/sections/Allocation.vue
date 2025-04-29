@@ -16,6 +16,7 @@
     <CardContent class="space-y-4">
 
       <Progress :model-value="50" />
+      
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <div class="w-2 h-2 rounded-full bg-icon-green mr-2"></div>

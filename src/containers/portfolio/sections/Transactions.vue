@@ -150,8 +150,6 @@ const columns: ColumnDef[] = [
         cell: ({ row }) => {
             const transaction = row.original
 
-            console.log(transaction.avatarColor);
-
             return h('div', { class: 'flex items-center gap-2' }, [
                 h('div', {
                     class: 'w-[28px] h-[28px] rounded-full flex items-center justify-center text-white',

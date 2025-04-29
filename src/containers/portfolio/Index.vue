@@ -9,31 +9,49 @@ import MyTokenAllocation from "./sections/MyTokenAllocation.vue";
 import Allocation from "./sections/Allocation.vue";
 import PurchaseSummary from "./sections/PurchaseSummary.vue";
 import IEOTimeline from "./sections/IEOTimeline.vue";
+import TokenomicsOverview from "./sections/TokenomicsOverview.vue";
 
 </script>
 
 <template>
     <div class="p-4 space-y-6">
         <SpecialOffer />
-        <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Transactions class="col-span-2" />
             <IEO class="col-span-1" />
         </div>
- -->
-        <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <IEODetail class="col-span-2" />
-            <Announcements class="col-span-1" />
+            <div class="space-y-4">
+                <Announcements class="col-span-1" />
+                <MyTokenAllocation class="col-span-1" />
+            </div>
+
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <Announcements class="col-span-2" />
+            <div class="space-y-4">
+                <Allocation class="col-span-2" />
+                <PurchaseSummary class="col-span-2" />
+                <IEOTimeline class="col-span-2" />
+            </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Announcements class="col-span-2" />
-        </div> -->
+            <MyTokenAllocation class="col-span-2" />
+            <TokenomicsOverview class="col-span-1" />
+            <div class="space-y-4 col-span-2">
+                <Allocation />
+                <PurchaseSummary />
+                <IEOTimeline />
+            </div>
+        </div>
+
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <!-- <MyTokenAllocation class="col-span-2" /> -->
-            <!--    <Allocation class="col-span-2" /> -->
-            <!--  <PurchaseSummary class="col-span-2" /> -->
-            <IEOTimeline class="col-span-2" />
+            <TokenomicsOverview class="col-span-2" />
         </div>
     </div>
 </template>
+
+<style></style>
