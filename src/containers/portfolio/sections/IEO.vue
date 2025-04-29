@@ -13,7 +13,6 @@ import {
 </script>
 
 <template>
-
     <Card>
         <CardHeader class="p-4 border-b">
             <CardTitle class="text-h4">IEO</CardTitle>
@@ -120,7 +119,6 @@ import {
         </CardContent>
 
     </Card>
-
 </template>
 
 
