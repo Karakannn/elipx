@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between py-5 border-b border-border">
+    <div class="flex items-center justify-between py-6 border-b border-border">
         <div class="flex gap-3 items-start">
             <slot name="icon"></slot>
             <div class="space-y-0.5">
