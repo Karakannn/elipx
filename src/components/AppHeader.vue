@@ -5,6 +5,11 @@ import { SvgIcon } from "@/components/ui/svg-icon";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRoute } from "vue-router";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 
 const route = useRoute();
 
@@ -133,20 +138,15 @@ const isActiveLink = (path: string) => {
 
 <template>
   <!-- Desktop Header -->
-  <header class="hidden md:block h-14 border-b border-border-on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
+  <header
+    class="hidden md:block h-14 border-b border-border-on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
     <div class="h-full flex items-center">
       <img src="/public/logo.svg" alt="" class="w-6 h-6 ml-4 shrink-0" />
 
       <div ref="navContainer" class="flex-1 overflow-hidden mx-4 select-none">
         <div class="flex gap-1" style="width: max-content">
-          <Button
-            v-for="link in links"
-            :key="link.name"
-            variant="header"
-            :as-child="true"
-            class="text-mono-12 uppercase shrink-0"
-            :active="isActiveLink(link.href)"
-          >
+          <Button v-for="link in links" :key="link.name" variant="header" :as-child="true"
+            class="text-mono-12 uppercase shrink-0" :active="isActiveLink(link.href)">
             <RouterLink :to="link.href">
               {{ link.name }}
             </RouterLink>
@@ -164,10 +164,83 @@ const isActiveLink = (path: string) => {
         <Button size="icon" variant="header-ghost">
           <SvgIcon class="size-6" name="bell" />
         </Button>
-        <Avatar class="shrink-0">
-          <AvatarImage src="/public/avatar.png" alt="@unovue" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+
+
+        <!-- TODO: items need be button and clickable -->
+        <Popover>
+          <PopoverTrigger as-child>
+            <Avatar class="shrink-0 cursor-pointer">
+              <AvatarImage src="/public/avatar.png" alt="@unovue" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </PopoverTrigger>
+          <PopoverContent align="end" class="w-[253px] mt-2 p-0">
+            <div class="pt-4 pb-1 space-y-4">
+              <div class="space-y-3 px-1">
+                <div class="px-3">
+                  <div class="rounded-full w-min bg-positive pt-[3] px-1.5 pb-[2px]">
+                    <span class="text-icon-green text-mono-10">VERIFIED</span>
+                  </div>
+                </div>
+
+
+                <div class="flex gap-3 items-center px-3">
+                  <Avatar class="shrink-0 cursor-pointer">
+                    <AvatarImage src="/public/avatar.png" alt="@unovue" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <div class="space-y-0.5">
+                    <div class="text-paragraph-14">John Doe</div>
+                    <div class="text-caption-12 text-secondary">John.doe@gmail.com</div>
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-surface-secondary">Dashboard
+                    Customization</RouterLink>
+                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-surface-secondary">Settings
+                  </RouterLink>
+                  <div class="p-3 uppercase text-mono-10 text-secondary">Preferences</div>
+
+                  <div class="flex justify-between gap-4 items-center">
+                    <span class="p-3 uppercase text-mono-12">Theme:</span>
+                    <div class="flex gap-2 items-center">
+                      <div class="hover:bg-surface-secondary p-1 rounded-md cursor-pointer">
+                        <SvgIcon name="light-mode" class="size-5 text-primary" />
+                      </div>
+                      <Separator orientation="vertical" />
+                      <div class="hover:bg-surface-secondary p-1 rounded-md cursor-pointer">
+                        <SvgIcon name="dark-mode" class="size-5 text-primary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-between gap-4 items-center">
+                    <span class="p-3 uppercase text-mono-12">Language:</span>
+
+                    <Button variant="link-secondary">
+                      <span class="uppercase text-mono-12 text-primary">English</span>
+                      <SvgIcon name="chevron-right" class="size-5 text-primary " />
+                    </Button>
+
+                  </div>
+
+                  <h5 class="p-3 uppercase text-mono-12 text-red hover:bg-red/10 cursor-pointer">LOG OUT</h5>
+
+
+                  <div class="flex gap-4 items-center">
+                    <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Privacy Policy</RouterLink>
+                    <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Terms</RouterLink>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </PopoverContent>
+        </Popover>
+
+
       </div>
     </div>
   </header>
@@ -188,7 +261,8 @@ const isActiveLink = (path: string) => {
           <AvatarImage src="/public/avatar.png" alt="@unovue" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost" size="icon" aria-label="Menu">
+        <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost"
+          size="icon" aria-label="Menu">
           <div class="hamburger-lines-container">
             <span class="hamburger-line line-1"></span>
             <span class="hamburger-line line-2"></span>
@@ -199,24 +273,15 @@ const isActiveLink = (path: string) => {
     </header>
 
     <!-- Mobile Menu -->
-    <Transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div v-if="isMenuOpen" class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-center">
+    <Transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0"
+      enter-to-class="opacity-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100"
+      leave-to-class="opacity-0">
+      <div v-if="isMenuOpen"
+        class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-center">
         <nav class="px-4 py-8">
           <div class="flex flex-col space-y-4">
-            <RouterLİnk
-              v-for="link in links"
-              :key="link.name"
-              :to="link.href"
-              class="text-headline-small font-normal text-center"
-              :active="isActiveLink(link.href)"
-            >
+            <RouterLİnk v-for="link in links" :key="link.name" :to="link.href"
+              class="text-headline-small font-normal text-center" :active="isActiveLink(link.href)">
               {{ link.name }}
             </RouterLİnk>
           </div>

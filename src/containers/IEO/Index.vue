@@ -48,6 +48,7 @@ const activeTab = ref("my-transactions");
           <div class="space-y-5">
             <div class="text-mono-14">ALLOCATION</div>
             <div class="space-y-3">
+              <!-- TODO: gray image not showing -->
               <Progress :model-value="50" />
 
               <div class="flex justify-between items-center">
