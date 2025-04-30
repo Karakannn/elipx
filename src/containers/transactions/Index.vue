@@ -1,2 +1,6 @@
-<template>transs</template>
-<script setup></script>
+<script setup>
+import Table from "./components/Table.vue";
+</script>
+<template>
+  <Table />
+</template>
