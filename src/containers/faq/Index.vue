@@ -1,18 +1,12 @@
 <script setup>
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Documentation from "./components/Documentation.vue";
 import FAQSection from "./components/FAQSection.vue";
 import Tickets from "./components/Tickets.vue";
 import { Button } from "@/components/ui/button";
 import { SvgIcon } from "@/components/ui/svg-icon";
-
 </script>
 <template>
   <Card>
@@ -43,13 +37,13 @@ import { SvgIcon } from "@/components/ui/svg-icon";
           </TabsTrigger>
         </TabsList>
         <TabsContent value="documentation">
-          <Documentation  />
+          <Documentation />
         </TabsContent>
         <TabsContent value="faq-section">
-          <FAQSection  />
+          <FAQSection />
         </TabsContent>
         <TabsContent value="tickets">
-          <Tickets  />
+          <Tickets />
         </TabsContent>
       </Tabs>
     </CardContent>
