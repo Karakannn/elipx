@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { Button } from "@/components/ui/button";
 import { SvgIcon } from "@/components/ui/svg-icon";
 import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const isMenuOpen = ref(false);
 const navContainer = ref<HTMLElement | null>(null);
@@ -12,269 +15,260 @@ const startX = ref(0);
 const scrollLeft = ref(0);
 
 const handleDragStart = (e: MouseEvent | TouchEvent) => {
-    if (!navContainer.value) return;
-    
-    isDragging.value = true;
-    navContainer.value.style.cursor = 'grabbing';
-    navContainer.value.style.userSelect = 'none';
-    
-    startX.value = 'touches' in e 
-        ? e.touches[0].pageX - navContainer.value.offsetLeft
-        : e.pageX - navContainer.value.offsetLeft;
-        
-    scrollLeft.value = navContainer.value.scrollLeft;
+  if (!navContainer.value) return;
+
+  isDragging.value = true;
+  navContainer.value.style.cursor = "grabbing";
+  navContainer.value.style.userSelect = "none";
+
+  startX.value = "touches" in e ? e.touches[0].pageX - navContainer.value.offsetLeft : e.pageX - navContainer.value.offsetLeft;
+
+  scrollLeft.value = navContainer.value.scrollLeft;
 };
 
 const handleDragEnd = () => {
-    if (!navContainer.value) return;
-    
-    isDragging.value = false;
-    navContainer.value.style.cursor = 'grab';
-    navContainer.value.style.removeProperty('user-select');
+  if (!navContainer.value) return;
+
+  isDragging.value = false;
+  navContainer.value.style.cursor = "grab";
+  navContainer.value.style.removeProperty("user-select");
 };
 
 const handleDragMove = (e: MouseEvent | TouchEvent) => {
-    if (!isDragging.value || !navContainer.value) return;
-    
-    e.preventDefault();
-    const x = 'touches' in e 
-        ? e.touches[0].pageX - navContainer.value.offsetLeft
-        : e.pageX - navContainer.value.offsetLeft;
-        
-    const walk = (x - startX.value) * 2;
-    navContainer.value.scrollLeft = scrollLeft.value - walk;
+  if (!isDragging.value || !navContainer.value) return;
+
+  e.preventDefault();
+  const x = "touches" in e ? e.touches[0].pageX - navContainer.value.offsetLeft : e.pageX - navContainer.value.offsetLeft;
+
+  const walk = (x - startX.value) * 2;
+  navContainer.value.scrollLeft = scrollLeft.value - walk;
 };
 
 // Setup event listeners
 onMounted(() => {
-    const nav = navContainer.value;
-    if (!nav) return;
+  const nav = navContainer.value;
+  if (!nav) return;
 
-    nav.style.cursor = 'grab';
-    
-    // Touch Events
-    nav.addEventListener('touchstart', handleDragStart);
-    nav.addEventListener('touchend', handleDragEnd);
-    nav.addEventListener('touchmove', handleDragMove);
-    
-    // Mouse Events
-    nav.addEventListener('mousedown', handleDragStart);
-    nav.addEventListener('mouseup', handleDragEnd);
-    nav.addEventListener('mousemove', handleDragMove);
-    nav.addEventListener('mouseleave', handleDragEnd);
+  nav.style.cursor = "grab";
+
+  // Touch Events
+  nav.addEventListener("touchstart", handleDragStart);
+  nav.addEventListener("touchend", handleDragEnd);
+  nav.addEventListener("touchmove", handleDragMove);
+
+  // Mouse Events
+  nav.addEventListener("mousedown", handleDragStart);
+  nav.addEventListener("mouseup", handleDragEnd);
+  nav.addEventListener("mousemove", handleDragMove);
+  nav.addEventListener("mouseleave", handleDragEnd);
 });
 
 onUnmounted(() => {
-    const nav = navContainer.value;
-    if (!nav) return;
-    
-    // Remove Touch Events
-    nav.removeEventListener('touchstart', handleDragStart);
-    nav.removeEventListener('touchend', handleDragEnd);
-    nav.removeEventListener('touchmove', handleDragMove);
-    
-    // Remove Mouse Events
-    nav.removeEventListener('mousedown', handleDragStart);
-    nav.removeEventListener('mouseup', handleDragEnd);
-    nav.removeEventListener('mousemove', handleDragMove);
-    nav.removeEventListener('mouseleave', handleDragEnd);
+  const nav = navContainer.value;
+  if (!nav) return;
+
+  // Remove Touch Events
+  nav.removeEventListener("touchstart", handleDragStart);
+  nav.removeEventListener("touchend", handleDragEnd);
+  nav.removeEventListener("touchmove", handleDragMove);
+
+  // Remove Mouse Events
+  nav.removeEventListener("mousedown", handleDragStart);
+  nav.removeEventListener("mouseup", handleDragEnd);
+  nav.removeEventListener("mousemove", handleDragMove);
+  nav.removeEventListener("mouseleave", handleDragEnd);
 });
 
 const links = [
-    {
-        name: 'Portfolio',
-        href: '/',
-    },
-    {
-        name: 'IEO',
-        href: '/ieo',
-    },
-    {
-        name: 'Purchase',
-        href: '/purchase',
-    },
-    {
-        name: 'Transactions',
-        href: '/transactions',
-    },
-    {
-        name: 'Support&Documentation',
-        href: '/support',
-    },
-    {
-        name: 'Announcements',
-        href: '/announcements',
-    },
-    {
-        name: 'Referral program',
-        href: '/referral',
-    },
-]
+  {
+    name: "Portfolio",
+    href: "/",
+  },
+  {
+    name: "IEO",
+    href: "/ieo",
+  },
+  {
+    name: "Purchase",
+    href: "/purchase",
+  },
+  {
+    name: "Transactions",
+    href: "/transactions",
+  },
+  {
+    name: "Support&Documentation",
+    href: "/faq",
+  },
+  {
+    name: "Announcements",
+    href: "/news",
+  },
+  {
+    name: "Referral program",
+    href: "/referral",
+  },
+];
 
 const toggleMenu = () => {
-    isMenuOpen.value = !isMenuOpen.value;
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 // Add watch to toggle body scroll
 watch(isMenuOpen, (newValue) => {
-    if (newValue) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
+  if (newValue) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 });
+
+const isActiveLink = (path: string) => {
+  if (path === "/" && route.path === "/") {
+    return true;
+  }
+  return path !== "/" && route.path.startsWith(path);
+};
 </script>
 
 <template>
-    <!-- Desktop Header -->
-    <header class="hidden md:block h-14 border-b border-border-on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
-        <div class="h-full flex items-center">
-            <img src="/public/logo.svg" alt="" class="w-6 h-6 ml-4 shrink-0">
+  <!-- Desktop Header -->
+  <header class="hidden md:block h-14 border-b border-border-on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
+    <div class="h-full flex items-center">
+      <img src="/public/logo.svg" alt="" class="w-6 h-6 ml-4 shrink-0" />
 
-            <div 
-                ref="navContainer" 
-                class="flex-1 overflow-hidden mx-4 select-none"
-            >
-                <div class="flex gap-1" style="width: max-content">
-                    <Button 
-                        v-for="link in links" 
-                        :key="link.name"
-                        variant="header" 
-                        class="text-mono-12 font-mono uppercase shrink-0"
-                    >
-                        {{ link.name }}
-                    </Button>
-                </div>
-            </div>
-            <div class="flex items-center gap-2 px-4 shrink-0 border-l border-border-on-sunken">
-                <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex">
-                    DEPOSIT
-                </Button>
-                <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex">
-                    WITHDRAWAL
-                </Button>
-
-                <Button size="icon" variant="header-ghost" class="hidden lg:inline-flex">
-                    <SvgIcon class="size-6" name="support" />
-                </Button>
-                <Separator orientation="vertical" class="bg-border-on-sunken hidden lg:block" />
-                <Button size="icon" variant="header-ghost">
-                    <SvgIcon class="size-6" name="bell" />
-                </Button>
-                <Avatar class="shrink-0">
-                    <AvatarImage src="/public/avatar.png" alt="@unovue" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-            </div>
+      <div ref="navContainer" class="flex-1 overflow-hidden mx-4 select-none">
+        <div class="flex gap-1" style="width: max-content">
+          <Button
+            v-for="link in links"
+            :key="link.name"
+            variant="header"
+            :as-child="true"
+            class="text-mono-12 font-mono uppercase shrink-0"
+            :active="isActiveLink(link.href)"
+          >
+            <RouterLink :to="link.href">
+              {{ link.name }}
+            </RouterLink>
+          </Button>
         </div>
+      </div>
+      <div class="flex items-center gap-2 px-4 shrink-0 border-l border-border-on-sunken">
+        <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex"> DEPOSIT </Button>
+        <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
+
+        <Button size="icon" variant="header-ghost" class="hidden lg:inline-flex">
+          <SvgIcon class="size-6" name="support" />
+        </Button>
+        <Separator orientation="vertical" class="bg-border-on-sunken hidden lg:block" />
+        <Button size="icon" variant="header-ghost">
+          <SvgIcon class="size-6" name="bell" />
+        </Button>
+        <Avatar class="shrink-0">
+          <AvatarImage src="/public/avatar.png" alt="@unovue" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </div>
+    </div>
+  </header>
+
+  <!-- TODO: add border/seperator between icon buttons in mobile header -->
+  <!-- Mobile Header -->
+  <div class="md:hidden fixed top-0 left-0 right-0 z-50">
+    <header class="h-14 px-4 flex items-center justify-between border-b border-border-on-sunken backdrop-blur-xl">
+      <SvgIcon name="logo" class="size-6" />
+      <div class="flex items-center gap-4">
+        <Button size="icon" variant="header-ghost">
+          <SvgIcon class="size-6" name="support" />
+        </Button>
+        <Button size="icon" variant="header-ghost">
+          <SvgIcon class="size-6" name="bell" />
+        </Button>
+        <Avatar>
+          <AvatarImage src="/public/avatar.png" alt="@unovue" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost" size="icon" aria-label="Menu">
+          <div class="hamburger-lines-container">
+            <span class="hamburger-line line-1"></span>
+            <span class="hamburger-line line-2"></span>
+            <span class="hamburger-line line-3"></span>
+          </div>
+        </Button>
+      </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="isMenuOpen" class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-center">
+        <nav class="px-4 py-8">
+          <div class="flex flex-col space-y-4">
+            <RouterLİnk
+              v-for="link in links"
+              :key="link.name"
+              :to="link.href"
+              class="text-headline-small font-normal text-center"
+              :active="isActiveLink(link.href)"
+            >
+              {{ link.name }}
+            </RouterLİnk>
+          </div>
+        </nav>
+        <div class="p-4 flex gap-2 border-t border-border-on-sunken">
+          <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1"> DEPOSIT </Button>
+          <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1"> WITHDRAWAL </Button>
+        </div>
+      </div>
+    </Transition>
+  </div>
 
-     <!-- TODO: add border/seperator between icon buttons in mobile header -->
-    <!-- Mobile Header -->
-    <div class="md:hidden fixed top-0 left-0 right-0 z-50">
-        <header class="h-14 px-4 flex items-center justify-between border-b border-border-on-sunken backdrop-blur-xl">
-            <SvgIcon name="logo" class="size-6" />
-            <div class="flex items-center gap-4">
-                <Button size="icon" variant="header-ghost">
-                    <SvgIcon class="size-6" name="support" />
-                </Button>
-                <Button size="icon" variant="header-ghost">
-                    <SvgIcon class="size-6" name="bell" />
-                </Button>
-                <Avatar>
-                    <AvatarImage src="/public/avatar.png" alt="@unovue" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <Button 
-                    class="hamburger-menu" 
-                    :class="{ 'is-active': isMenuOpen }" 
-                    @click="toggleMenu"
-                    variant="header-ghost"
-                    size="icon"
-                    aria-label="Menu"
-                >
-                    <div class="hamburger-lines-container">
-                        <span class="hamburger-line line-1"></span>
-                        <span class="hamburger-line line-2"></span>
-                        <span class="hamburger-line line-3"></span>
-                    </div>
-                </Button>
-            </div>
-        </header>
-
-        <!-- Mobile Menu -->
-        <Transition
-            enter-active-class="transition duration-200 ease-out"
-            enter-from-class="opacity-0"
-            enter-to-class="opacity-100"
-            leave-active-class="transition duration-150 ease-in"
-            leave-from-class="opacity-100"
-            leave-to-class="opacity-0"
-        >
-            <div v-if="isMenuOpen" class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-center">
-                <nav class="px-4 py-8">
-                    <div class="flex flex-col space-y-4">
-                        <a v-for="link in links" 
-                           :key="link.name"
-                           :href="link.href"
-                           class="text-headline-small font-normal text-center">
-                            {{ link.name }}
-                        </a>
-                    </div>
-                </nav>
-                <div class="p-4 flex gap-2 border-t border-border-on-sunken">
-                    <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1">
-                        DEPOSIT
-                    </Button>
-                    <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1">
-                        WITHDRAWAL
-                    </Button>
-                </div>
-            </div>
-        </Transition>
-    </div>
-
-    <!-- Add spacer for fixed header -->
-    <div class="h-14"></div>
+  <!-- Add spacer for fixed header -->
+  <div class="h-14"></div>
 </template>
 
 <style scoped>
 .hamburger-menu {
-    position: relative;
-    padding: 0;
+  position: relative;
+  padding: 0;
 }
 
 .hamburger-lines-container {
-    width: 18px;
-    height: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 18px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hamburger-line {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--foreground);
-    transition: .25s ease-in-out;
-    transform-origin: center;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--foreground);
+  transition: 0.25s ease-in-out;
+  transform-origin: center;
 }
 
 .is-active .line-1 {
-    transform: translateY(6.5px) rotate(45deg);
+  transform: translateY(6.5px) rotate(45deg);
 }
 
 .is-active .line-2 {
-    opacity: 0;
+  opacity: 0;
 }
 
 .is-active .line-3 {
-    transform: translateY(-6.5px) rotate(-45deg);
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 </style>
