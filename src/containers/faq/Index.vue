@@ -17,11 +17,11 @@ import { SvgIcon } from "@/components/ui/svg-icon";
 <template>
   <Card>
     <CardHeader class="p-4 border-b">
-      <CardTitle class="">Support&Documentation</CardTitle>
+      <CardTitle class="text-h4">Support&Documentation</CardTitle>
     </CardHeader>
     <CardContent class="space-y-4">
       <Tabs default-value="documentation">
-        <TabsList class="space-x-1 text-mono-12">
+        <TabsList class="space-x-1 border-b w-full">
           <TabsTrigger asChild value="documentation">
             <Button class="px-2 py-2" variant="tertiary">
               <SvgIcon name="fire" class="size-4" />
@@ -43,13 +43,13 @@ import { SvgIcon } from "@/components/ui/svg-icon";
           </TabsTrigger>
         </TabsList>
         <TabsContent value="documentation">
-          <Documentation />
+          <Documentation  />
         </TabsContent>
         <TabsContent value="faq-section">
-          <FAQSection />
+          <FAQSection  />
         </TabsContent>
         <TabsContent value="tickets">
-          <Tickets />
+          <Tickets  />
         </TabsContent>
       </Tabs>
     </CardContent>
