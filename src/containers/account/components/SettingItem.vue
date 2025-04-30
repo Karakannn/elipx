@@ -3,7 +3,7 @@
         <div class="flex gap-3 items-start">
             <slot name="icon"></slot>
             <div class="space-y-0.5">
-                <div class="text-mono-10 text-secondary uppercase" v-if="label">{{ label }}</div>
+                <div class="text-mono-10 uppercase text-primary" v-if="label">{{ label }}</div>
                 <div class="text-mono-12" v-if="value">{{ value }}
                     <span v-if="verified" class="text-icon-green text-mono-12">
                         (VERIFIED)

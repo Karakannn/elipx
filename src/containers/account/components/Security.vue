@@ -1,149 +1,203 @@
+<script setup>
+import { ref } from 'vue';
+import SettingItem from './SettingItem.vue'
+import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
+import { Button } from "@/components/ui/button";
+
+// 2FA bilgileri
+const twoFactorAuth = ref({
+    passkeys: {
+        status: 'PIN CODE',
+        enabled: true
+    },
+    authenticator: {
+        status: 'OFF',
+        enabled: false
+    },
+    email: {
+        status: 'JO*****@GMAIL.COM',
+        enabled: true
+    },
+    phone: {
+        status: 'NO PHONE NUMBER',
+        enabled: false
+    },
+    password: {
+        enabled: true
+    }
+});
+
+// Aktif oturumlar
+const activeSessions = ref([
+    {
+        ip: '85.15.90.451',
+        device: 'CHROME 131, MACBOOK PRO M1 PRO',
+        location: 'Krakow, Poland - 07.02.2025'
+    },
+    {
+        ip: '85.15.90.451',
+        device: 'CHROME 12, IPHONE 15 PRO MAX',
+        location: 'Krakow, Poland - online'
+    },
+    {
+        ip: '85.15.90.451',
+        device: 'SAFARI 87, MACBOOK PRO M1 PRO',
+        location: 'Krakow, Poland - 07.02.2025'
+    }
+]);
+
+// Button click handlers
+const managePasskeys = () => {
+    console.log('Manage passkeys clicked');
+};
+
+const connectAuthenticator = () => {
+    console.log('Connect authenticator clicked');
+};
+
+const manageEmail = () => {
+    console.log('Manage email clicked');
+};
+
+const addPhone = () => {
+    console.log('Add phone clicked');
+};
+
+const managePassword = () => {
+    console.log('Manage password clicked');
+};
+
+const terminateSession = (index) => {
+    console.log(`Terminate session ${index} clicked`);
+};
+</script>
+
 <template>
-    <div class="max-w-3xl mx-auto">
-      <!-- Security Header -->
-      <div class="py-6 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold">Security</h1>
-      </div>
-  
-      <!-- Navigation Tabs -->
-      <div class="flex flex-wrap gap-4 py-4 border-b border-gray-200">
-        <div class="text-sm text-gray-500 px-2 py-1">ACCOUNT</div>
-        <div class="text-sm font-medium px-2 py-1 border-b-2 border-blue-600">SECURITY</div>
-        <div class="text-sm text-gray-500 px-2 py-1">DASHBOARD CUSTOMIZATION</div>
-        <div class="text-sm text-gray-500 px-2 py-1">REFERRAL PROGRAM</div>
-        <div class="text-sm text-gray-500 px-2 py-1">NOTIFICATION</div>
-      </div>
-  
-      <!-- Two-Factor Authentication Section -->
-      <div class="py-6">
-        <h2 class="text-lg font-medium mb-6">Two-Factor Authentication (2FA)</h2>
-  
-        <!-- Passkeys -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="font-medium">PASSKEYS</div>
-            <div class="text-sm text-gray-500">Protect your account and withdrawals with an access key</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="text-sm text-gray-500">PIN CODE</div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              MANAGE
-              <span class="ml-1">›</span>
-            </button>
-          </div>
+    <div>
+     
+        <div class="border-b border-border px-4">
+            <h2 class="text-caption-12 text-secondary pt-5">Two-Factor Authentication (2FA)</h2>
+
+            <SettingItem label="PASSKEYS" description="Protect your account and withdrawals with an access key">
+                <template #icon>
+                    <SvgIcon name="key" class="size-5" />
+                </template>
+                <template #action>
+                    <div class="flex items-center gap-3">
+                        <div class="text-mono-12 text-secondary">{{ twoFactorAuth.passkeys.status }}</div>
+                        <Button variant="secondary" size="sm" @click="managePasskeys">
+                            <span class="uppercase text-mono-12">MANAGE</span>
+                            <SvgIcon name="chevron-right" class="size-5" />
+                        </Button>
+                    </div>
+                </template>
+            </SettingItem>
+
+            <SettingItem label="AUTHENTICATOR APP"
+                description="Using Google Authenticator to protect your account and transactions.">
+                <template #icon>
+                    <SvgIcon name="authenticator" class="size-5" />
+                </template>
+                <template #action>
+                    <div class="flex items-center gap-3">
+                        <div class="text-mono-12 text-secondary">{{ twoFactorAuth.authenticator.status }}</div>
+                        <Button variant="secondary" size="sm" @click="connectAuthenticator">
+                            <span class="uppercase text-mono-12">CONNECT</span>
+                        </Button>
+                    </div>
+                </template>
+            </SettingItem>
+
+            <SettingItem label="EMAIL" description="Using your email to protect your account and transactions.">
+                <template #icon>
+                    <SvgIcon name="email" class="size-5" />
+                </template>
+                <template #action>
+                    <div class="flex items-center gap-3">
+                        <div class="text-mono-12 text-secondary">{{ twoFactorAuth.email.status }}</div>
+                        <Button variant="secondary" size="sm" @click="manageEmail">
+                            <span class="uppercase text-mono-12">MANAGE</span>
+                            <SvgIcon name="chevron-right" class="size-5" />
+                        </Button>
+                    </div>
+                </template>
+            </SettingItem>
+
+            <SettingItem label="PHONE NUMBER"
+                description="Using your phone number to protect your account and transactions.">
+                <template #icon>
+                    <SvgIcon name="mobile" class="size-5" />
+                </template>
+                <template #action>
+                    <div class="flex items-center gap-3">
+                        <div class="text-mono-12 text-secondary">{{ twoFactorAuth.phone.status }}</div>
+                        <Button variant="secondary" size="sm" @click="addPhone">
+                            <span class="uppercase text-mono-12">ADD</span>
+                        </Button>
+                    </div>
+                </template>
+            </SettingItem>
+
+            <SettingItem label="PASSWORD" description="The login password is used to log in to your account.">
+                <template #icon>
+                    <SvgIcon name="lock" class="size-5" />
+                </template>
+                <template #action>
+                    <Button variant="secondary" size="sm" @click="managePassword">
+                        <span class="uppercase text-mono-12">MANAGE</span>
+                        <SvgIcon name="chevron-right" class="size-5" />
+                    </Button>
+                </template>
+            </SettingItem>
         </div>
-  
-        <!-- Authenticator App -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="font-medium">AUTHENTICATOR APP</div>
-            <div class="text-sm text-gray-500">Using Google Authenticator to protect your account and transactions.</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="text-sm text-gray-500">OFF</div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg">
-              CONNECT
-            </button>
-          </div>
+
+        <div class="border-b border-border px-4">
+            <h2 class="text-caption-12 text-secondary pt-5">Active Sessions</h2>
+
+            <SettingItem :value="activeSessions[0].device" :description="activeSessions[0].location">
+                <template #icon>
+                    <SvgIcon name="laptop" class="size-5" />
+                </template>
+                <template #label>
+                    <div class="text-xs text-secondary">{{ activeSessions[0].ip }}</div>
+                </template>
+                <template #action>
+                    <Button variant="secondary" size="sm" @click="terminateSession(0)">
+                        <span class="uppercase text-mono-12">TERMINATE SESSION</span>
+                        <SvgIcon name="chevron-right" class="size-5" />
+                    </Button>
+                </template>
+            </SettingItem>
+
+            <SettingItem :value="activeSessions[1].device" :description="activeSessions[1].location">
+                <template #icon>
+                    <SvgIcon name="mobile" class="size-5" />
+                </template>
+                <template #label>
+                    <div class="text-xs text-secondary">{{ activeSessions[1].ip }}</div>
+                </template>
+                <template #action>
+                    <Button variant="secondary" size="sm" @click="terminateSession(1)">
+                        <span class="uppercase text-mono-12">TERMINATE SESSION</span>
+                        <SvgIcon name="chevron-right" class="size-5" />
+                    </Button>
+                </template>
+            </SettingItem>
+
+            <SettingItem :value="activeSessions[2].device" :description="activeSessions[2].location">
+                <template #icon>
+                    <SvgIcon name="desktop" class="size-5" />
+                </template>
+                <template #label>
+                    <div class="text-xs text-secondary">{{ activeSessions[2].ip }}</div>
+                </template>
+                <template #action>
+                    <Button variant="secondary" size="sm" @click="terminateSession(2)">
+                        <span class="uppercase text-mono-12">TERMINATE SESSION</span>
+                        <SvgIcon name="chevron-right" class="size-5" />
+                    </Button>
+                </template>
+            </SettingItem>
         </div>
-  
-        <!-- Email -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="font-medium">EMAIL</div>
-            <div class="text-sm text-gray-500">Using your email to protect your account and transactions.</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="text-sm text-gray-500">JO*****@GMAIL.COM</div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              MANAGE
-              <span class="ml-1">›</span>
-            </button>
-          </div>
-        </div>
-  
-        <!-- Phone Number -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="font-medium">PHONE NUMBER</div>
-            <div class="text-sm text-gray-500">Using your phone number to protect your account and transactions.</div>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="text-sm text-gray-500">NO PHONE NUMBER</div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg">
-              ADD
-            </button>
-          </div>
-        </div>
-  
-        <!-- Password -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="font-medium">PASSWORD</div>
-            <div class="text-sm text-gray-500">The login password is used to log in to your account.</div>
-          </div>
-          <div class="flex items-center">
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              MANAGE
-              <span class="ml-1">›</span>
-            </button>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Active Sessions Section -->
-      <div class="py-6">
-        <h2 class="text-lg font-medium mb-6">Active Sessions</h2>
-  
-        <!-- Session 1 -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="text-xs text-gray-500">85.15.90.451</div>
-            <div class="font-medium">CHROME 131, MACBOOK PRO M1 PRO</div>
-            <div class="text-sm text-gray-500">Krakow, Poland - 07.02.2025</div>
-          </div>
-          <div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              TERMINATE SESSION
-              <span class="ml-1">›</span>
-            </button>
-          </div>
-        </div>
-  
-        <!-- Session 2 -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="text-xs text-gray-500">85.15.90.451</div>
-            <div class="font-medium">CHROME 12, IPHONE 15 PRO MAX</div>
-            <div class="text-sm text-gray-500">Krakow, Poland - online</div>
-          </div>
-          <div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              TERMINATE SESSION
-              <span class="ml-1">›</span>
-            </button>
-          </div>
-        </div>
-  
-        <!-- Session 3 -->
-        <div class="flex flex-wrap items-center justify-between py-4 border-b border-gray-200">
-          <div class="flex-1">
-            <div class="text-xs text-gray-500">85.15.90.451</div>
-            <div class="font-medium">SAFARI 87, MACBOOK PRO M1 PRO</div>
-            <div class="text-sm text-gray-500">Krakow, Poland - 07.02.2025</div>
-          </div>
-          <div>
-            <button class="bg-gray-100 text-sm px-4 py-2 rounded-lg flex items-center">
-              TERMINATE SESSION
-              <span class="ml-1">›</span>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
-  </template>
-  
-  <script setup>
-  // Bu sayfada herhangi bir state yönetimi veya veri işleme gerekmiyor
-  // Gerçek bir uygulamada, bu veriler API'den alınabilir
-  </script>
+</template>
