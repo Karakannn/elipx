@@ -24,7 +24,7 @@ import {
             </CardAction>
         </CardHeader>
         <CardContent class="space-y-6">
-            <div class="flex gap-2 text-mono-12 font-mono overflow-x-auto">
+            <div class="flex gap-2 text-mono-12 overflow-x-auto">
                 <Button class="px-2 py-2.5" variant="tertiary">
                     <SvgIcon name="fav" class="size-4" />
                     ALL
@@ -50,18 +50,18 @@ import {
                 </div>
                 <div class="flex items-center">
                     <span class="w-2 h-2 rounded-full bg-amber-500 mr-2"></span>
-                    <span class="text-mono-12 font-mono">IN PROGRESS</span>
+                    <span class="text-mono-12">IN PROGRESS</span>
                 </div>
             </div>
 
             <div class="flex justify-between mb-4">
                 <div class="space-y-1.5">
                     <div class="text-secondary text-caption-12">Start</div>
-                    <div class="text-mono-12 font-mono">20 MAY 2025</div>
+                    <div class="text-mono-12">20 MAY 2025</div>
                 </div>
                 <div class="text-right space-y-1.5">
                     <div class="text-secondary text-caption-12">End</div>
-                    <div class="text-mono-12 font-mono">28 MAY 2025</div>
+                    <div class="text-mono-12">28 MAY 2025</div>
                 </div>
             </div>
 
@@ -74,19 +74,19 @@ import {
                 <div class="space-y-3">
                     <div class=" flex justify-between">
                         <div class="text-caption-12">Token Price</div>
-                        <div class="text-mono-12 font-mono">0.45$</div>
+                        <div class="text-mono-12">0.45$</div>
                     </div>
                     <Separator />
 
                     <div class=" flex justify-between">
                         <div class="text-caption-12">Tokens for Sale</div>
-                        <div class="text-mono-12 font-mono">200,000 ELX</div>
+                        <div class="text-mono-12">200,000 ELX</div>
                     </div>
                     <Separator />
 
                     <div class=" flex justify-between">
                         <div class="text-caption-12">Total Supply</div>
-                        <div class="text-mono-12 font-mono">10,000,000 ELX</div>
+                        <div class="text-mono-12">10,000,000 ELX</div>
                     </div>
                 </div>
             </div>
@@ -99,18 +99,18 @@ import {
                 </div>
                 <div class="flex items-center">
                     <span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-                    <span class="text-mono-12 font-mono">COMPLETED</span>
+                    <span class="text-mono-12">COMPLETED</span>
                 </div>
             </div>
 
             <div class="flex justify-between mb-4">
                 <div class="space-y-1.5">
                     <div class="text-secondary text-caption-12">Start</div>
-                    <div class="text-mono-12 font-mono">16 APRIL 2025</div>
+                    <div class="text-mono-12">16 APRIL 2025</div>
                 </div>
                 <div class="text-right space-y-1.5">
                     <div class="text-secondary text-caption-12">End</div>
-                    <div class="text-mono-12 font-mono">20 APRIL 2025</div>
+                    <div class="text-mono-12">20 APRIL 2025</div>
                 </div>
             </div>
 

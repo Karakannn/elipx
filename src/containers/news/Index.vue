@@ -72,7 +72,7 @@
               <h2 class="text-2xl font-bold mb-1">TGE Scheduled:</h2>
               <h2 class="text-2xl font-bold mb-3">May 28, 2025</h2>
               <p class="text-sm mb-4">Your tokens will unlock soon.<br />Are you ready?</p>
-              <div class="text-2xl font-mono font-bold text-blue-400">09:47:31</div>
+              <div class="text-2xl font-bold text-blue-400">09:47:31</div>
             </div>
             <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2">
               <div class="w-32 h-32 opacity-70">

@@ -21,11 +21,11 @@ import { Button } from "@/components/ui/button";
                     :key="index">
 
                     <div class="p-6 w-full flex flex-col gap-4 relative z-20">
-                        <span class="text-primary-inverse text-mono-12 font-mono">IEO IS LIVE</span>
+                        <span class="text-primary-inverse text-mono-12">IEO IS LIVE</span>
                         <span class="text-h4 sm:text-h3 text-primary-inverse max-w-[260px] sm:max-w-[370px]">Public Sale is now open at $0.045 per token. Secure your spot before the allocation fills
                             up.</span>
                         <Button variant="header-button" class="w-full sm:w-min bg-primary-inverse px-4 mb-10 sm:mb-0">
-                            <span class="text-mono-12 font-mono">Go to IEO</span>
+                            <span class="text-mono-12">Go to IEO</span>
                             <SvgIcon name="chevron-right" />
                         </Button>
                     </div>

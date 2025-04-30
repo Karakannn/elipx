@@ -82,7 +82,6 @@
   --font-sans: "Suisse Int'l";
   --font-mono: "Chivo Mono", monospace;
 
-
   /* CHART */
   --vis-tooltip-background-color: none !important;
   --vis-tooltip-border-color: none !important;
@@ -157,6 +156,7 @@
 
   /* Mono */
   --text-mono-18: 12px;
+  --text-mono-18--font-family: 12px;
   --text-mono-18--line-height: 100%;
   --text-mono-18--letter-spacing: 0%;
   --text-mono-18--font-weight: 450;
@@ -172,6 +172,7 @@
   --text-mono-14--font-weight: 450;
 
   --text-mono-12: 12px;
+  --text-mono-12--line-height: 100%;
   --text-mono-12--line-height: 100%;
   --text-mono-12--letter-spacing: 0%;
   --text-mono-12--font-weight: 450;
@@ -290,10 +291,25 @@
 }
 
 @layer base {
+  .text-mono-10,
+  .text-mono-12,
+  .text-mono-14,
+  .text-mono-16,
+  .text-mono-18 {
+    font-family: var(--font-mono);
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-surface-sunken text-foreground mx-auto;
+  }
+}
+
+@layer components {
+  .tab-trigger {
+    @apply py-3 text-sm relative;
+    @apply data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-border-accent;
   }
 }

@@ -22,9 +22,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
         </div>
 
         <div class="flex justify-between">
-          <div class="text-mono-12 font-mono uppercase">PRIVATE</div>
-          <div class="text-mono-12 -translate-x-1/3 font-mono uppercase">PUBLIC</div>
-          <div class="text-mono-12 font-mono uppercase">TGE</div>
+          <div class="text-mono-12 uppercase">PRIVATE</div>
+          <div class="text-mono-12 -translate-x-1/3 uppercase">PUBLIC</div>
+          <div class="text-mono-12 uppercase">TGE</div>
         </div>
       </div>
     </CardContent>

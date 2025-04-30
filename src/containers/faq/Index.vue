@@ -4,7 +4,7 @@
       <h1 class="text-2xl font-semibold mb-6">Support&Documentation</h1>
 
       <Tabs default-value="documentation">
-        <TabsList class="space-x-1 text-mono-12 font-mono">
+        <TabsList class="space-x-1 text-mono-12">
           <TabsTrigger asChild value="documentation">
             <Button class="px-2 py-2" variant="tertiary">
               <SvgIcon name="fire" class="size-4" />

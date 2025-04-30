@@ -144,7 +144,7 @@ const isActiveLink = (path: string) => {
             :key="link.name"
             variant="header"
             :as-child="true"
-            class="text-mono-12 font-mono uppercase shrink-0"
+            class="text-mono-12 uppercase shrink-0"
             :active="isActiveLink(link.href)"
           >
             <RouterLink :to="link.href">
@@ -154,8 +154,8 @@ const isActiveLink = (path: string) => {
         </div>
       </div>
       <div class="flex items-center gap-2 px-4 shrink-0 border-l border-border-on-sunken">
-        <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex"> DEPOSIT </Button>
-        <Button variant="header" class="text-mono-12 font-mono uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
+        <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> DEPOSIT </Button>
+        <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
 
         <Button size="icon" variant="header-ghost" class="hidden lg:inline-flex">
           <SvgIcon class="size-6" name="support" />
@@ -222,8 +222,8 @@ const isActiveLink = (path: string) => {
           </div>
         </nav>
         <div class="p-4 flex gap-2 border-t border-border-on-sunken">
-          <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1"> DEPOSIT </Button>
-          <Button variant="secondary" class="flex-1 text-mono-12 font-mono uppercase gap-1"> WITHDRAWAL </Button>
+          <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> DEPOSIT </Button>
+          <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> WITHDRAWAL </Button>
         </div>
       </div>
     </Transition>

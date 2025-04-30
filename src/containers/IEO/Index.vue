@@ -99,7 +99,7 @@
               <!-- Distribution Box -->
               <div class="bg-gray-50 p-4 rounded-lg">
                 <div class="text-sm text-gray-500 mb-2">Distribution:</div>
-                <div class="font-mono text-sm">
+                <div class="text-sm">
                   100% LOCKED FOR 12 MONTHS<br>
                   + 12-MONTH LINEAR VESTING
                 </div>
@@ -108,14 +108,14 @@
               <!-- Private Price Box -->
               <div class="bg-gray-50 p-4 rounded-lg">
                 <div class="text-sm text-gray-500 mb-2">Private Price:</div>
-                <div class="font-mono text-sm">$0.030</div>
+                <div class="text-sm">$0.030</div>
               </div>
             </div>
             
             <!-- Limits Box -->
             <div class="bg-gray-50 p-4 rounded-lg mb-6">
               <div class="text-sm text-gray-500 mb-2">Limits:</div>
-              <div class="font-mono text-sm">
+              <div class="text-sm">
                 YOU CAN PARTICIPATE WITH<br>
                 A MINIMUM OF $100 AND A<br>
                 MAXIMUM OF $5,000.
@@ -131,7 +131,7 @@
                 <div class="text-sm font-medium text-right">17,500 ELX</div>
                 
                 <div class="text-sm text-gray-500">TGE Address:</div>
-                <div class="text-sm font-mono text-right">0XA8C...12DE</div>
+                <div class="text-sm text-right">0XA8C...12DE</div>
                 
                 <div class="text-sm text-gray-500">Status:</div>
                 <div class="text-sm font-medium text-right">LOCKED UNTIL TGE</div>

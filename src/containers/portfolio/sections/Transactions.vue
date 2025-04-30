@@ -145,7 +145,7 @@ const columns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => {
       const transaction = row.original;
 
-      return h("span", { class: "text-mono-12 font-mono" }, transaction.asset);
+      return h("span", { class: "text-mono-12" }, transaction.asset);
     },
   },
   {
@@ -155,7 +155,7 @@ const columns: ColumnDef<Transaction>[] = [
       const txid = row.getValue("txid") as string;
 
       return h("div", { class: "flex items-center" }, [
-        h("span", { class: "text-mono-12 font-mono" }, txid),
+        h("span", { class: "text-mono-12" }, txid),
         h("button", { class: "ml-1" }, [h(Copy, { class: "h-4 w-4 text-gray-400" })]),
       ]);
     },
@@ -167,7 +167,7 @@ const columns: ColumnDef<Transaction>[] = [
       const date = row.getValue("date") as string;
       const time = row.original.time;
 
-      return h("div", { class: "flex flex-col text-mono-12 font-mono" }, [h("span", {}, date), h("span", {}, time)]);
+      return h("div", { class: "flex flex-col text-mono-12" }, [h("span", {}, date), h("span", {}, time)]);
     },
   },
   {
@@ -198,7 +198,7 @@ const columns: ColumnDef<Transaction>[] = [
 
       return h("div", { class: "flex items-center" }, [
         h("span", { class: `w-2 h-2 rounded-full mr-2 ${dotColor}` }),
-        h("span", { class: "text-mono-12 font-mono" }, status),
+        h("span", { class: "text-mono-12" }, status),
       ]);
     },
   },
@@ -212,7 +212,7 @@ const columns: ColumnDef<Transaction>[] = [
 
       return h("div", { class: "flex flex-col items-end gap-1" }, [
         h("span", { class: "text-caption-12" }, amountELX),
-        h("span", { class: "text-mono-12 font-mono text-secondary" }, `$ ${amountUSD}`),
+        h("span", { class: "text-mono-12 text-secondary" }, `$ ${amountUSD}`),
       ]);
     },
   },
@@ -260,13 +260,13 @@ const table = useVueTable({
       <TabsList class="border-b flex gap-4 justify-start">
         <TabsTrigger
           value="my-transactions"
-          class="text-mono-12 font-mono py-3 text-sm relative data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-border-accent"
+          class="text-mono-12 tab-trigger"
         >
           MY TRANSACTION
         </TabsTrigger>
         <TabsTrigger
           value="all-transactions"
-          class="py-3 text-sm relative data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-border-accent"
+          class="tab-trigger"
         >
           See <span class="text-border-accent">All Transactions</span>
         </TabsTrigger>
@@ -277,7 +277,7 @@ const table = useVueTable({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 font-mono text-secondary uppercase p-4 text-[10px]">
+                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase p-4 text-[10px]">
                   {{ column.columnDef.header }}
                 </TableHead>
               </TableRow>
@@ -316,7 +316,7 @@ const table = useVueTable({
     </Tabs>
 
     <div class="flex justify-between items-center p-4 text-sm">
-      <div class="text-secondary font-mono text-mono-10">SHOWING 11 OF 15</div>
+      <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
       <div class="flex items-center space-x-2">
         <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
           <ChevronLeft class="h-5 w-5" />

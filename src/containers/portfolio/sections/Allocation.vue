@@ -20,9 +20,9 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <div class="w-2 h-2 rounded-full bg-icon-green mr-2"></div>
-          <span class="text-mono-12 font-mono">IN PROGRESS</span>
+          <span class="text-mono-12">IN PROGRESS</span>
         </div>
-        <div class="text-mono-12 font-mono">25,000,000 ELX / 50%</div>
+        <div class="text-mono-12">25,000,000 ELX / 50%</div>
       </div>
     </CardContent>
   </Card>

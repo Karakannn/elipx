@@ -89,8 +89,8 @@ onUnmounted(() => {
                 {{ announcement.title }}
               </h2>
               <div class="flex items-center gap-4">
-                <span class="text-mono-12 font-mono text-secondary">{{ announcement.date }}</span>
-                <span class="text-mono-12 font-mono text-secondary">{{ announcement.category }}</span>
+                <span class="text-mono-12 text-secondary">{{ announcement.date }}</span>
+                <span class="text-mono-12 text-secondary">{{ announcement.category }}</span>
               </div>
             </div>
           </div>
