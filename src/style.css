@@ -74,10 +74,11 @@
 
   --color-surface-sunken: rgba(245, 245, 245, 1);
   --color-on-sunken: rgba(16, 16, 16, 0.06);
-  --color-border-on-sunken: rgba(16, 16, 16, 0.08);
 
   --color-primary-inverse: rgba(255, 255, 255, 1);
   --color-secondary-inverse: rgba(255, 255, 255, 0.45);
+
+  --color-dialog-window: rgba(245, 245, 245, 1);
 
   --font-sans: "Suisse Int'l";
   --font-mono: "Chivo Mono", monospace;
