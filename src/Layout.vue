@@ -2,7 +2,9 @@
   <div class="app-container">
     <div class="gradient-bg"></div>
     <AppHeader />
-    <router-view />
+    <div class="sm:p-4 space-y-6">
+      <router-view />
+    </div>
   </div>
 </template>
 

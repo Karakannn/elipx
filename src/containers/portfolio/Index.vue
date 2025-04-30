@@ -13,30 +13,28 @@ import TokenomicsOverview from "./sections/TokenomicsOverview.vue";
 </script>
 
 <template>
-    <div class="sm:p-4 space-y-6">
-        <SpecialOffer />
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div class="col-span-2 flex flex-col space-y-4">
-                <Transactions />
-                <IEO />
-                <Announcements/>
-                <MyTokenAllocation/>
-                <Allocation />
-                <PurchaseSummary />
-                <IEOTimeline />
-                <TokenomicsOverview />
-            </div>
-            <div class="hidden sm:flex col-span-1 flex-col space-y-4">
-                <IEO />
-                <Announcements/>
-                <MyTokenAllocation/>
-                <Allocation />
-                <PurchaseSummary />
-                <IEOTimeline />
-                <TokenomicsOverview />
-            </div>
-        </div>
+  <SpecialOffer />
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="col-span-2 flex flex-col space-y-4">
+      <Transactions />
+      <IEO />
+      <Announcements />
+      <MyTokenAllocation />
+      <Allocation />
+      <PurchaseSummary />
+      <IEOTimeline />
+      <TokenomicsOverview />
     </div>
+    <div class="hidden sm:flex col-span-1 flex-col space-y-4">
+      <IEO />
+      <Announcements />
+      <MyTokenAllocation />
+      <Allocation />
+      <PurchaseSummary />
+      <IEOTimeline />
+      <TokenomicsOverview />
+    </div>
+  </div>
 </template>
 
 <style></style>

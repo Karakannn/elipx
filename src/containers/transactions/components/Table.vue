@@ -312,6 +312,7 @@ const table = useVueTable({
     </div>
 
     <Tabs v-model="activeTab" class="gap-0">
+      <!-- TODO: Tab need change from website -->
       <TabsList class="border-b flex gap-4 justify-start">
         <TabsTrigger
           value="my-transactions"
@@ -370,6 +371,9 @@ const table = useVueTable({
       </TabsContent>
     </Tabs>
 
+    <!-- TODO: Pagination need to change -->
+    <!-- TODO: need transaction history web modal and mobile drawer-->
+     
     <div class="flex justify-between items-center p-4 text-sm">
       <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
       <div class="flex items-center space-x-2">
