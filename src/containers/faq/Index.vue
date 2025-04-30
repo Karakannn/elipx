@@ -1,8 +1,25 @@
-<template>
-  <div class="bg-gray-50 min-h-screen p-4 md:p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6">
-      <h1 class="text-2xl font-semibold mb-6">Support&Documentation</h1>
+<script setup>
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs'
+import Documentation from "./components/Documentation.vue";
+import FAQSection from "./components/FAQSection.vue";
+import Tickets from "./components/Tickets.vue";
+import { Button } from "@/components/ui/button";
+import { SvgIcon } from "@/components/ui/svg-icon";
 
+</script>
+<template>
+  <Card>
+    <CardHeader class="p-4 border-b">
+      <CardTitle class="">Support&Documentation</CardTitle>
+    </CardHeader>
+    <CardContent class="space-y-4">
       <Tabs default-value="documentation">
         <TabsList class="space-x-1 text-mono-12">
           <TabsTrigger asChild value="documentation">
@@ -35,18 +52,6 @@
           <Tickets />
         </TabsContent>
       </Tabs>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 </template>
-
-<script setup>
-import Documentation from "./components/Documentation.vue";
-import FAQSection from "./components/FAQSection.vue";
-import Tickets from "./components/Tickets.vue";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
-</script>
