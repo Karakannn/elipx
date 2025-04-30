@@ -4,7 +4,16 @@ import SettingItem from './SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ChangeEmail from '@/components/dialogs/ChangeEmail.vue';
+import ChangeCountry from '@/components/dialogs/ChangeCountry.vue';
+import ChangePhoneNumber from '@/components/dialogs/ChangePhoneNumber.vue';
+import DisconnectApp from '@/components/dialogs/DisconnectApp.vue';
 
+
+const changeMailRef = ref(null);
+const changeCountryRef = ref(null);
+const changePhoneRef = ref(null);
+const disconnectedAppRef = ref(null);
 
 // User information
 const userInfo = ref({
@@ -27,26 +36,24 @@ const wallets = ref({
     }
 });
 
+
 // Button click handlers
 const changeCountry = () => {
-    console.log('Change country clicked');
+    changeCountryRef.value.openModal();
 };
 
 const changeEmail = () => {
-    console.log('Change email clicked');
+    changeMailRef.value.openModal();
 };
 
 const changePhone = () => {
-    console.log('Change phone clicked');
+    changePhoneRef.value.openModal();
 };
 
 const disconnectWallet = (wallet) => {
-    console.log(`Disconnect ${wallet} wallet clicked`);
+    disconnectedAppRef.value.openModal();
 };
 
-const connectNewWallet = () => {
-    console.log('Connect new wallet clicked');
-};
 </script>
 
 <template>
@@ -54,8 +61,8 @@ const connectNewWallet = () => {
         <div class="border-b border-border px-4">
             <h2 class="text-caption-12 text-secondary pt-5">Profile photo</h2>
             <div class="flex items-center gap-5 pt-5 pb-3">
-                <Avatar class="shrink-0 cursor-pointer h-[60px] w-[60px]" >
-                    <AvatarImage src="/public/avatar.png" alt="@unovue"  />
+                <Avatar class="shrink-0 cursor-pointer h-[60px] w-[60px]">
+                    <AvatarImage src="/public/avatar.png" alt="@unovue" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <div class="flex gap-2">
@@ -87,7 +94,7 @@ const connectNewWallet = () => {
                 </template>
 
                 <template #action>
-                    <Button variant="secondary" size="sm">
+                    <Button variant="secondary" size="sm" @click="changeCountry">
                         <span class="uppercase text-mono-12">Change County</span>
                         <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
@@ -100,7 +107,7 @@ const connectNewWallet = () => {
                     <SvgIcon name="email" class="size-5" />
                 </template>
                 <template #action>
-                    <Button variant="secondary" size="sm">
+                    <Button variant="secondary" size="sm" @click="changeEmail">
                         <span class="uppercase text-mono-12">Change Email</span>
                         <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
@@ -113,7 +120,7 @@ const connectNewWallet = () => {
                     <SvgIcon name="mobile" class="size-5" />
                 </template>
                 <template #action>
-                    <Button variant="secondary" size="sm">
+                    <Button variant="secondary" size="sm" @click="changePhone">
                         <span class="uppercase text-mono-12">Change Phone</span>
                         <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
@@ -135,7 +142,7 @@ const connectNewWallet = () => {
                     <SvgIcon name="metamask" class="size-5" />
                 </template>
                 <template #action>
-                    <Button variant="secondary" size="sm">
+                    <Button variant="secondary" size="sm" @click="disconnectWallet">
                         <span class="uppercase text-mono-12">Disconnect</span>
                         <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
@@ -147,7 +154,7 @@ const connectNewWallet = () => {
                     <SvgIcon name="ledger" class="size-5" />
                 </template>
                 <template #action>
-                    <Button variant="secondary" size="sm">
+                    <Button variant="secondary" size="sm" @click="disconnectWallet">
                         <span class="uppercase text-mono-12">Disconnect</span>
                         <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
@@ -171,5 +178,10 @@ const connectNewWallet = () => {
         <div class="px-4 py-5 text-secondary text-caption-12">
             You can <a href="#" class="text-red-500">delete your account</a>
         </div>
+
+        <ChangeEmail ref="changeMailRef" />
+        <ChangeCountry ref="changeCountryRef" />
+        <ChangePhoneNumber ref="changePhoneRef" />
+        <DisconnectApp ref="disconnectedAppRef" />
     </div>
 </template>

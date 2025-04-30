@@ -3,6 +3,22 @@ import { ref } from 'vue';
 import SettingItem from './SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import { Button } from "@/components/ui/button";
+import ChangeEmail from '@/components/dialogs/ChangeEmail.vue';
+import ChangeCountry from '@/components/dialogs/ChangeCountry.vue';
+import ChangePhoneNumber from '@/components/dialogs/ChangePhoneNumber.vue';
+import DisconnectApp from '@/components/dialogs/DisconnectApp.vue';
+import TerminateSession from '@/components/dialogs/TerminateSession.vue';
+import Passkeys from '@/components/dialogs/Passkeys.vue';
+import ChangePassword from '@/components/dialogs/ChangePassword.vue';
+
+
+const passKeyRef = ref(null);
+const authAppRef = ref(null);
+const changeMailRef = ref(null);
+const changePasswordRef = ref(null);
+const changeCountryRef = ref(null);
+const changePhoneRef = ref(null);
+const terminateSessionRef = ref(null);
 
 // 2FA bilgileri
 const twoFactorAuth = ref({
@@ -48,33 +64,32 @@ const activeSessions = ref([
 
 // Button click handlers
 const managePasskeys = () => {
-    console.log('Manage passkeys clicked');
+    passKeyRef.value.openModal();
 };
 
 const connectAuthenticator = () => {
-    console.log('Connect authenticator clicked');
+    authAppRef.value.openModal();
 };
 
 const manageEmail = () => {
-    console.log('Manage email clicked');
+    changeMailRef.value.openModal();
 };
 
-const addPhone = () => {
-    console.log('Add phone clicked');
+const changePhoneNumber = () => {
+    changePhoneRef.value.openModal();
 };
 
 const managePassword = () => {
-    console.log('Manage password clicked');
+    changePasswordRef.value.openModal();
 };
 
 const terminateSession = (index) => {
-    console.log(`Terminate session ${index} clicked`);
+    terminateSessionRef.value.openModal();
 };
 </script>
 
 <template>
     <div>
-     
         <div class="border-b border-border px-4">
             <h2 class="text-caption-12 text-secondary pt-5">Two-Factor Authentication (2FA)</h2>
 
@@ -131,7 +146,7 @@ const terminateSession = (index) => {
                 <template #action>
                     <div class="flex items-center gap-3">
                         <div class="text-mono-12 text-secondary">{{ twoFactorAuth.phone.status }}</div>
-                        <Button variant="secondary" size="sm" @click="addPhone">
+                        <Button variant="secondary" size="sm">
                             <span class="uppercase text-mono-12">ADD</span>
                         </Button>
                     </div>
@@ -199,5 +214,14 @@ const terminateSession = (index) => {
                 </template>
             </SettingItem>
         </div>
+
+        <Passkeys ref="passKeyRef" />
+        <ChangeEmail ref="changeMailRef" />
+        <ChangePassword ref="changePasswordRef" />
+        <ChangeCountry ref="changeCountryRef" />
+        <ChangePhoneNumber ref="changePhoneRef" />
+        <TerminateSession ref="terminateSessionRef" />
+        <DisconnectApp ref="authAppRef" />
+
     </div>
 </template>
