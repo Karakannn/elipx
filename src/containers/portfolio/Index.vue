@@ -10,11 +10,9 @@ import Allocation from "./sections/Allocation.vue";
 import PurchaseSummary from "./sections/PurchaseSummary.vue";
 import IEOTimeline from "./sections/IEOTimeline.vue";
 import TokenomicsOverview from "./sections/TokenomicsOverview.vue";
-import AppHeader from "@/components/AppHeader.vue";
 </script>
 
 <template>
-    <AppHeader />
     <div class="sm:p-4 space-y-6">
         <SpecialOffer />
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
