@@ -10,7 +10,7 @@ const props = defineProps<{
 <template>
   <div
     data-slot="card-header"
-    :class="cn('grid auto-rows-min grid-rows-[auto_auto] items-center px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6', props.class)"
+    :class="cn('flex items-center justify-between w-full p-4', props.class)"
   >
     <slot />
   </div>

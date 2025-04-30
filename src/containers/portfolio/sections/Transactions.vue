@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from "@tanstack/vue-table";
 import { Copy, ChevronLeft, ChevronRight } from "lucide-vue-next";
+import { Card, CardContent, CardHeader, CardTitle, CardAction } from "@/components/ui/card";
 import { h, ref } from "vue";
 
 const data = [
@@ -96,7 +97,7 @@ const data = [
   },
 ];
 
-type Transaction = typeof data[0];
+type Transaction = (typeof data)[0];
 
 const columns: ColumnDef<Transaction>[] = [
   {
@@ -248,87 +249,80 @@ const table = useVueTable({
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 w-full">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-h4 font-medium">Transactions</h1>
-      <Button variant="header" size="icon">
-        <SvgIcon name="search" class="size-4" />
-      </Button>
-    </div>
+  <Card>
+    <CardHeader class="p-4 border-b">
+      <CardTitle class="text-h4">Transactions</CardTitle>
+      <CardAction>
+        <Button variant="header" size="icon">
+          <SvgIcon name="search" class="size-4" />
+        </Button>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
+      <Tabs v-model="activeTab" class="gap-0">
+        <TabsList class="border-b flex gap-4 justify-start">
+          <TabsTrigger value="my-transactions" class="text-mono-12 tab-trigger"> MY TRANSACTION </TabsTrigger>
+          <TabsTrigger value="all-transactions" class="tab-trigger"> See <span class="text-border-accent">All Transactions</span> </TabsTrigger>
+        </TabsList>
 
-    <Tabs v-model="activeTab" class="gap-0">
-      <TabsList class="border-b flex gap-4 justify-start">
-        <TabsTrigger
-          value="my-transactions"
-          class="text-mono-12 tab-trigger"
-        >
-          MY TRANSACTION
-        </TabsTrigger>
-        <TabsTrigger
-          value="all-transactions"
-          class="tab-trigger"
-        >
-          See <span class="text-border-accent">All Transactions</span>
-        </TabsTrigger>
-      </TabsList>
+        <TabsContent value="my-transactions">
+          <div class="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase p-4 text-[10px]">
+                    {{ column.columnDef.header }}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
+                  <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
+                    <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </TabsContent>
 
-      <TabsContent value="my-transactions">
-        <div class="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase p-4 text-[10px]">
-                  {{ column.columnDef.header }}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+        <TabsContent value="all-transactions">
+          <div class="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-xs text-gray-500 uppercase font-medium">
+                    {{ column.columnDef.header }}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
+                  <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
+                    <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </TabsContent>
+      </Tabs>
+
+      <div class="flex justify-between items-center py-4 text-sm">
+        <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
+        <div class="flex items-center space-x-2">
+          <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
+            <ChevronLeft class="h-5 w-5" />
+          </button>
+          <Button class="bg-border-accent !rounded-md h-7 w-7 p-0" @click="table.setPageIndex(0)"> 1 </Button>
+          <Button variant="ghost" class="hover:bg-gray-100 !rounded-md ph-7 w-7 p-0" @click="table.setPageIndex(1)"> 2 </Button>
+          <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
+            <ChevronRight class="h-5 w-5" />
+          </button>
         </div>
-      </TabsContent>
-
-      <TabsContent value="all-transactions">
-        <div class="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-xs text-gray-500 uppercase font-medium">
-                  {{ column.columnDef.header }}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      </TabsContent>
-    </Tabs>
-
-    <div class="flex justify-between items-center p-4 text-sm">
-      <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
-      <div class="flex items-center space-x-2">
-        <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
-          <ChevronLeft class="h-5 w-5" />
-        </button>
-        <Button class="bg-border-accent !rounded-xl px-4 py-2.5" @click="table.setPageIndex(0)"> 1 </Button>
-        <Button variant="ghost" class="hover:bg-gray-100 !rounded-xl px-4 py-2.5" @click="table.setPageIndex(1)"> 2 </Button>
-        <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
-          <ChevronRight class="h-5 w-5" />
-        </button>
       </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 </template>
 
 <style scoped>

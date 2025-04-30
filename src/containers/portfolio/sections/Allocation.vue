@@ -11,7 +11,7 @@
 <template>
   <Card>
     <CardHeader class="p-4 border-b">
-      <CardTitle class="text-h4">ALLOCATION</CardTitle>
+      <CardTitle class="text-mono-14">ALLOCATION</CardTitle>
     </CardHeader>
     <CardContent class="space-y-4">
 
