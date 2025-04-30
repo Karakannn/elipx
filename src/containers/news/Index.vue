@@ -135,6 +135,7 @@ const goToPage = (page: number) => {
     </CardHeader>
     <CardContent class="p-0">
       <Tabs v-model="activeTab" class="w-full">
+        <!-- TODO: need tab ui -->
         <TabsList class="flex gap-4 justify-start p-4 pb-0 border-b">
           <TabsTrigger
             v-for="tab in tabs"
