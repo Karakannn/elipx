@@ -188,24 +188,4 @@ function submitTicket() {
   </div>
 </template>
 
-<style scoped>
-:deep(.border-primary) {
-  border-color: #0ea5e9;
-}
-
-:deep(.text-primary) {
-  color: #0ea5e9;
-}
-
-:deep(.bg-primary) {
-  background-color: #0ea5e9;
-}
-
-:deep(.ring-primary) {
-  --tw-ring-color: #0ea5e9;
-}
-
-:deep(.bg-primary\/90) {
-  background-color: rgba(14, 165, 233, 0.9);
-}
-</style>
+<style scoped></style>
