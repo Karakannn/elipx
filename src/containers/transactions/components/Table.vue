@@ -3,7 +3,6 @@ import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } fro
 import { SvgIcon } from "@/components/ui/svg-icon";
 import { valueUpdater } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { FlexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from "@tanstack/vue-table";
 import { Copy, ChevronLeft, ChevronRight } from "lucide-vue-next";
@@ -152,7 +151,7 @@ const data = [
   },
 ];
 
-type Transaction = typeof data[0];
+type Transaction = (typeof data)[0];
 
 const columns: ColumnDef<Transaction>[] = [
   {
@@ -210,9 +209,9 @@ const columns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => {
       const txid = row.getValue("txid") as string;
 
-      return h("div", { class: "flex items-center" }, [
+      return h("div", { class: "flex items-center gap-1" }, [
         h("span", { class: "text-mono-12" }, txid),
-        h("button", { class: "ml-1" }, [h(Copy, { class: "h-4 w-4 text-gray-400" })]),
+        h("button", { class: "ml-1" }, [h(Copy, { class: "h-4 w-4 text-secondary cursor-pointer" })]),
       ]);
     },
   },
@@ -232,7 +231,6 @@ const columns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       let dotColor = "bg-gray-500";
-      let textColor = "text-gray-500";
 
       switch (status) {
         case "IN PROGRESS":
@@ -276,7 +274,6 @@ const columns: ColumnDef<Transaction>[] = [
 const sorting = ref<SortingState>([]);
 const columnFilters = ref<ColumnFiltersState>([]);
 const columnVisibility = ref<VisibilityState>({});
-const activeTab = ref("my-transactions");
 
 const table = useVueTable({
   data,
@@ -303,77 +300,27 @@ const table = useVueTable({
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-sm p-4 w-full">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-h4 font-medium">Transactions</h1>
-      <Button variant="header" size="icon">
-        <SvgIcon name="search" class="size-4" />
-      </Button>
-    </div>
-
-    <Tabs v-model="activeTab" class="gap-0">
-      <!-- TODO: Tab need change from website -->
-      <TabsList class="border-b flex gap-4 justify-start">
-        <TabsTrigger
-          value="my-transactions"
-          class="text-mono-12 py-3 text-sm relative data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-border-accent"
-        >
-          MY TRANSACTION
-        </TabsTrigger>
-        <TabsTrigger
-          value="all-transactions"
-          class="py-3 text-sm relative data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-border-accent"
-        >
-          See <span class="text-border-accent">All Transactions</span>
-        </TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="my-transactions">
-        <div class="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase p-4 text-[10px]">
-                  {{ column.columnDef.header }}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="all-transactions">
-        <div class="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-xs text-gray-500 uppercase font-medium">
-                  {{ column.columnDef.header }}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                  <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      </TabsContent>
-    </Tabs>
+  <div class="w-full">
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase py-4 text-[10px]">
+            {{ column.columnDef.header }}
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t hover:bg-gray-50">
+          <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
+            <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
 
     <!-- TODO: Pagination need to change -->
     <!-- TODO: need transaction history web modal and mobile drawer-->
-     
+
     <div class="flex justify-between items-center p-4 text-sm">
       <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
       <div class="flex items-center space-x-2">

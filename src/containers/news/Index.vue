@@ -136,8 +136,6 @@ const activeTabTitle = computed(() => {
   return tab ? tab.title : "";
 });
 
-const isDocumentationTab = computed(() => activeTab.value === "documentation");
-
 watch(
   () => activeTab.value,
   (newValue) => {
