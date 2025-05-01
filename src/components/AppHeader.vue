@@ -5,12 +5,8 @@ import { SvgIcon } from "@/components/ui/svg-icon";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRoute } from "vue-router";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { useColorMode } from '@vueuse/core'
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useColorMode } from "@vueuse/core";
 
 const route = useRoute();
 
@@ -19,13 +15,12 @@ const navContainer = ref<HTMLElement | null>(null);
 const isDragging = ref(false);
 const startX = ref(0);
 const scrollLeft = ref(0);
-const mode = useColorMode()
-
+const mode = useColorMode();
 
 // Function to toggle theme
-const toggleTheme = (theme: 'light' | 'dark') => {
+const toggleTheme = (theme: "light" | "dark") => {
   mode.value = theme;
-  localStorage.setItem('theme', theme);
+  localStorage.setItem("theme", theme);
 };
 
 const handleDragStart = (e: MouseEvent | TouchEvent) => {
@@ -147,22 +142,26 @@ const isActiveLink = (path: string) => {
 
 <template>
   <!-- Desktop Header -->
-  <header
-    class="hidden md:block h-14 border-b -on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
+  <header class="hidden md:block h-14 border-b fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
     <div class="h-full flex items-center">
-      <img src="/public/logo.svg" alt="" class="w-6 h-6 ml-4 shrink-0" />
+      <SvgIcon name="logo" class="w-6 h-6 ml-4 shrink-0" />
 
       <div ref="navContainer" class="flex-1 overflow-hidden mx-4 select-none">
         <div class="flex gap-1" style="width: max-content">
-          <Button v-for="link in links" :key="link.name" variant="header" :as-child="true"
-            class="text-mono-12 uppercase shrink-0" :active="isActiveLink(link.href)">
+          <Button
+            v-for="link in links"
+            :key="link.name"
+            variant="header"
+            :as-child="true"
+            class="text-mono-12 uppercase shrink-0"
+            :active="isActiveLink(link.href)">
             <RouterLink :to="link.href">
               {{ link.name }}
             </RouterLink>
           </Button>
         </div>
       </div>
-      <div class="flex items-center gap-2 px-4 shrink-0 border-l -on-sunken">
+      <div class="flex items-center gap-2 px-4 shrink-0 border-l">
         <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> DEPOSIT </Button>
         <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
 
@@ -190,7 +189,6 @@ const isActiveLink = (path: string) => {
                   </div>
                 </div>
 
-
                 <div class="flex gap-3 items-center px-3">
                   <Avatar class="shrink-0 cursor-pointer">
                     <AvatarImage src="/public/avatar.png" alt="@unovue" />
@@ -203,23 +201,21 @@ const isActiveLink = (path: string) => {
                 </div>
 
                 <div class="space-y-1">
-                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Dashboard
-                    Customization</RouterLink>
-                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Settings
-                  </RouterLink>
+                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Dashboard Customization</RouterLink>
+                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Settings </RouterLink>
                   <div class="p-3 uppercase text-mono-10 text-secondary">Preferences</div>
 
                   <div class="flex justify-between gap-4 items-center">
                     <span class="p-3 uppercase text-mono-12">Theme:</span>
                     <div class="flex gap-2 items-center">
-                      <div 
+                      <div
                         class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
                         :class="{ 'bg-secondary/20': mode === 'light' }"
                         @click="toggleTheme('light')">
                         <SvgIcon name="light-mode" class="size-5" :class="mode === 'light' ? 'text-primary' : 'text-secondary'" />
                       </div>
                       <Separator orientation="vertical" />
-                      <div 
+                      <div
                         class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
                         :class="{ 'bg-secondary/20': mode === 'dark' }"
                         @click="toggleTheme('dark')">
@@ -233,34 +229,27 @@ const isActiveLink = (path: string) => {
 
                     <Button variant="link-secondary">
                       <span class="uppercase text-mono-12 text-primary">English</span>
-                      <SvgIcon name="chevron-right" class="size-5 text-primary " />
+                      <SvgIcon name="chevron-right" class="size-5 text-primary" />
                     </Button>
-
                   </div>
 
                   <h5 class="p-3 uppercase text-mono-12 text-red hover:bg-red/10 cursor-pointer">LOG OUT</h5>
-
-
                   <div class="flex gap-4 items-center">
                     <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Privacy Policy</RouterLink>
                     <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Terms</RouterLink>
                   </div>
-
                 </div>
               </div>
-
             </div>
           </PopoverContent>
         </Popover>
-
-
       </div>
     </div>
   </header>
 
   <!-- Mobile Header -->
   <div class="md:hidden fixed top-0 left-0 right-0 z-50">
-    <header class="h-14 px-4 flex items-center justify-between border-b -on-sunken backdrop-blur-xl">
+    <header class="h-14 px-4 flex items-center justify-between border-b backdrop-blur-xl">
       <SvgIcon name="logo" class="size-6" />
       <div class="flex items-center gap-4">
         <Button size="icon" variant="header-ghost">
@@ -273,45 +262,51 @@ const isActiveLink = (path: string) => {
           <AvatarImage src="/public/avatar.png" alt="@unovue" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost"
-          size="icon" aria-label="Menu">
+        <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost" size="icon" aria-label="Menu">
           <div class="hamburger-lines-container">
-            <span class="hamburger-line line-1"></span>
-            <span class="hamburger-line line-2"></span>
-            <span class="hamburger-line line-3"></span>
+            <span class="hamburger-line bg-primary line-1"></span>
+            <span class="hamburger-line bg-primary line-2"></span>
+            <span class="hamburger-line bg-primary line-3"></span>
           </div>
         </Button>
       </div>
     </header>
 
     <!-- Mobile Menu -->
-    <Transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0"
-      enter-to-class="opacity-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100"
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="opacity-100"
       leave-to-class="opacity-0">
-      <div v-if="isMenuOpen"
-        class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-between">
+      <div v-if="isMenuOpen" class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-between">
         <nav class="px-4 py-8">
           <div class="flex flex-col space-y-4">
-            <RouterLink v-for="link in links" :key="link.name" :to="link.href"
-              class="text-headline-small font-normal text-center" :class="{ 'font-medium': isActiveLink(link.href) }">
+            <RouterLink
+              v-for="link in links"
+              :key="link.name"
+              :to="link.href"
+              class="text-headline-small font-normal text-center"
+              :class="{ 'font-medium': isActiveLink(link.href) }">
               {{ link.name }}
             </RouterLink>
           </div>
         </nav>
-        
+
         <!-- Theme toggle in mobile menu -->
         <div class="px-4 py-4 border-t -on-sunken">
           <div class="flex justify-center items-center gap-2 mb-4">
             <span class="uppercase text-mono-12">Theme:</span>
             <div class="flex gap-2 items-center">
-              <div 
+              <div
                 class="hover:bg-secondary/10 p-2 rounded-md cursor-pointer"
                 :class="{ 'bg-secondary/20': mode === 'light' }"
                 @click="toggleTheme('light')">
                 <SvgIcon name="light-mode" class="size-5" :class="mode === 'light' ? 'text-primary' : 'text-secondary'" />
               </div>
               <Separator orientation="vertical" />
-              <div 
+              <div
                 class="hover:bg-secondary/10 p-2 rounded-md cursor-pointer"
                 :class="{ 'bg-secondary/20': mode === 'dark' }"
                 @click="toggleTheme('dark')">
@@ -319,7 +314,7 @@ const isActiveLink = (path: string) => {
               </div>
             </div>
           </div>
-          
+
           <div class="flex gap-2">
             <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> DEPOSIT </Button>
             <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> WITHDRAWAL </Button>
@@ -329,7 +324,6 @@ const isActiveLink = (path: string) => {
     </Transition>
   </div>
 
-  <!-- Add spacer for fixed header -->
   <div class="h-14"></div>
 </template>
 
@@ -355,7 +349,6 @@ const isActiveLink = (path: string) => {
   display: block;
   width: 100%;
   height: 2px;
-  background-color: var(--foreground);
   transition: 0.25s ease-in-out;
   transform-origin: center;
 }

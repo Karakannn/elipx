@@ -28,12 +28,7 @@ defineExpose({
     <BaseDialog ref="modalRef" v-model="isOpen" maxWidth="412px">
 
         <template #header>
-            <div class="flex justify-between items-center w-full">
-                <h2 class="text-h4">Change your password?</h2>
-                <Button size="icon" variant="secondary">
-                    <SvgIcon name="cross" class="size-5" />
-                </Button>
-            </div>
+            <h2 class="text-h4">Change your password?</h2>
         </template>
 
 

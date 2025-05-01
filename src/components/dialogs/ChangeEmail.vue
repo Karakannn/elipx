@@ -28,12 +28,7 @@ defineExpose({
 <template>
   <BaseDialog ref="modalRef" v-model="isOpen" maxWidth="412px">
     <template #header>
-      <div class="flex justify-between items-center w-full">
-        <h2 class="text-h4">Email</h2>
-        <Button size="icon" variant="secondary">
-          <SvgIcon name="cross" class="size-5" />
-        </Button>
-      </div>
+      <h2 class="text-h4">Email</h2>
     </template>
     <div class="p-4 pt-0">
       <div class="flex flex-col">
