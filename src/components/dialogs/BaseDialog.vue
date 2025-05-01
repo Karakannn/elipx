@@ -46,21 +46,21 @@ defineExpose({
 <template>
   <!-- Desktop-->
   <Dialog v-if="isDesktop" v-model:open="isOpen">
-    <DialogContent :class="`sm:max-w-[${maxWidth}]`">
-      <DialogHeader>
+    <DialogContent :class="`md:max-w-[${maxWidth}] p-0 gap-5`">
+      <DialogHeader class="py-5 px-4 gap-4 border-b border-border">
         <slot name="header">
           {{ title }}
         </slot>
       </DialogHeader>
-      
+
       <slot />
-      
-      <DialogFooter>
-        <slot name="footer" />
-      </DialogFooter>
+
+      <!--       <DialogFooter v-if="!$slots['footer']">
+        <slot name="footer" />x
+      </DialogFooter> -->
     </DialogContent>
   </Dialog>
-  
+
   <!-- Mobile -->
   <Drawer v-else v-model:open="isOpen">
     <DrawerContent>
@@ -69,10 +69,15 @@ defineExpose({
           {{ title }}
         </slot>
       </DrawerHeader>
-      
+
       <slot />
-      
+
       <DrawerFooter>
+
+        <div class="w-full flex justify-center">
+          <div class="h-[5px] w-[135px] bg-muted rounded-full" />
+        </div>
+
         <slot name="mobile-footer">
           <slot name="footer" />
         </slot>

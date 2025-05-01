@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { Input } from '@/components/ui/input'
 import BaseDialog from './BaseDialog.vue'
+import { Button } from '@/components/ui/button'
+import SvgIcon from '../ui/svg-icon/SvgIcon.vue'
 
 const isOpen = ref(false)
 const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -14,47 +16,47 @@ const countries = ref([
   {
     name: 'Great Britain',
     language: 'English',
-    flag: '🇬🇧',
+    icon: 'united-kingdom',
     code: 'gb'
   },
   {
     name: 'Italia',
     language: 'Italiano',
-    flag: '🇮🇹',
+    icon: 'italy',
     code: 'it'
   },
   {
     name: 'Spain',
     language: 'Espanol',
-    flag: '🇪🇸',
+    icon: 'spain',
     code: 'es'
   },
   {
     name: 'Ukraine',
     language: 'Українська',
-    flag: '🇺🇦',
+    icon: 'ukraine',
     code: 'ua'
   },
   {
     name: 'Poland',
     language: 'Polski',
-    flag: '🇵🇱',
+    icon: 'poland',
     code: 'pl'
   },
   {
     name: 'China',
     language: '中文',
-    flag: '🇨🇳',
+    icon: 'china',
     code: 'cn'
   }
 ])
 
 const filteredCountries = computed(() => {
   if (!searchQuery.value) return countries.value
-  
+
   const query = searchQuery.value.toLowerCase()
-  return countries.value.filter(country => 
-    country.name.toLowerCase().includes(query) || 
+  return countries.value.filter(country =>
+    country.name.toLowerCase().includes(query) ||
     country.language.toLowerCase().includes(query)
   )
 })
@@ -72,72 +74,37 @@ defineExpose({
 </script>
 
 <template>
-  <BaseDialog
-    ref="modalRef"
-    v-model="isOpen"
-    title="Change country"
-    maxWidth="550px"
-  >
+  <BaseDialog ref="modalRef" v-model="isOpen" title="Change country" maxWidth="412px">
     <template #header>
       <div class="flex justify-between items-center w-full">
         <h2 class="text-xl font-semibold">Change country</h2>
-        <button @click="isOpen = false" class="text-gray-500 text-xl">
-          ×
-        </button>
+        <Button size="icon" variant="secondary">
+          <SvgIcon name="cross" class="size-5" />
+        </Button>
+
       </div>
     </template>
-    
-    <div class="p-4">
-      <div class="relative mb-4">
-        <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
+
+    <div class="px-1 pt-0 pb-4 space-y-4">
+      <div class="relative px-3">
+        <div class="absolute inset-y-0 left-7 flex items-center pointer-events-none">
+          <SvgIcon name="search" class="size-5" />
         </div>
-        <Input
-          v-model="searchQuery"
-          placeholder="Search country"
-          class="pl-10 py-6 rounded-full bg-gray-50 w-full"
-        />
+        <Input v-model="searchQuery" placeholder="Search country" class="pl-10 h-10 rounded-full w-full" />
       </div>
-      
-      <div class="space-y-2">
-        <div 
-          v-for="country in filteredCountries" 
-          :key="country.code"
-          class="p-3 flex items-center justify-between cursor-pointer hover:bg-gray-100 rounded-lg"
-          @click="selectCountry(country)"
-        >
+
+      <div class="space-y-1">
+        <div v-for="country in filteredCountries" :key="country.code"
+          class="py-2 flex items-center justify-between cursor-pointer px-3 hover:bg-gray-100 rounded-lg"
+          @click="selectCountry(country)">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden border">
-              <div v-if="country.code === 'gb'" class="bg-blue-500 w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇬🇧</span>
-              </div>
-              <div v-else-if="country.code === 'it'" class="bg-white w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇮🇹</span>
-              </div>
-              <div v-else-if="country.code === 'es'" class="bg-yellow-400 w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇪🇸</span>
-              </div>
-              <div v-else-if="country.code === 'ua'" class="bg-blue-400 w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇺🇦</span>
-              </div>
-              <div v-else-if="country.code === 'pl'" class="bg-red-500 w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇵🇱</span>
-              </div>
-              <div v-else-if="country.code === 'cn'" class="bg-red-600 w-full h-full flex items-center justify-center">
-                <span class="text-lg">🇨🇳</span>
-              </div>
-            </div>
+            <SvgIcon :name="country.icon" class="size-8" />
             <div>
-              <p class="font-medium">{{ country.name }}</p>
-              <p class="text-gray-500">{{ country.language }}</p>
+              <p class=" text-paragraph-16">{{ country.name }}</p>
+              <p class=" text-paragraph-14 text-secondary">{{ country.language }}</p>
             </div>
           </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
+          <SvgIcon name="chevron-right" class="size-8" />
         </div>
       </div>
     </div>
