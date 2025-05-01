@@ -52,13 +52,13 @@ onMounted(() => {
 </script>
 
 <template>
-        <div class="flex gap-4">
+        <div class="flex gap-4 justify-center">
         
-            <div v-if="isDocumentationTab" class="hidden md:block sticky top-0 self-start max-h-screen">
+            <div v-if="isDocumentationTab" class="hidden md:block sticky top-1/5 self-start max-h-screen">
                 <DocumentNavigation />
             </div>
 
-            <Card class="w-full">
+            <Card class="w-full max-w-[800px]">
                     <CardHeader class="p-4 border-b">
                         <CardTitle class="text-h4">Support & Documentation</CardTitle>
                     </CardHeader>
@@ -102,15 +102,12 @@ onMounted(() => {
                     </CardContent>
                 </Card>
 
-            <div v-if="isDocumentationTab" class="hidden md:block sticky top-0 self-start max-h-screen">
+            <div v-if="isDocumentationTab" class="hidden md:block sticky top-1/5 self-start max-h-screen">
                 <TableOfContents />
             </div>
         </div>
 </template>
 
 <style scoped>
-.sticky {
-    top: 50%;
-    transform: translateY(-50%);
-}
+
 </style>

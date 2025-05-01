@@ -1,9 +1,10 @@
-<script setup lang="ts">
-import { ref, computed } from "vue";
-import { BellIcon, NewspaperIcon, ClockIcon, CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-vue-next";
+<script setup>
+import { ref, onMounted, nextTick, computed, watch } from "vue";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SvgIcon } from "@/components/ui/svg-icon";
 
 const notifications = [
   {
@@ -81,10 +82,10 @@ const notifications = [
 ];
 
 const tabs = [
-  { id: "all", name: "ALL NEWS", icon: NewspaperIcon },
-  { id: "elipx", name: "ELIPX NEWS", icon: BellIcon },
-  { id: "vesting", name: "VESTING", icon: ClockIcon },
-  { id: "tge", name: "TGE", icon: CalendarIcon },
+  { id: "all", name: "ALL NEWS", icon: "user" },
+  { id: "elipx", name: "ELIPX NEWS", icon: "logo-solid" },
+  { id: "vesting", name: "VESTING", icon: "timeline" },
+  { id: "tge", name: "TGE", icon: "token" },
 ];
 
 const activeTab = ref("all");
@@ -106,7 +107,7 @@ const paginatedNotifications = computed(() => {
   return filteredNotifications.value.slice(start, end);
 });
 
-const filterByTab = (tabId: string) => {
+const filterByTab = (tabId) => {
   activeTab.value = tabId;
   currentPage.value = 0;
 };
@@ -123,9 +124,50 @@ const goToPreviousPage = () => {
   }
 };
 
-const goToPage = (page: number) => {
+const goToPage = (page) => {
   currentPage.value = page;
 };
+
+const container = ref(null);
+const indicator = ref(null);
+
+const activeTabTitle = computed(() => {
+  const tab = tabs.value.find((t) => t.value === activeTab.value);
+  return tab ? tab.title : "";
+});
+
+const isDocumentationTab = computed(() => activeTab.value === "documentation");
+
+watch(
+  () => activeTab.value,
+  (newValue) => {
+    console.log("Active tab changed:", newValue);
+  }
+);
+
+onMounted(() => {
+  const updateIndicator = () => {
+    const activeTabEl = container.value?.querySelector('[data-state="active"]');
+    if (!activeTabEl || !indicator.value) return;
+
+    const tabDiv = activeTabEl.querySelector(".custom-tab-trigger");
+    if (!tabDiv) return;
+
+    const tabRect = tabDiv.getBoundingClientRect();
+    const containerRect = container.value.getBoundingClientRect();
+
+    indicator.value.style.width = `${tabDiv.offsetWidth}px`;
+    indicator.value.style.transform = `translateX(${tabRect.left - containerRect.left}px)`;
+  };
+
+  nextTick(updateIndicator);
+  window.addEventListener("resize", updateIndicator);
+  new MutationObserver(() => nextTick(updateIndicator)).observe(container.value, {
+    attributes: true,
+    subtree: true,
+    attributeFilter: ["data-state"],
+  });
+});
 </script>
 
 <template>
@@ -134,24 +176,26 @@ const goToPage = (page: number) => {
       <CardTitle class="text-h4">Notification Preferences</CardTitle>
     </CardHeader>
     <CardContent class="p-0">
-      <Tabs v-model="activeTab" class="w-full">
-        <!-- TODO: need tab ui -->
-        <TabsList class="flex gap-4 justify-start p-4 pb-0 border-b">
-          <TabsTrigger
-            v-for="tab in tabs"
-            :key="tab.id"
-            :value="tab.id"
-            class="px-4 py-2 text-sm flex items-center gap-2 whitespace-nowrap relative data-[state=active]:text-blue-500 data-[state=active]:font-medium data-[state=active]:border-b-2 data-[state=active]:border-blue-500"
-            @click="filterByTab(tab.id)"
-          >
-            <component :is="tab.icon" class="h-4 w-4" />
-            {{ tab.name }}
-          </TabsTrigger>
-        </TabsList>
-
+      <Tabs v-model="activeTab" default-value="documentation" class="pb-0">
+        <div class="relative" ref="container">
+          <div class="border-b w-full px-2 overflow-x-auto">
+            <TabsList class="space-x-4 border-b">
+              <TabsTrigger v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-0" @click="filterByTab(tab.id)">
+                <div class="custom-tab-trigger">
+                  <SvgIcon :name="tab.icon" class="size-4" />
+                  <span class="text-mono-12">{{ tab.name }}</span>
+                </div>
+              </TabsTrigger>
+            </TabsList>
+            <div ref="indicator" class="custom-tab-indicator"></div>
+          </div>
+        </div>
         <TabsContent v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-4">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div v-for="notification in paginatedNotifications" :key="notification.id" class="hover:bg-gray-50 rounded-md hover:shadow-sm cursor-pointer">
+            <div
+              v-for="notification in paginatedNotifications"
+              :key="notification.id"
+              class="hover:bg-gray-50 rounded-md hover:shadow-sm cursor-pointer">
               <img :src="notification.imageUrl" :alt="notification.title" />
 
               <div class="p-4 space-y-4">
@@ -168,6 +212,8 @@ const goToPage = (page: number) => {
         </TabsContent>
       </Tabs>
 
+      <!-- TODO: need tab ui -->
+
       <div class="p-4 flex items-center justify-between border-t border-border">
         <div class="flex items-center gap-4">
           <Button variant="secondary" class="text-mono-12"> SHOW MORE </Button>
@@ -176,15 +222,17 @@ const goToPage = (page: number) => {
 
         <!-- TODO: make pagination component for table -->
         <div class="flex items-center ml-4">
-          <button class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50" :disabled="currentPage === 0" @click="goToPreviousPage">
+          <button
+            class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50"
+            :disabled="currentPage === 0"
+            @click="goToPreviousPage">
             <ChevronLeftIcon class="h-4 w-4" />
           </button>
 
           <button
             class="w-8 h-8 flex items-center justify-center rounded border"
             :class="currentPage === 0 ? 'bg-blue-500 text-white' : 'hover:bg-gray-50'"
-            @click="goToPage(0)"
-          >
+            @click="goToPage(0)">
             1
           </button>
 
@@ -192,16 +240,14 @@ const goToPage = (page: number) => {
             v-if="totalPages > 1"
             class="w-8 h-8 flex items-center justify-center rounded border"
             :class="currentPage === 1 ? 'bg-blue-500 text-white' : 'hover:bg-gray-50'"
-            @click="goToPage(1)"
-          >
+            @click="goToPage(1)">
             2
           </button>
 
           <button
             class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50"
             :disabled="currentPage >= totalPages - 1"
-            @click="goToNextPage"
-          >
+            @click="goToNextPage">
             <ChevronRightIcon class="h-4 w-4" />
           </button>
         </div>
@@ -210,13 +256,4 @@ const goToPage = (page: number) => {
   </Card>
 </template>
 
-<style scoped>
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>
+<style scoped></style>
