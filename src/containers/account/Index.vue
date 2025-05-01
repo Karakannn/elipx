@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, computed, watch } from 'vue';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Account from './components/Account.vue';
@@ -10,14 +10,29 @@ import Notification from './components/Notification.vue';
 import AccountVerified from './components/AccountVerified.vue';
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 
-const container = ref(null), indicator = ref(null);
+const tabs = ref([
+    { value: 'account', icon: 'user', title: 'Account' },
+    { value: 'security', icon: 'security', title: 'Security' },
+    { value: 'dashboard-customization', icon: 'activity', title: 'Dashboard Customization' },
+    { value: 'referral-program', icon: 'wallet', title: 'Referral Program' },
+    { value: 'notification', icon: 'bell', title: 'Notification' }
+]);
+
+const container = ref(null);
+const indicator = ref(null);
+const activeTab = ref('account');
+
+const activeTabTitle = computed(() => {
+    const tab = tabs.value.find(t => t.value === activeTab.value);
+    return tab ? tab.title : '';
+});
 
 onMounted(() => {
     const updateIndicator = () => {
-        const activeTab = container.value?.querySelector('[data-state="active"]');
-        if (!activeTab || !indicator.value) return;
+        const activeTabEl = container.value?.querySelector('[data-state="active"]');
+        if (!activeTabEl || !indicator.value) return;
 
-        const tabDiv = activeTab.querySelector('.custom-tab-trigger');
+        const tabDiv = activeTabEl.querySelector('.custom-tab-trigger');
         if (!tabDiv) return;
 
         const tabRect = tabDiv.getBoundingClientRect();
@@ -28,7 +43,9 @@ onMounted(() => {
     };
 
     nextTick(updateIndicator);
+
     window.addEventListener('resize', updateIndicator);
+
     new MutationObserver(() => nextTick(updateIndicator)).observe(
         container.value,
         { attributes: true, subtree: true, attributeFilter: ['data-state'] }
@@ -41,49 +58,22 @@ onMounted(() => {
         <AccountVerified />
         <Card>
             <CardHeader class="p-4 border-b">
-                <CardTitle class="text-h4">Account</CardTitle>
+                <CardTitle class="text-h4">{{ activeTabTitle }}</CardTitle>
             </CardHeader>
             <CardContent class="p-0">
-                <Tabs default-value="account" class="pb-0">
+                <Tabs v-model="activeTab" default-value="account" class="pb-0">
                     <div class="relative" ref="container">
-                        <div class="border-b w-full px-2 ">
-
-                            <TabsList class="border-b space-x-4">
-                                <TabsTrigger class="p-0" value="account">
+                        <div class="border-b w-full px-2 overflow-x-auto">
+                            <TabsList class="border-b space-x-4 overflow-x-auto">
+                                <TabsTrigger v-for="tab in tabs" :key="tab.value" class="p-0" :value="tab.value">
                                     <div class="custom-tab-trigger">
-                                        <SvgIcon name="user" class="size-4" />
-                                        <span class="text-mono-12">account</span>
-                                    </div>
-                                </TabsTrigger>
-                                <TabsTrigger class="p-0" value="security">
-                                    <div class="custom-tab-trigger">
-                                        <SvgIcon name="security" class="size-4" />
-                                        <span class="text-mono-12">security</span>
-                                    </div>
-                                </TabsTrigger>
-                                <TabsTrigger class="p-0" value="dashboard-customization">
-                                    <div class="custom-tab-trigger">
-                                        <SvgIcon name="activity" class="size-4" />
-                                        <span class="text-mono-12">Dashboard Customization</span>
-                                    </div>
-                                </TabsTrigger>
-                                <TabsTrigger class="p-0" value="referral-program">
-                                    <div class="custom-tab-trigger">
-                                        <SvgIcon name="wallet" class="size-4" />
-                                        <span class="text-mono-12">Referral program</span>
-                                    </div>
-                                </TabsTrigger>
-                                <TabsTrigger class="p-0" value="notification">
-                                    <div class="custom-tab-trigger">
-                                        <SvgIcon name="wallet" class="size-4" />
-                                        <span class="text-mono-12">Notification</span>
+                                        <SvgIcon :name="tab.icon" class="size-4" />
+                                        <span class="text-mono-12">{{ tab.title }}</span>
                                     </div>
                                 </TabsTrigger>
                             </TabsList>
-
-                        <div ref="indicator" class="custom-tab-indicator"></div>
-                    </div>
-
+                            <div ref="indicator" class="custom-tab-indicator"></div>
+                        </div>
                     </div>
                     <TabsContent value="account">
                         <Account />
