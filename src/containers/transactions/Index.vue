@@ -46,7 +46,7 @@ onMounted(() => {
     <CardContent class="p-0">
       <Tabs v-model="activeTab" default-value="my-transactions" class="pb-0">
         <div class="relative" ref="container">
-          <div class="border-b w-full px-4 overflow-x-auto">
+          <div class="border-b w-full px-3 overflow-x-auto">
             <TabsList class="space-x-4 border-b">
               <TabsTrigger class="p-0" value="my-transactions">
                 <span class="custom-tab-trigger text-mono-12 text-primary">ALL TRANSACTION</span>
@@ -61,10 +61,10 @@ onMounted(() => {
           </div>
         </div>
         <TabsContent value="my-transactions">
-          <Table class="px-4" />
+          <Table class="px-2" />
         </TabsContent>
         <TabsContent value="all-transactions">
-          <Table class="px-4" />
+          <Table class="px-2" />
         </TabsContent>
       </Tabs>
     </CardContent>

@@ -1,342 +1,71 @@
-<script setup lang="ts">
-import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from "@tanstack/vue-table";
-import { SvgIcon } from "@/components/ui/svg-icon";
-import { valueUpdater } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { FlexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useVueTable } from "@tanstack/vue-table";
-import { Copy, ChevronLeft, ChevronRight } from "lucide-vue-next";
+<script setup>
+import { ref, onMounted, nextTick, computed, watch } from "vue";
+import SvgIcon from "@/components/ui/svg-icon/SvgIcon.vue";
 import { Card, CardContent, CardHeader, CardTitle, CardAction } from "@/components/ui/card";
-import { h, ref } from "vue";
-
-const data = [
-  {
-    id: "1",
-    type: "Withdraw",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #C699FE 0%, #6573EF 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x487a...aeef",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "IN PROGRESS",
-    amountELX: "-254 ELX",
-    amountUSD: "1,052.25",
-  },
-  {
-    id: "2",
-    type: "Received",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #FF918F 0%, #FF85B8 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x1asd...6789",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "COMPLETED",
-    amountELX: "-406.515 ELX",
-    amountUSD: "4,008.01",
-  },
-  {
-    id: "3",
-    type: "Buy",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #62E9B7 0%, #31C7AE 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x487a...aeef",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "CANCELED",
-    amountELX: "-14 ELX",
-    amountUSD: "120",
-  },
-  {
-    id: "4",
-    type: "TGE",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #8ED5F5 0%, #57B1F1 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x487a...aeef",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "REFUND",
-    amountELX: "-58 ELX",
-    amountUSD: "184.53",
-  },
-  {
-    id: "5",
-    type: "Withdraw",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #C699FE 0%, #6573EF 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x487a...aeef",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "PENDING",
-    amountELX: "-74 ELX",
-    amountUSD: "265",
-  },
-  {
-    id: "6",
-    type: "Withdraw",
-    beneficiary: "John Doe",
-    avatarInitial: "J",
-    avatarColor: "linear-gradient(90deg, #FF918F 0%, #FF85B8 100%)",
-    asset: "USDT (Tether)",
-    txid: "0x1asd...6789",
-    date: "15/12/24",
-    time: "14:23:56",
-    status: "COMPLETED",
-    amountELX: "-100 ELX",
-    amountUSD: "300",
-  },
-];
-
-type Transaction = (typeof data)[0];
-
-const columns: ColumnDef<Transaction>[] = [
-  {
-    accessorKey: "type",
-    header: "TYPE",
-    cell: ({ row }) => {
-      const type = row.getValue("type") as string;
-      const isReceived = type === "Received";
-
-      return h("div", { class: "flex items-center gap-2" }, [
-        h(
-          Button,
-          {
-            variant: "header",
-            size: "icon",
-          },
-          [h(SvgIcon, { name: "arrow-up" })]
-        ),
-        h("span", { class: "text-paragraph-14" }, type),
-      ]);
-    },
-  },
-  {
-    accessorKey: "beneficiary",
-    header: "BENEFICIARY",
-    cell: ({ row }) => {
-      const transaction = row.original;
-
-      return h("div", { class: "flex items-center gap-2" }, [
-        h(
-          "div",
-          {
-            class: "w-[28px] h-[28px] rounded-full flex items-center justify-center text-white",
-            style: { background: `${transaction.avatarColor}` },
-          },
-          h(SvgIcon, { name: "user", class: "size-4" }, transaction.beneficiary)
-        ),
-
-        h("span", { class: "text-paragraph-14" }, transaction.beneficiary),
-      ]);
-    },
-  },
-  {
-    accessorKey: "asset",
-    header: "ASSET",
-    cell: ({ row }) => {
-      const transaction = row.original;
-
-      return h("span", { class: "text-mono-12" }, transaction.asset);
-    },
-  },
-  {
-    accessorKey: "txid",
-    header: "TXID",
-    cell: ({ row }) => {
-      const txid = row.getValue("txid") as string;
-
-      return h("div", { class: "flex items-center" }, [
-        h("span", { class: "text-mono-12" }, txid),
-        h("button", { class: "ml-1" }, [h(Copy, { class: "h-4 w-4 text-gray-400" })]),
-      ]);
-    },
-  },
-  {
-    accessorKey: "date",
-    header: "DATE/TIME",
-    cell: ({ row }) => {
-      const date = row.getValue("date") as string;
-      const time = row.original.time;
-
-      return h("div", { class: "flex flex-col text-mono-12" }, [h("span", {}, date), h("span", {}, time)]);
-    },
-  },
-  {
-    accessorKey: "status",
-    header: "STATUS",
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      let dotColor = "bg-gray-500";
-      let textColor = "text-gray-500";
-
-      switch (status) {
-        case "IN PROGRESS":
-          dotColor = "bg-amber-500";
-          break;
-        case "COMPLETED":
-          dotColor = "bg-green-500";
-          break;
-        case "CANCELED":
-          dotColor = "bg-red-500";
-          break;
-        case "REFUND":
-          dotColor = "bg-emerald-500";
-          break;
-        case "PENDING":
-          dotColor = "bg-blue-500";
-          break;
-      }
-
-      return h("div", { class: "flex items-center" }, [
-        h("span", { class: `w-2 h-2 rounded-full mr-2 ${dotColor}` }),
-        h("span", { class: "text-mono-12" }, status),
-      ]);
-    },
-  },
-  {
-    /* TODO: make amount right */
-    accessorKey: "amountELX",
-    header: "AMOUNT",
-    cell: ({ row }) => {
-      const amountELX = row.getValue("amountELX") as string;
-      const amountUSD = row.original.amountUSD;
-
-      return h("div", { class: "flex flex-col items-end gap-1" }, [
-        h("span", { class: "text-caption-12" }, amountELX),
-        h("span", { class: "text-mono-12 text-secondary" }, `$ ${amountUSD}`),
-      ]);
-    },
-  },
-];
-
-const sorting = ref<SortingState>([]);
-const columnFilters = ref<ColumnFiltersState>([]);
-const columnVisibility = ref<VisibilityState>({});
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TransactionTable from "./TransactionTable.vue";
 const activeTab = ref("my-transactions");
+const container = ref(null);
+const indicator = ref(null);
 
-const table = useVueTable({
-  data,
-  columns,
-  getCoreRowModel: getCoreRowModel(),
-  getPaginationRowModel: getPaginationRowModel(),
-  getSortedRowModel: getSortedRowModel(),
-  getFilteredRowModel: getFilteredRowModel(),
-  onSortingChange: (updaterOrValue) => valueUpdater(updaterOrValue, sorting),
-  onColumnFiltersChange: (updaterOrValue) => valueUpdater(updaterOrValue, columnFilters),
-  onColumnVisibilityChange: (updaterOrValue) => valueUpdater(updaterOrValue, columnVisibility),
-  state: {
-    get sorting() {
-      return sorting.value;
-    },
-    get columnFilters() {
-      return columnFilters.value;
-    },
-    get columnVisibility() {
-      return columnVisibility.value;
-    },
-  },
+const activeTabTitle = computed(() => {
+  const tab = tabs.value.find((t) => t.value === activeTab.value);
+  return tab ? tab.title : "";
+});
+
+onMounted(() => {
+  const updateIndicator = () => {
+    const activeTabEl = container.value?.querySelector('[data-state="active"]');
+    if (!activeTabEl || !indicator.value) return;
+
+    const tabDiv = activeTabEl.querySelector(".custom-tab-trigger");
+    if (!tabDiv) return;
+
+    const tabRect = tabDiv.getBoundingClientRect();
+    const containerRect = container.value.getBoundingClientRect();
+
+    indicator.value.style.width = `${tabDiv.offsetWidth}px`;
+    indicator.value.style.transform = `translateX(${tabRect.left - containerRect.left}px)`;
+  };
+
+  nextTick(updateIndicator);
+  window.addEventListener("resize", updateIndicator);
+  new MutationObserver(() => nextTick(updateIndicator)).observe(container.value, {
+    attributes: true,
+    subtree: true,
+    attributeFilter: ["data-state"],
+  });
 });
 </script>
-
 <template>
   <Card>
     <CardHeader class="p-4 border-b">
       <CardTitle class="text-h4">Transactions</CardTitle>
-      <CardAction>
-        <Button variant="header" size="icon">
-          <SvgIcon name="search" class="size-4" />
-        </Button>
-      </CardAction>
     </CardHeader>
-    <CardContent>
-      <Tabs v-model="activeTab" class="gap-0">
-        <TabsList class="border-b flex gap-4 justify-start">
-          <TabsTrigger value="my-transactions" class="text-mono-12 tab-trigger"> MY TRANSACTION </TabsTrigger>
-          <TabsTrigger value="all-transactions" class="tab-trigger"> See <span class="text-border-accent">All Transactions</span> </TabsTrigger>
-        </TabsList>
+    <CardContent class="p-0">
+      <Tabs v-model="activeTab" default-value="my-transactions" class="pb-0">
+        <div class="relative" ref="container">
+          <div class="border-b w-full px-4 overflow-x-auto">
+            <TabsList class="space-x-4 border-b">
+              <TabsTrigger class="p-0" value="my-transactions">
+                <span class="custom-tab-trigger text-mono-12 text-primary">ALL TRANSACTION</span>
 
+              </TabsTrigger>
+              <TabsTrigger class="p-0" value="all-transactions">
+                <span class="custom-tab-trigger normal-case  text-caption-12">See <span class="text-accent">All Transactions</span></span>
+
+              </TabsTrigger>
+            </TabsList>
+            <div ref="indicator" class="custom-tab-indicator"></div>
+          </div>
+        </div>
         <TabsContent value="my-transactions">
-          <div class="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-mono-10 text-secondary uppercase p-4 text-[10px]">
-                    {{ column.columnDef.header }}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                  <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                    <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
+          <TransactionTable class="px-2" />
         </TabsContent>
-
         <TabsContent value="all-transactions">
-          <div class="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead v-for="column in table.getAllColumns()" :key="column.id" class="text-xs text-gray-500 uppercase font-medium">
-                    {{ column.columnDef.header }}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t">
-                  <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
-                    <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
+          <TransactionTable class="px-2" />
         </TabsContent>
       </Tabs>
-
-      <div class="flex justify-between items-center py-4 text-sm">
-        <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
-        <div class="flex items-center space-x-2">
-          <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
-            <ChevronLeft class="h-5 w-5" />
-          </button>
-          <Button class="bg-border-accent !rounded-md h-7 w-7 p-0" @click="table.setPageIndex(0)"> 1 </Button>
-          <Button variant="ghost" class="hover:bg-gray-100 !rounded-md ph-7 w-7 p-0" @click="table.setPageIndex(1)"> 2 </Button>
-          <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
-            <ChevronRight class="h-5 w-5" />
-          </button>
-        </div>
-      </div>
     </CardContent>
   </Card>
 </template>
-
-<style scoped>
-:deep(.table) {
-  width: 100%;
-}
-
-:deep(th) {
-  font-weight: 500;
-  text-align: left;
-  padding-bottom: 1rem;
-}
-
-:deep(td) {
-  vertical-align: middle;
-}
-</style>
