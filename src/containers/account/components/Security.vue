@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import SettingItem from './SettingItem.vue'
+import SettingItem from '@/components/SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import { Button } from "@/components/ui/button";
 import ChangeEmail from '@/components/dialogs/ChangeEmail.vue';

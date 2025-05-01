@@ -3,60 +3,74 @@ import { ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import { Button } from '@/components/ui/button'
 import BaseDialog from './BaseDialog.vue'
+import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue'
+import SettingItem from '@/components/SettingItem.vue'
 
 const isOpen = ref(false)
 const isDesktop = useMediaQuery('(min-width: 768px)')
 const modalRef = ref(null)
 const passkeys = ref([
     {
-        type: 'FACE ID',
-        status: 'On',
+        label: false,
+        title: 'FACE ID',
+        description: 'On',
         icon: 'face-id',
+
+        canAdd: true,
+        canDisconnect: true
+    },
+
+    {
+        label: '85.15.90.451',
+        title: 'Chrome 131, MacBook Pro M1 Pro',
+        description: 'Krakow, Poland - 07.02.2025',
+        icon: false,
+        canDisconnect: true
+    },
+
+    {
+        label: '85.15.90.451',
+        title: 'Chrome 12, iPhone 15 Pro Max',
+        description: 'Krakow, Poland - online',
+        icon: false,
+        canDisconnect: true
+    },
+
+    {
+        label: false,
+        title: 'TOUCH ID',
+        description: 'Off',
+        icon: 'fingerprint',
         devices: [],
-        canAdd: true
+        canAdd: true,
+        canDisconnect: false
     },
     {
-        type: 'TOUCH ID',
-        status: 'Off',
-        icon: 'touch-id',
-        devices: [],
-        canAdd: true
-    },
-    {
-        type: 'PIN CODE',
-        status: 'On',
-        icon: 'pin-code',
+        label: false,
+        title: 'PIN CODE',
+        description: 'On',
+        icon: 'pin',
         devices: [],
         canAdd: false,
-        canChange: true
+        canChange: true,
+        canDisconnect: true
     }
 ])
 
-const devices = ref([
-    {
-        id: '86.15.90.a51',
-        name: 'CHROME 131, MACBOOK PRO M1 PRO',
-        location: 'Krakow, Poland',
-        date: '07.02.2025'
-    },
-    {
-        id: '86.15.90.a51',
-        name: 'CHROME 12, IPHONE 15 PRO MAX',
-        location: 'Krakow, Poland',
-        date: 'online'
-    }
-])
-
-const disconnectDevice = (deviceId) => {
-    console.log(`Cihaz bağlantısı kesildi: ${deviceId}`)
+const disconnectDevice = (passkeyIndex, deviceIndex) => {
+    console.log(`Cihaz bağlantısı kesildi: ${passkeys.value[passkeyIndex].devices[deviceIndex].id}`)
 }
 
-const addDevice = (passkeyType) => {
-    console.log(`${passkeyType} için yeni cihaz ekleniyor`)
+const disconnectPasskey = (passkeyIndex) => {
+    console.log(`Passkey bağlantısı kesildi: ${passkeys.value[passkeyIndex].type}`)
 }
 
-const changePasskey = (passkeyType) => {
-    console.log(`${passkeyType} değiştiriliyor`)
+const addDevice = (passkeyIndex) => {
+    console.log(`${passkeys.value[passkeyIndex].type} için yeni cihaz ekleniyor`)
+}
+
+const changePasskey = (passkeyIndex) => {
+    console.log(`${passkeys.value[passkeyIndex].type} değiştiriliyor`)
 }
 
 defineExpose({
@@ -72,130 +86,32 @@ defineExpose({
             <h2 class="text-xl font-semibold">Passkeys</h2>
         </template>
 
-        <div class="divide-y">
-            <div class="p-4">
-                <div class="flex justify-between items-center mb-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-6 h-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" class="w-full h-full">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="12" cy="10" r="3" />
-                                <path d="M7 16c0-1.5 1.5-3 5-3s5 1.5 5 3" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-bold uppercase text-sm">Face ID</p>
-                            <p class="text-gray-500 text-xs">On</p>
-                        </div>
-                    </div>
+        <div class="px-5">
+            <SettingItem class="!py-3.5" v-for="(item) in passkeys" :label="item.label" :value="item.title"
+                :description="item.description" :key="item.type">
+                <template v-if="item.icon" #icon>
+                    <SvgIcon :name="item.icon" class="size-6" />
+                </template>
+                <template #action>
                     <div class="flex gap-2">
-                        <Button variant="secondary" size="sm" class="rounded-full text-xs bg-gray-100">
+                        <Button class="text-mono-12" v-if="item.canDisconnect" variant="secondary" size="sm"
+                            @click="disconnectPasskey(0)">
                             DISCONNECT
                         </Button>
-                        <Button variant="secondary" size="sm"
-                            class="rounded-full text-xs bg-gray-100 flex items-center gap-1">
+                        <Button v-if="item.canAdd" variant="secondary" size="sm" class="text-mono-12"
+                            @click="addDevice(0)">
                             ADD
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" class="w-4 h-4">
-                                <path d="M9 18l6-6-6-6" />
-                            </svg>
+                            <SvgIcon name="chevron-right" class="size-4" />
                         </Button>
-                    </div>
-                </div>
 
-                <div class="ml-9 mt-3 mb-1">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-gray-500">86.15.90.a51</p>
-                            <p class="text-sm font-medium">CHROME 131, MACBOOK PRO M1 PRO</p>
-                            <p class="text-xs text-gray-500">Krakow, Poland - 07.02.2025</p>
-                        </div>
-                        <Button variant="secondary" size="sm" class="rounded-full text-xs bg-gray-100">
-                            DISCONNECT
-                        </Button>
-                    </div>
-                </div>
-
-                <div class="ml-9 mt-3">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="text-xs text-gray-500">86.15.90.a51</p>
-                            <p class="text-sm font-medium">CHROME 12, IPHONE 15 PRO MAX</p>
-                            <p class="text-xs text-gray-500">Krakow, Poland - online</p>
-                        </div>
-                        <Button variant="secondary" size="sm" class="rounded-full text-xs bg-gray-100">
-                            DISCONNECT
-                        </Button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="w-6 h-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" class="w-full h-full">
-                                <path
-                                    d="M12 11c1.33 0 2.25-1.17 2.25-2.5S13.33 6 12 6s-2.25 1.17-2.25 2.5S10.67 11 12 11z" />
-                                <path d="M6 17.5c0-2.76 2.69-5 6-5s6 2.24 6 5" />
-                                <circle cx="12" cy="12" r="10" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-bold uppercase text-sm">Touch ID</p>
-                            <p class="text-gray-500 text-xs">Off</p>
-                        </div>
-                    </div>
-                    <Button variant="secondary" size="sm"
-                        class="rounded-full text-xs bg-gray-100 flex items-center gap-1">
-                        ADD
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" class="w-4 h-4">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </Button>
-                </div>
-            </div>
-
-            <div class="p-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="w-6 h-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" class="w-full h-full">
-                                <circle cx="8" cy="8" r="1" />
-                                <circle cx="12" cy="8" r="1" />
-                                <circle cx="16" cy="8" r="1" />
-                                <circle cx="8" cy="12" r="1" />
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="16" cy="12" r="1" />
-                                <circle cx="8" cy="16" r="1" />
-                                <circle cx="12" cy="16" r="1" />
-                                <circle cx="16" cy="16" r="1" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="font-bold uppercase text-sm">PIN CODE</p>
-                            <p class="text-gray-500 text-xs">On</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <Button variant="secondary" size="sm" class="rounded-full text-xs bg-gray-100">
-                            DISCONNECT
-                        </Button>
-                        <Button variant="secondary" size="sm"
-                            class="rounded-full text-xs bg-gray-100 flex items-center gap-1">
+                        <Button v-if="item.canChange" variant="secondary" size="sm" class="text-mono-12"
+                            @click="addDevice(0)">
                             CHANGE
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" class="w-4 h-4">
-                                <path d="M9 18l6-6-6-6" />
-                            </svg>
+                            <SvgIcon name="chevron-right" class="size-4" />
                         </Button>
                     </div>
-                </div>
-            </div>
+                </template>
+            </SettingItem>
         </div>
     </BaseDialog>
 </template>

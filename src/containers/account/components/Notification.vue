@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
-import SettingItem from './SettingItem.vue'
+import SettingItem from '@/components/SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import ToggleSwitch from './ToggleSwitch.vue';
 

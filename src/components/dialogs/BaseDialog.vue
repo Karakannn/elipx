@@ -55,9 +55,9 @@ defineExpose({
 
       <slot />
 
-      <!--       <DialogFooter v-if="!$slots['footer']">
-        <slot name="footer" />x
-      </DialogFooter> -->
+      <DialogFooter>
+        <slot name="footer" />
+      </DialogFooter>
     </DialogContent>
   </Dialog>
 
@@ -72,12 +72,10 @@ defineExpose({
 
       <slot />
 
-      <DrawerFooter>
+      <DrawerFooter class="relative">
 
-        <div class="w-full flex justify-center">
-          <div class="h-[5px] w-[135px] bg-muted rounded-full" />
-        </div>
-
+<!--         <div class="absolute bottom-2 left-1/2 h-[5px] w-[135px] -translate-x-1/2 bg-muted rounded-full" />
+ -->
         <slot name="mobile-footer">
           <slot name="footer" />
         </slot>

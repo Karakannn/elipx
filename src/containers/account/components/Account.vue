@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import SettingItem from './SettingItem.vue'
+import SettingItem from '@/components/SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -169,7 +169,7 @@ const disconnectWallet = (wallet) => {
                 <template #action>
                     <Button variant="secondary" size="sm">
                         <span class="uppercase text-mono-12">Connect New Wallet</span>
-                        <SvgIcon name="linked" class="size-5" />
+                        <SvgIcon name="linked_wallet" class="size-5" />
                     </Button>
                 </template>
             </SettingItem>
