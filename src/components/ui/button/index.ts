@@ -9,24 +9,24 @@ export const buttonVariants = cva(
       variant: {
         default:
           "bg-surface-accent !text-white outline-surface-accent hover:bg-surface-accent-hover active:bg-surface-accent-active data-[active=true]:bg-surface-accent-active",
-        secondary: "bg-surface-secondary text-primary  outline-surface-accent hover:bg-surface-secondary-hover active:bg-surface-secondary-active data-[active=true]:bg-surface-secondary-active",
+        secondary: "bg-secondary text-primary  outline-surface-accent hover:bg-secondary-hover active:bg-secondary-active data-[active=true]:bg-secondary-active",
         header:
-          "bg-surface-secondary hover:bg-surface-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
-        "header-ghost": "bg-transparent hover:bg-surface-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
-        tertiary: "bg-surface-secondary !rounded-[8px] hover:bg-surface-secondary active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
-        "link-default": "p-0 text-primary hover:text-accent active:text-accent data-[active=true]:text-accent",
-        "link-secondary": "p-0 text-secondary hover:text-primary active:text-primary data-[active=true]:text-primary",
-        "link-accent": "p-0 text-accent hover:text-accent-hover active:text-accent-active data-[active=true]:text-accent-active",
-        "link-active": "p-0 text-warning hover:text-warning-hover active:text-warning-active data-[active=true]:text-warning-active",
-
+          "bg-secondary hover:bg-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
+        "header-ghost": "bg-transparent hover:bg-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
+        tertiary: "bg-secondary !rounded-[8px] hover:bg-secondary active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
+        "link-default": "!h-auto !p-0 text-primary hover:text-accent active:text-accent data-[active=true]:text-accent",
+        "link-secondary": "!h-auto !p-0 text-secondary hover:text-primary active:text-primary data-[active=true]:text-primary",
+        "link-accent": "!h-auto !p-0 text-accent hover:text-accent-hover active:text-accent-active data-[active=true]:text-accent-active",
+        "link-active": "!h-auto !p-0 text-warning hover:text-warning-hover active:text-warning-active data-[active=true]:text-warning-active",
+        ghost: "bg-transparent hover:bg-secondary-hover dark:hover:bg-accent/50",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "bg-critical hover:bg-critical-hover active:bg-critical-active focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+     
       },
       size: {
-        default: "rounded-full gap-2 py-3 px-4",
-        sm: "rounded-full gap-2 py-2 px-2",
-        lg: "rounded-full gap-2 py-3.5 px-5",
+        default: "rounded-full gap-1 px-4 h-[40px]",
+        sm: "rounded-full gap-1 py-1.5 px-2  h-[32px]" ,
+        lg: "rounded-full gap-1 px-4 h-[44px]",
         icon: "p-2 rounded-full size-8",
       },
     },

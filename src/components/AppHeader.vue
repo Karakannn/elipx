@@ -196,20 +196,20 @@ const isActiveLink = (path: string) => {
                 </div>
 
                 <div class="space-y-1">
-                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-surface-secondary">Dashboard
+                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary">Dashboard
                     Customization</RouterLink>
-                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-surface-secondary">Settings
+                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary">Settings
                   </RouterLink>
                   <div class="p-3 uppercase text-mono-10 text-secondary">Preferences</div>
 
                   <div class="flex justify-between gap-4 items-center">
                     <span class="p-3 uppercase text-mono-12">Theme:</span>
                     <div class="flex gap-2 items-center">
-                      <div class="hover:bg-surface-secondary p-1 rounded-md cursor-pointer">
+                      <div class="hover:bg-secondary p-1 rounded-md cursor-pointer">
                         <SvgIcon name="light-mode" class="size-5 text-primary" />
                       </div>
                       <Separator orientation="vertical" />
-                      <div class="hover:bg-surface-secondary p-1 rounded-md cursor-pointer">
+                      <div class="hover:bg-secondary p-1 rounded-md cursor-pointer">
                         <SvgIcon name="dark-mode" class="size-5 text-primary" />
                       </div>
                     </div>

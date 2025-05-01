@@ -1,2 +1,8 @@
-<template>not found</template>
-<script setup></script>
+<script setup>
+import Button from "@/components/ui/button/Button.vue";
+import SvgIcon from "@/components/ui/svg-icon/SvgIcon.vue";
+</script>
+<template>
+    <div class="w-full flex justify-center p-4 uppercase">Not Found</div>
+  
+</template>
