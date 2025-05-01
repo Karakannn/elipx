@@ -74,7 +74,7 @@
   --color-surface-accent-hover: #0b15da;
   --color-surface-accent-active: #0009bd;
 
-  --color-secondary: rgba(16, 16, 16, 0.06);
+  --color-secondary: rgba(16, 16, 16, 0.6);
   --color-secondary-hover: rgba(16, 16, 16, 0.08);
   --color-secondary-active: rgba(16, 16, 16, 0.12);
   --color-secondary-active: rgba(16, 16, 16, 0.12);
@@ -86,7 +86,8 @@
   --color-secondary-inverse: rgba(255, 255, 255, 0.45);
 
   --color-dialog-window: rgba(245, 245, 245, 1);
-
+  --color-dialog-window-bg: rgba(16, 16, 16, 0.45);
+  
   --font-sans: "Suisse Int'l";
   --font-mono: "Chivo Mono", monospace;
 
@@ -283,7 +284,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-surface-sunken text-foreground mx-auto;
+    @apply bg-surface-sunken text-primary mx-auto;
   }
 }
 

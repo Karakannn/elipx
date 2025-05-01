@@ -22,7 +22,6 @@ const activeTab = ref("my-transactions");
             <span class="text-caption-12 text-secondary">EllipX</span>
           </div>
         </div>
-        <!-- TODO: make sm paddings -->
         <Button variant="secondary" size="sm" class="uppercase text-mono-10">Private Sale</Button>
       </div>
     </CardHeader>
@@ -48,8 +47,7 @@ const activeTab = ref("my-transactions");
           <div class="space-y-5">
             <div class="text-mono-14">ALLOCATION</div>
             <div class="space-y-3">
-              <!-- TODO: gray image not showing -->
-              <Progress :model-value="50" />
+              <Progress class="bg-secondary/10" :model-value="50" />
 
               <div class="flex justify-between items-center">
                 <div class="flex items-center">
@@ -61,19 +59,33 @@ const activeTab = ref("my-transactions");
             </div>
           </div>
 
-          <!-- TODO: check button size -->
-          <Button>
+          <Button size="lg">
             <SvgIcon name="plus" class="size-5" />
-            <span>Participate in IEO</span>
+            <span class="text-mono-12">Participate in IEO</span>
           </Button>
         </div>
 
         <div class="p-4 space-y-6">
           <Tabs v-model="activeTab" class="space-y-6">
-            <TabsList class="border-b flex gap-4 justify-start">
-              <TabsTrigger value="my-transactions" class="text-mono-12 tab-trigger"> 1 ROUND </TabsTrigger>
-              <TabsTrigger value="all-transactions" class="tab-trigger"> 2 ROUND</TabsTrigger>
-              <TabsTrigger value="all-transactions" class="tab-trigger"> 3 ROUND</TabsTrigger>
+            <TabsList class="border-b flex gap-1 ">
+              <TabsTrigger :as-child="true" value="my-transactions" class="p-0">
+                <Button :data-active="true" variant="tertiary" class="h-7 px-2">
+                  <SvgIcon name="fire" class="size-4" />
+                  <span class="text-mono-12 uppercase">1 Round</span>
+                </Button>
+              </TabsTrigger>
+              <TabsTrigger :as-child="true" value="all-transactions" class="p-0">
+                <Button variant="tertiary" class="h-7 px-2">
+                  <SvgIcon name="fire" class="size-4" />
+                  <span class="text-mono-12 uppercase">2 Round</span>
+                </Button>
+              </TabsTrigger>
+              <TabsTrigger :as-child="true" value="all-transactions" class="p-0">
+                <Button variant="tertiary" class="h-7 px-2">
+                  <SvgIcon name="fire" class="size-4" />
+                  <span class="text-mono-12 uppercase">3 Round</span>
+                </Button>
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="my-transactions">
@@ -83,13 +95,17 @@ const activeTab = ref("my-transactions");
                 <!-- Info Cards -->
                 <div class="grid md:grid-cols-2 gap-4 mb-6">
                   <!-- Token For Sale Card -->
-                  <div class="rounded-[12px] p-6 space-y-4" style="background: url('/public/ieo-bg.png'), rgba(0, 230, 255, 0.68); background-size: cover;">
+                  <div
+                    class="rounded-[12px] p-6 space-y-4"
+                    style="background: url('/public/ieo-bg.png'), rgba(0, 230, 255, 0.68); background-size: cover">
                     <div class="text-mono-12 text-white">TOKEN FOR SALE</div>
                     <div class="text-h3 text-white">50,000,000 ELX (5%)</div>
                   </div>
 
                   <!-- Accepted Currencies Card -->
-                  <div class="rounded-[12px] p-6 space-y-4" style="background: url('/public/ieo-bg.png'), rgba(0, 230, 255, 0.68); background-size: cover;">
+                  <div
+                    class="rounded-[12px] p-6 space-y-4"
+                    style="background: url('/public/ieo-bg.png'), rgba(0, 230, 255, 0.68); background-size: cover">
                     <div class="text-mono-12 text-white">ACCEPTED</div>
                     <div class="text-h3 text-white">BTC, ETH, BSC, USDT</div>
                   </div>
@@ -158,7 +174,7 @@ const activeTab = ref("my-transactions");
               </div>
             </TabsContent>
 
-            <TabsContent value="all-transactions"> sa </TabsContent>
+        <!--     <TabsContent value="all-transactions">ALL TRANSACTIONS</TabsContent> -->
           </Tabs>
         </div>
       </div>

@@ -17,7 +17,6 @@ const props = defineProps({
 })
 
 const handleTerminate = () => {
-    console.log(`Oturum sonlandırıldı: ${props.deviceInfo}`)
     isOpen.value = false
 }
 

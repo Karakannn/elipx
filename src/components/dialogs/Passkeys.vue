@@ -58,19 +58,15 @@ const passkeys = ref([
 ])
 
 const disconnectDevice = (passkeyIndex, deviceIndex) => {
-    console.log(`Cihaz bağlantısı kesildi: ${passkeys.value[passkeyIndex].devices[deviceIndex].id}`)
 }
 
 const disconnectPasskey = (passkeyIndex) => {
-    console.log(`Passkey bağlantısı kesildi: ${passkeys.value[passkeyIndex].type}`)
 }
 
 const addDevice = (passkeyIndex) => {
-    console.log(`${passkeys.value[passkeyIndex].type} için yeni cihaz ekleniyor`)
 }
 
 const changePasskey = (passkeyIndex) => {
-    console.log(`${passkeys.value[passkeyIndex].type} değiştiriliyor`)
 }
 
 defineExpose({

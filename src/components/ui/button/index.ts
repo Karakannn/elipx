@@ -9,11 +9,11 @@ export const buttonVariants = cva(
       variant: {
         default:
           "bg-surface-accent !text-white outline-surface-accent hover:bg-surface-accent-hover active:bg-surface-accent-active data-[active=true]:bg-surface-accent-active",
-        secondary: "bg-secondary text-primary  outline-surface-accent hover:bg-secondary-hover active:bg-secondary-active data-[active=true]:bg-secondary-active",
+        secondary: "bg-secondary/10 text-primary  outline-surface-accent hover:bg-secondary-hover active:bg-secondary-active data-[active=true]:bg-secondary-active",
         header:
-          "bg-secondary hover:bg-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
+          "bg-secondary/10 hover:bg-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
         "header-ghost": "bg-transparent hover:bg-secondary-hover active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
-        tertiary: "bg-secondary !rounded-[8px] hover:bg-secondary active:bg-surface-accent active:text-white data-[active=true]:bg-surface-accent data-[active=true]:text-white",
+        tertiary: "bg-secondary/10 !rounded-[8px] hover:bg-secondary/10 active:bg-surface-accent active:text-white data-[active=true]:bg-accent data-[active=true]:text-white",
         "link-default": "!h-auto !p-0 text-primary hover:text-accent active:text-accent data-[active=true]:text-accent",
         "link-secondary": "!h-auto !p-0 text-secondary hover:text-primary active:text-primary data-[active=true]:text-primary",
         "link-accent": "!h-auto !p-0 text-accent hover:text-accent-hover active:text-accent-active data-[active=true]:text-accent-active",
@@ -25,7 +25,7 @@ export const buttonVariants = cva(
       },
       size: {
         default: "rounded-full gap-1 px-4 h-[40px]",
-        sm: "rounded-full gap-1 py-1.5 px-2  h-[32px]" ,
+        sm: "rounded-full gap-1 py-1.5 px-3  h-[32px]" ,
         lg: "rounded-full gap-1 px-4 h-[44px]",
         icon: "p-2 rounded-full size-8",
       },

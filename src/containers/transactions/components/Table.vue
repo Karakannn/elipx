@@ -318,18 +318,15 @@ const table = useVueTable({
       </TableBody>
     </Table>
 
-    <!-- TODO: Pagination need to change -->
-    <!-- TODO: need transaction history web modal and mobile drawer-->
-
     <div class="flex justify-between items-center p-4 text-sm">
       <div class="text-secondary text-mono-10">SHOWING 11 OF 15</div>
       <div class="flex items-center space-x-2">
-        <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
+        <button  :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
           <ChevronLeft class="h-5 w-5" />
         </button>
-        <Button class="bg-border-accent !rounded-xl px-4 py-2.5" @click="table.setPageIndex(0)"> 1 </Button>
-        <Button variant="ghost" class="hover:bg-gray-100 !rounded-xl px-4 py-2.5" @click="table.setPageIndex(1)"> 2 </Button>
-        <button class="p-1 rounded hover:bg-gray-100" :disabled="!table.getCanNextPage()" @click="table.nextPage()">
+        <Button class="bg-border-accent !rounded-sm h-[28px] w-[28px] p-0" @click="table.setPageIndex(0)"> 1 </Button>
+        <Button variant="ghost" class="hover:bg-gray-100 !rounded-sm h-[28px] w-[28px] p-0" @click="table.setPageIndex(1)"> 2 </Button>
+        <button  :disabled="!table.getCanNextPage()" @click="table.nextPage()">
           <ChevronRight class="h-5 w-5" />
         </button>
       </div>

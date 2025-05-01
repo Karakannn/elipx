@@ -10,7 +10,6 @@ const isDesktop = useMediaQuery('(min-width: 768px)')
 const modalRef = ref(null)
 
 const handleEnable = () => {
-  console.log('Authenticator App etkinleştirildi')
   isOpen.value = false
 }
 
@@ -42,7 +41,6 @@ defineExpose({
       </p>
     </div>
 
-    <!-- TODO: change button size -->
     <template #footer>
       <div class="w-full p-4 pt-0">
         <Button size="lg" class="w-full " @click="handleEnable">

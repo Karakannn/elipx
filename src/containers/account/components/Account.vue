@@ -82,12 +82,11 @@ const disconnectWallet = (wallet) => {
 
             <SettingItem label="username" :value="userInfo.username">
                 <template #icon>
-                    <SvgIcon name="username" class="size-5" />
+                    <SvgIcon name="username" class="size-4" />
                 </template>
             </SettingItem>
 
 
-            <!-- TODO: need button sizes change to 32px width -->
             <SettingItem label="Country" :value="userInfo.country">
                 <template #icon>
                     <SvgIcon name="id" class="size-5" />
@@ -122,14 +121,14 @@ const disconnectWallet = (wallet) => {
                 <template #action>
                     <Button variant="secondary" size="sm" @click="changePhone">
                         <span class="uppercase text-mono-12">Change Phone</span>
-                        <SvgIcon name="chevron-right" class="size-5" />
+                        <SvgIcon name="chevron-right" class="size-4" />
                     </Button>
                 </template>
             </SettingItem>
 
             <SettingItem label="JOINED" :value="userInfo.joined">
                 <template #icon>
-                    <SvgIcon name="gg_check-o" class="size-5" />
+                    <SvgIcon name="gg_check-o" class="size-4" />
                 </template>
             </SettingItem>
         </div>
@@ -139,24 +138,22 @@ const disconnectWallet = (wallet) => {
 
             <SettingItem label="MY MAIN WALLET" :value="wallets.main.address" :verified="true">
                 <template #icon>
-                    <SvgIcon name="metamask" class="size-5" />
+                    <SvgIcon name="metamask" class="size-4" />
                 </template>
                 <template #action>
                     <Button variant="secondary" size="sm" @click="disconnectWallet">
                         <span class="uppercase text-mono-12">Disconnect</span>
-                        <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
                 </template>
             </SettingItem>
 
             <SettingItem label="LEDGER WALLET" :value="wallets.ledger.address" :verified="true">
                 <template #icon>
-                    <SvgIcon name="ledger" class="size-5" />
+                    <SvgIcon name="ledger" class="size-4" />
                 </template>
                 <template #action>
                     <Button variant="secondary" size="sm" @click="disconnectWallet">
                         <span class="uppercase text-mono-12">Disconnect</span>
-                        <SvgIcon name="chevron-right" class="size-5" />
                     </Button>
                 </template>
             </SettingItem>
@@ -164,12 +161,12 @@ const disconnectWallet = (wallet) => {
             <SettingItem label="LINKED WALLET"
                 description="WE SUPPORT METAMASK, WALLETCONNECT, LEDGER, AND OTHER POPULAR WALLETS.">
                 <template #icon>
-                    <SvgIcon name="ledger" class="size-5" />
+                    <SvgIcon name="ledger" class="size-4" />
                 </template>
                 <template #action>
                     <Button variant="secondary" size="sm">
                         <span class="uppercase text-mono-12">Connect New Wallet</span>
-                        <SvgIcon name="linked_wallet" class="size-5" />
+                        <SvgIcon name="linked_wallet" class="size-4" />
                     </Button>
                 </template>
             </SettingItem>

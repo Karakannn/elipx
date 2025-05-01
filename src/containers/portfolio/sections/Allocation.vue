@@ -15,7 +15,7 @@
     </CardHeader>
     <CardContent class="space-y-4">
 
-      <Progress :model-value="50" />
+      <Progress class="bg-secondary/10" :model-value="50" />
       
       <div class="flex justify-between items-center">
         <div class="flex items-center">

@@ -10,7 +10,6 @@ const isDesktop = useMediaQuery('(min-width: 768px)')
 const modalRef = ref(null)
 
 const handleChangePassword = () => {
-    console.log('Şifre değiştirme işlemi başlatıldı')
     isOpen.value = false
 }
 

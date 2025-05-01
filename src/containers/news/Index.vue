@@ -136,12 +136,7 @@ const activeTabTitle = computed(() => {
   return tab ? tab.title : "";
 });
 
-watch(
-  () => activeTab.value,
-  (newValue) => {
-    console.log("Active tab changed:", newValue);
-  }
-);
+
 
 onMounted(() => {
   const updateIndicator = () => {
@@ -210,7 +205,6 @@ onMounted(() => {
         </TabsContent>
       </Tabs>
 
-      <!-- TODO: need tab ui -->
 
       <div class="p-4 flex items-center justify-between border-t border-border">
         <div class="flex items-center gap-4">
@@ -218,7 +212,6 @@ onMounted(() => {
           <span class="text-mono-10"> SHOWING 11 OF 15 </span>
         </div>
 
-        <!-- TODO: make pagination component for table -->
         <div class="flex items-center ml-4">
           <button
             class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50"

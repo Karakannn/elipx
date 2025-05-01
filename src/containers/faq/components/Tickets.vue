@@ -132,7 +132,6 @@ function submitTicket() {
         </div>
       </div>
 
-      <!-- TODO: check button sizes -->
       <Button size="lg">
         <span class="text-mono-12">SUBMIT TICKET</span>
         <SvgIcon name="chevron-right" class="size-5" />
@@ -172,7 +171,6 @@ function submitTicket() {
           <span class="text-sm">John Doe</span>
         </div>
 
-        <!-- TODO: Secondary text and icon blue -->
         <Button variant="secondary" class="!text-primary">
           <span class="text-mono-12">OPEN TICKET</span>
           <SvgIcon name="chevron-right" class="size-5" />

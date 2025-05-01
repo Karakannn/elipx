@@ -25,19 +25,20 @@ import {
         </CardHeader>
         <CardContent class="space-y-6">
             <div class="flex gap-2 text-mono-12 overflow-x-auto">
-                <Button class="px-2 py-2.5" variant="tertiary">
+
+                <Button :data-active="true" class="h-7 px-2" variant="tertiary">
                     <SvgIcon name="fav" class="size-4" />
                     ALL
                 </Button>
-                <Button class="px-2 py-2.5" variant="tertiary">
+                <Button class="h-7 px-2" variant="tertiary">
                     <SvgIcon name="fire" class="size-4" />
                     RELEASE
                 </Button>
-                <Button class="px-2 py-2.5" variant="tertiary">
+                <Button class="h-7 px-2" variant="tertiary">
                     <SvgIcon name="new" class="size-4" />
                     COMING SOON
                 </Button>
-                <Button class="px-2 py-2.5" variant="tertiary">
+                <Button class="h-7 px-2" variant="tertiary">
                     <SvgIcon name="check_circle" class="size-4" />
                     COMPLETED
                 </Button>

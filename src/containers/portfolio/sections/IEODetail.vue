@@ -36,20 +36,20 @@ import {
       <Tabs default-value="round-one">
         <TabsList class="space-x-1 text-mono-12 ">
           <TabsTrigger asChild value="round-one">
-            <Button class="px-2 py-2" variant="tertiary">
+            <Button :data-active="true" class="h-7 px-2" variant="tertiary">
               <SvgIcon name="fire" class="size-4" />
               <span class="text-[12px]">1 ROUND</span>
             </Button>
           </TabsTrigger>
           <TabsTrigger asChild value="round-two">
-            <Button class="px-2 py-2" variant="tertiary">
+            <Button  class="h-7 px-2" variant="tertiary">
               <SvgIcon name="new" class="size-4" />
               <span class="text-[12px]">2 ROUND</span>
             </Button>
           </TabsTrigger>
 
           <TabsTrigger asChild value="round-three">
-            <Button class="px-2 py-2" variant="tertiary">
+            <Button  class="h-7 px-2" variant="tertiary">
               <SvgIcon name="new" class="size-4" />
               <span class="text-[12px]">3 ROUND</span>
             </Button>

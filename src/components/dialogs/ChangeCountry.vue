@@ -62,7 +62,6 @@ const filteredCountries = computed(() => {
 })
 
 const selectCountry = (country) => {
-  console.log(`Ülke seçildi: ${country.name}`)
   isOpen.value = false
 }
 

@@ -165,8 +165,6 @@ const isActiveLink = (path: string) => {
           <SvgIcon class="size-6" name="bell" />
         </Button>
 
-
-        <!-- TODO: items need be button and clickable -->
         <Popover>
           <PopoverTrigger as-child>
             <Avatar class="shrink-0 cursor-pointer">
@@ -196,20 +194,20 @@ const isActiveLink = (path: string) => {
                 </div>
 
                 <div class="space-y-1">
-                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary">Dashboard
+                  <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Dashboard
                     Customization</RouterLink>
-                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary">Settings
+                  <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Settings
                   </RouterLink>
                   <div class="p-3 uppercase text-mono-10 text-secondary">Preferences</div>
 
                   <div class="flex justify-between gap-4 items-center">
                     <span class="p-3 uppercase text-mono-12">Theme:</span>
                     <div class="flex gap-2 items-center">
-                      <div class="hover:bg-secondary p-1 rounded-md cursor-pointer">
+                      <div class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer">
                         <SvgIcon name="light-mode" class="size-5 text-primary" />
                       </div>
                       <Separator orientation="vertical" />
-                      <div class="hover:bg-secondary p-1 rounded-md cursor-pointer">
+                      <div class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer">
                         <SvgIcon name="dark-mode" class="size-5 text-primary" />
                       </div>
                     </div>
