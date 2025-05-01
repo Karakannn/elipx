@@ -19,7 +19,7 @@ import {
 
 <template>
  <div class="flex flex-col lg:flex-row lg:gap-16">
-    <div class="space-y-4 lg:max-w-xl p-4 pb-0">
+    <div class="space-y-4 lg:max-w-xl p-4 lg:px-0 pb-0">
         <div class="text-h4 sm:text-h3 font-[450] flex items-center gap-1 flex-wrap">
                 <span class="text-muted font-[450]">Get Started,</span>
                 <span>Jason</span>

@@ -136,8 +136,6 @@ const activeTabTitle = computed(() => {
   return tab ? tab.title : "";
 });
 
-
-
 onMounted(() => {
   const updateIndicator = () => {
     const activeTabEl = container.value?.querySelector('[data-state="active"]');
@@ -172,14 +170,15 @@ onMounted(() => {
       <Tabs v-model="activeTab" default-value="documentation" class="pb-0">
         <div class="relative" ref="container">
           <div class="border-b w-full px-2 overflow-x-auto">
-            <TabsList class="space-x-4 border-b">
-              <TabsTrigger as-child="true" v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-0" @click="filterByTab(tab.id)">
+            <TabsList class="border-b space-x-4 overflow-x-auto">
+              <TabsTrigger v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-0" @click="filterByTab(tab.id)">
                 <div class="custom-tab-trigger">
                   <SvgIcon :name="tab.icon" class="size-4" />
                   <span class="text-mono-12">{{ tab.name }}</span>
                 </div>
               </TabsTrigger>
             </TabsList>
+
             <div ref="indicator" class="custom-tab-indicator"></div>
           </div>
         </div>
@@ -205,8 +204,7 @@ onMounted(() => {
         </TabsContent>
       </Tabs>
 
-
-      <div class="p-4 flex items-center justify-between border-t ">
+      <div class="p-4 flex items-center justify-between border-t">
         <div class="flex items-center gap-4">
           <Button variant="secondary" class="text-mono-12"> SHOW MORE </Button>
           <span class="text-mono-10"> SHOWING 11 OF 15 </span>

@@ -142,37 +142,124 @@ const isActiveLink = (path: string) => {
 
 <template>
   <!-- Desktop Header -->
-  <header class="hidden md:block h-14 border-b fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
-    <div class="h-full flex items-center">
-      <SvgIcon name="logo" class="w-6 h-6 ml-4 shrink-0" />
+  <header class="hidden md:block border-b fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
+    <div class="max-w-[1440px] mx-auto h-14 ">
+      <div class="h-full flex items-center">
+        <SvgIcon name="logo" class="w-6 h-6 ml-4 shrink-0" />
 
-      <div ref="navContainer" class="flex-1 overflow-hidden mx-4 select-none">
-        <div class="flex gap-1" style="width: max-content">
-          <Button
-            v-for="link in links"
-            :key="link.name"
-            variant="header"
-            :as-child="true"
-            class="text-mono-12 uppercase shrink-0"
-            :active="isActiveLink(link.href)">
-            <RouterLink :to="link.href">
-              {{ link.name }}
-            </RouterLink>
+        <div ref="navContainer" class="flex-1 overflow-hidden mx-4 select-none">
+          <div class="flex gap-1" style="width: max-content">
+            <Button
+              v-for="link in links"
+              :key="link.name"
+              variant="header"
+              :as-child="true"
+              class="text-mono-12 uppercase shrink-0"
+              :active="isActiveLink(link.href)">
+              <RouterLink :to="link.href">
+                {{ link.name }}
+              </RouterLink>
+            </Button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 px-4 shrink-0 border-l">
+          <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> DEPOSIT </Button>
+          <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
+
+          <Button size="icon" variant="header-ghost" class="hidden lg:inline-flex">
+            <SvgIcon class="size-6" name="support" />
           </Button>
+          <Separator orientation="vertical" class="bg-border-on-sunken hidden lg:block" />
+          <Button size="icon" variant="header-ghost">
+            <SvgIcon class="size-6" name="bell" />
+          </Button>
+
+          <Popover>
+            <PopoverTrigger as-child>
+              <Avatar class="shrink-0 cursor-pointer">
+                <AvatarImage src="/public/avatar.png" alt="@unovue" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent align="end" class="w-[253px] mt-2 p-0">
+              <div class="pt-4 pb-1 space-y-4">
+                <div class="space-y-3 px-1">
+                  <div class="px-3">
+                    <div class="rounded-full w-min bg-positive pt-[3] px-1.5 pb-[2px]">
+                      <span class="text-icon-green text-mono-10">VERIFIED</span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-3 items-center px-3">
+                    <Avatar class="shrink-0 cursor-pointer">
+                      <AvatarImage src="/public/avatar.png" alt="@unovue" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <div class="space-y-0.5">
+                      <div class="text-paragraph-14">John Doe</div>
+                      <div class="text-caption-12 text-secondary">john.doe@gmail.com</div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-1">
+                    <RouterLink to="/" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Dashboard Customization</RouterLink>
+                    <RouterLink to="/account" class="p-3 uppercase text-mono-12 block hover:bg-secondary/10">Settings </RouterLink>
+                    <div class="p-3 uppercase text-mono-10 text-secondary">Preferences</div>
+
+                    <div class="flex justify-between gap-4 items-center">
+                      <span class="p-3 uppercase text-mono-12">Theme:</span>
+                      <div class="flex gap-2 items-center">
+                        <div
+                          class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
+                          :class="{ 'bg-secondary/20': mode === 'light' }"
+                          @click="toggleTheme('light')">
+                          <SvgIcon name="light-mode" class="size-5" :class="mode === 'light' ? 'text-primary' : 'text-secondary'" />
+                        </div>
+                        <Separator orientation="vertical" />
+                        <div
+                          class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
+                          :class="{ 'bg-secondary/20': mode === 'dark' }"
+                          @click="toggleTheme('dark')">
+                          <SvgIcon name="dark-mode" class="size-5" :class="mode === 'dark' ? 'text-primary' : 'text-secondary'" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-between gap-4 items-center">
+                      <span class="p-3 uppercase text-mono-12">Language:</span>
+
+                      <Button variant="link-secondary">
+                        <span class="uppercase text-mono-12 text-primary">English</span>
+                        <SvgIcon name="chevron-right" class="size-5 text-primary" />
+                      </Button>
+                    </div>
+
+                    <h5 class="p-3 uppercase text-mono-12 text-red hover:bg-red/10 cursor-pointer">LOG OUT</h5>
+                    <div class="flex gap-4 items-center">
+                      <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Privacy Policy</RouterLink>
+                      <RouterLink to="/" class="p-3 uppercase text-mono-12 text-secondary">Terms</RouterLink>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
-      <div class="flex items-center gap-2 px-4 shrink-0 border-l">
-        <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> DEPOSIT </Button>
-        <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
+    </div>
+  </header>
 
-        <Button size="icon" variant="header-ghost" class="hidden lg:inline-flex">
+  <!-- Mobile Header -->
+  <div class="md:hidden fixed top-0 left-0 right-0 z-50">
+    <header class="h-14 px-4 flex items-center justify-between border-b backdrop-blur-xl">
+      <SvgIcon name="logo" class="size-6" />
+      <div class="flex items-center gap-4">
+        <Button size="icon" variant="header-ghost">
           <SvgIcon class="size-6" name="support" />
         </Button>
-        <Separator orientation="vertical" class="bg-border-on-sunken hidden lg:block" />
         <Button size="icon" variant="header-ghost">
           <SvgIcon class="size-6" name="bell" />
         </Button>
-
         <Popover>
           <PopoverTrigger as-child>
             <Avatar class="shrink-0 cursor-pointer">
@@ -243,25 +330,6 @@ const isActiveLink = (path: string) => {
             </div>
           </PopoverContent>
         </Popover>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Header -->
-  <div class="md:hidden fixed top-0 left-0 right-0 z-50">
-    <header class="h-14 px-4 flex items-center justify-between border-b backdrop-blur-xl">
-      <SvgIcon name="logo" class="size-6" />
-      <div class="flex items-center gap-4">
-        <Button size="icon" variant="header-ghost">
-          <SvgIcon class="size-6" name="support" />
-        </Button>
-        <Button size="icon" variant="header-ghost">
-          <SvgIcon class="size-6" name="bell" />
-        </Button>
-        <Avatar>
-          <AvatarImage src="/public/avatar.png" alt="@unovue" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
         <Button class="hamburger-menu" :class="{ 'is-active': isMenuOpen }" @click="toggleMenu" variant="header-ghost" size="icon" aria-label="Menu">
           <div class="hamburger-lines-container">
             <span class="hamburger-line bg-primary line-1"></span>
@@ -281,8 +349,8 @@ const isActiveLink = (path: string) => {
       leave-from-class="opacity-100"
       leave-to-class="opacity-0">
       <div v-if="isMenuOpen" class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-between">
-        <nav class="px-4 py-8">
-          <div class="flex flex-col space-y-4">
+        <nav class="px-4 py-8 h-full">
+          <div class="flex flex-col space-y-6 h-full items-center justify-center">
             <RouterLink
               v-for="link in links"
               :key="link.name"
