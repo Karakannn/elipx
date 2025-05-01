@@ -1,6 +1,6 @@
 <template>
  <div>
-        <h2 class="text-h4 p-4 border-b border-border">Overview</h2>
+        <h2 class="text-h4 p-4 border-b ">Overview</h2>
 
         <div class="space-y-4 p-4">
           <h3 class="text-paragraph-14">Welcome to EllipX</h3>

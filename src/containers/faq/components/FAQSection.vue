@@ -4,7 +4,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
       <div v-for="(item, itemIndex) in section.items" :key="itemIndex" class="w-full pb-4">
-        <Collapsible class="py-[13px] px-5 border border-border rounded-full data-[state=open]:rounded-[12px]">
+        <Collapsible class="py-[13px] px-5 border  rounded-full data-[state=open]:rounded-[12px]">
           <CollapsibleTrigger :as-child="true" class="flex cursor-pointer w-full">
             <div class="flex justify-between gap-4 items-center">
               <div class="text-paragraph-14 flex-1 text-left">{{ item.question }}</div>

@@ -175,7 +175,6 @@ const columns: ColumnDef<Transaction>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       let dotColor = "bg-gray-500";
-      let textColor = "text-gray-500";
 
       switch (status) {
         case "IN PROGRESS":
@@ -191,7 +190,7 @@ const columns: ColumnDef<Transaction>[] = [
           dotColor = "bg-emerald-500";
           break;
         case "PENDING":
-          dotColor = "bg-blue-500";
+          dotColor = "bg-accent";
           break;
       }
 
@@ -256,7 +255,7 @@ const table = useVueTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t hover:bg-gray-50">
+        <TableRow v-for="row in table.getRowModel().rows" :key="row.id" class="border-t hover:bg-secondary/10">
           <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id" class="py-4">
             <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
           </TableCell>
@@ -270,7 +269,7 @@ const table = useVueTable({
         <button  :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
           <ChevronLeft class="h-5 w-5" />
         </button>
-        <Button class="bg-border-accent !rounded-sm h-[28px] w-[28px] p-0" @click="table.setPageIndex(0)"> 1 </Button>
+        <Button class="bg-accent !rounded-sm h-[28px] w-[28px] p-0" @click="table.setPageIndex(0)"> 1 </Button>
         <Button variant="ghost" class="hover:bg-gray-100 !rounded-sm h-[28px] w-[28px] p-0" @click="table.setPageIndex(1)"> 2 </Button>
         <button  :disabled="!table.getCanNextPage()" @click="table.nextPage()">
           <ChevronRight class="h-5 w-5" />

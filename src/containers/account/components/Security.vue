@@ -87,7 +87,7 @@ const terminateSession = (index) => {
 
 <template>
     <div>
-        <div class="border-b border-border px-4">
+        <div class="border-b  px-4">
             <h2 class="text-caption-12 text-secondary pt-5">Two-Factor Authentication (2FA)</h2>
 
             <SettingItem label="PASSKEYS" description="Protect your account and withdrawals with an access key">
@@ -163,7 +163,7 @@ const terminateSession = (index) => {
             </SettingItem>
         </div>
 
-        <div class="border-b border-border px-4">
+        <div class="border-b  px-4">
             <h2 class="text-caption-12 text-secondary pt-5">Active Sessions</h2>
 
             <SettingItem :value="activeSessions[0].device" :description="activeSessions[0].location">

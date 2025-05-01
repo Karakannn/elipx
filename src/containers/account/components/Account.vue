@@ -58,7 +58,7 @@ const disconnectWallet = (wallet) => {
 
 <template>
     <div>
-        <div class="border-b border-border px-4">
+        <div class="border-b  px-4">
             <h2 class="text-caption-12 text-secondary pt-5">Profile photo</h2>
             <div class="flex items-center gap-5 pt-5 pb-3">
                 <Avatar class="shrink-0 cursor-pointer h-[60px] w-[60px]">

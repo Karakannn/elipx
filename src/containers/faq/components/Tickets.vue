@@ -76,16 +76,16 @@ function submitTicket() {
 
 <template>
   <div class="flex flex-col">
-    <form @submit.prevent="submitTicket" class="space-y-8 p-4 border-b border-border">
+    <form @submit.prevent="submitTicket" class="space-y-8 p-4 border-b ">
       <h2 class="text-h1">Submit a ticket</h2>
 
       <div class="space-y-2 relative">
-        <label class="absolute bg-white -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Subject <span class="text-red-500 ml-0.5">*</span> </label>
+        <label class="absolute bg-card -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Subject <span class="text-red-500 ml-0.5">*</span> </label>
         <Input v-model="ticketForm.subject" type="text" placeholder="Enter a brief subject" class="w-full" required />
       </div>
 
       <div class="space-y-2 relative">
-        <label class="absolute bg-white -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Category <span class="text-red-500 ml-0.5">*</span> </label>
+        <label class="absolute bg-card -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Category <span class="text-red-500 ml-0.5">*</span> </label>
 
         <Select v-model="ticketForm.category" required>
           <SelectTrigger class="w-full px-5 !h-[52px] rounded-full">
@@ -105,12 +105,12 @@ function submitTicket() {
       </div>
 
       <div class="space-y-2 relative">
-        <label class="absolute bg-white -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Message <span class="text-red-500 ml-0.5">*</span> </label>
+        <label class="absolute bg-card -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Message <span class="text-red-500 ml-0.5">*</span> </label>
         <Input v-model="ticketForm.message" type="text" placeholder="Describe your issue or question in detail" class="w-full" required />
       </div>
 
       <div class="space-y-2 relative">
-        <label class="absolute bg-white -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary">
+        <label class="absolute bg-card -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary">
           Attachments <span class="text-red-500 ml-0.5">*</span>
         </label>
 
@@ -120,7 +120,7 @@ function submitTicket() {
         </div>
         <input ref="fileInput" type="file" @change="handleFileChange" class="hidden" multiple />
         <div v-if="ticketForm.files.length > 0" class="mt-2 space-y-1">
-          <div v-for="(file, index) in ticketForm.files" :key="index" class="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-md">
+          <div v-for="(file, index) in ticketForm.files" :key="index" class="flex items-center justify-between bg-secondary/10 px-3 py-2 rounded-md">
             <div class="flex items-center gap-2">
               <FileIcon class="h-4 w-4 text-gray-500" />
               <span class="text-sm truncate max-w-xs">{{ file.name }}</span>
@@ -141,7 +141,7 @@ function submitTicket() {
     <div v-for="(ticket, index) in tickets" :key="index" class="px-4">
       <div class="py-5 text-caption-12 text-secondary">Ticket# {{ ticket.id }}</div>
 
-      <div class="space-y-1 w-full py-4 border-b border-border">
+      <div class="space-y-1 w-full py-4 border-b ">
         <div class="flex justify-between gap-4 items-center w-full">
           <div class="flex gap-4 items-center">
             <div class="text-paragraph-14">{{ ticket.subject }}</div>

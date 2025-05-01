@@ -47,7 +47,7 @@ defineExpose({
   <!-- Desktop-->
   <Dialog v-if="isDesktop" v-model:open="isOpen">
     <DialogContent :class="`md:max-w-[${maxWidth}] p-0 gap-5`">
-      <DialogHeader class="py-5 px-4 gap-4 border-b border-border">
+      <DialogHeader class="py-5 px-4 gap-4 border-b ">
         <slot name="header">
           {{ title }}
         </slot>

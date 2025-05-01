@@ -48,7 +48,7 @@ const showQrCode = () => {
 <template>
 
   <div>
-    <div class="px-4 border-b border-border">
+    <div class="px-4 border-b ">
       <p class="pt-5 text-caption-12 text-secondary">Share the link with a friend and get bonuses</p>
 
       <div class="flex flex-wrap items-center justify-between py-5">
@@ -65,7 +65,7 @@ const showQrCode = () => {
           </Button>
         </div>
 
-        <div class="bg-dialog-window text-right p-4 space-y-1 rounded-lg border border-border">
+        <div class="bg-surface-sunken text-right p-4 space-y-1 rounded-lg border ">
           <div class="text-secondary text-caption-12 w-[120px]">In general, you got</div>
           <div class="text-caption-12 text-[18px]">{{ totalEarned }} <span class="text-mono-12">ELX</span></div>
         </div>

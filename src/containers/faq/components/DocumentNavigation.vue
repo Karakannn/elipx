@@ -62,11 +62,11 @@ const updateSectionExpanded = (sectionId: string, value: boolean) => {
 
 <template>
     <div class="w-full lg:w-[288px] shrink-0">
-      <div class="bg-white rounded-lg shadow">
+      <div class="bg-card rounded-lg shadow">
         <div v-for="(section, sectionIndex) in sidebarSections" :key="sectionIndex">
           <Collapsible :open="section.expanded" @update:open="(value) => updateSectionExpanded(section.id, value)">
             <CollapsibleTrigger class="w-full">
-              <div class="flex items-center justify-between rounded-md cursor-pointer gap-8 p-4 hover:bg-gray-50">
+              <div class="flex items-center justify-between rounded-md cursor-pointer gap-8 p-4 hover:bg-secondary/10">
                 <div class="flex items-center gap-3">
                   <SvgIcon :name="section.icon" class="size-5 text-primary" />
                   <span class="text-h4 text-left">{{ section.label }}</span>
@@ -81,7 +81,7 @@ const updateSectionExpanded = (sectionId: string, value: boolean) => {
                   v-for="(item, itemIndex) in section.items"
                   :key="itemIndex"
                   :class="[
-                    'flex items-center pb-3 cursor-pointer border-b border-border',
+                    'flex items-center pb-3 cursor-pointer border-b ',
                     activeSidebarItem === item.id ? 'text-primary' : 'hover:text-primary text-secondary',
                   ]"
                   @click="activeSidebarItem = item.id"

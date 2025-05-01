@@ -42,7 +42,7 @@ defineExpose({
         <div class="p-4">
 
             <div class="space-y-2 relative">
-                <label class="absolute bg-white -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Edit
+                <label class="absolute bg-card -translate-y-1/2 px-3 py-1 text-caption-12 text-secondary"> Edit
                     Link</label>
                 <Input v-model="referralLink" type="text" placeholder="Enter a brief subject" class="w-full" required />
             </div>

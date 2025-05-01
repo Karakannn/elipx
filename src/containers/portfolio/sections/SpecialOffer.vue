@@ -68,9 +68,9 @@ import {
                     </div>
                 </div>
 
-                <div class="flex gap-3 w-full border-t border-border-on-sunken">
+                <div class="flex gap-3 w-full border-t -on-sunken">
 
-                    <div class="space-y-1.5 flex-1 pt-3 border-r border-border-on-sunken">
+                    <div class="space-y-1.5 flex-1 pt-3 border-r -on-sunken">
                         <h5 class=" text-secondary text-caption-12">Token Price:</h5>
                         <span class=" text-mono-12">0.2715$</span>
                     </div>
@@ -80,7 +80,7 @@ import {
                         <span class=" text-mono-12">248 ELX</span>
                     </div>
 
-                    <div class="space-y-1.5 flex-1 pt-3 border-r border-border-on-sunken">
+                    <div class="space-y-1.5 flex-1 pt-3 border-r -on-sunken">
                         <h5 class=" text-secondary text-caption-12">IEO Date</h5>
                         <span class=" text-mono-12">28 may 2025</span>
                     </div>

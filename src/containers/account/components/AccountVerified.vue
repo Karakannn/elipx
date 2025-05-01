@@ -7,7 +7,7 @@ import { SvgIcon } from "@/components/ui/svg-icon";
 
     <Card>
         <CardContent class="py-3 px-4">
-            <div class="flex items-center gap-3 border-b border-border">
+            <div class="flex items-center gap-3 border-b ">
                 <SvgIcon name="verified" class="size-5" />
                 <div class="space-y-0.5">
                     <div class="flex gap-2 items-center">

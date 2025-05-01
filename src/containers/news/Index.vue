@@ -173,7 +173,7 @@ onMounted(() => {
         <div class="relative" ref="container">
           <div class="border-b w-full px-2 overflow-x-auto">
             <TabsList class="space-x-4 border-b">
-              <TabsTrigger v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-0" @click="filterByTab(tab.id)">
+              <TabsTrigger as-child="true" v-for="tab in tabs" :key="tab.id" :value="tab.id" class="p-0" @click="filterByTab(tab.id)">
                 <div class="custom-tab-trigger">
                   <SvgIcon :name="tab.icon" class="size-4" />
                   <span class="text-mono-12">{{ tab.name }}</span>
@@ -188,7 +188,7 @@ onMounted(() => {
             <div
               v-for="notification in paginatedNotifications"
               :key="notification.id"
-              class="hover:bg-gray-50 rounded-md hover:shadow-sm cursor-pointer">
+              class="hover:bg-secondary/10 rounded-md hover:shadow-sm cursor-pointer">
               <img :src="notification.imageUrl" :alt="notification.title" />
 
               <div class="p-4 space-y-4">
@@ -206,7 +206,7 @@ onMounted(() => {
       </Tabs>
 
 
-      <div class="p-4 flex items-center justify-between border-t border-border">
+      <div class="p-4 flex items-center justify-between border-t ">
         <div class="flex items-center gap-4">
           <Button variant="secondary" class="text-mono-12"> SHOW MORE </Button>
           <span class="text-mono-10"> SHOWING 11 OF 15 </span>
@@ -214,7 +214,7 @@ onMounted(() => {
 
         <div class="flex items-center ml-4">
           <button
-            class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50"
+            class="w-8 h-8 flex items-center justify-center rounded border hover:bg-secondary/10"
             :disabled="currentPage === 0"
             @click="goToPreviousPage">
             <ChevronLeftIcon class="h-4 w-4" />
@@ -222,7 +222,7 @@ onMounted(() => {
 
           <button
             class="w-8 h-8 flex items-center justify-center rounded border"
-            :class="currentPage === 0 ? 'bg-blue-500 text-white' : 'hover:bg-gray-50'"
+            :class="currentPage === 0 ? 'bg-accent text-white' : 'hover:bg-secondary/10'"
             @click="goToPage(0)">
             1
           </button>
@@ -230,13 +230,13 @@ onMounted(() => {
           <button
             v-if="totalPages > 1"
             class="w-8 h-8 flex items-center justify-center rounded border"
-            :class="currentPage === 1 ? 'bg-blue-500 text-white' : 'hover:bg-gray-50'"
+            :class="currentPage === 1 ? 'bg-accent text-white' : 'hover:bg-secondary/10'"
             @click="goToPage(1)">
             2
           </button>
 
           <button
-            class="w-8 h-8 flex items-center justify-center rounded border hover:bg-gray-50"
+            class="w-8 h-8 flex items-center justify-center rounded border hover:bg-secondary/10"
             :disabled="currentPage >= totalPages - 1"
             @click="goToNextPage">
             <ChevronRightIcon class="h-4 w-4" />

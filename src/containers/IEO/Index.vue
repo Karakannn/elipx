@@ -112,7 +112,7 @@ const activeTab = ref("my-transactions");
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4 mb-6">
-                  <div class="col-span-1 bg-dialog-window p-4 rounded-[12px] space-y-3 border border-border">
+                  <div class="col-span-1 bg-surface-sunken p-4 rounded-[12px] space-y-3 border ">
                     <div class="text-caption-12 text-secondary">Distribution:</div>
                     <div class="text-mono-12">
                       100% LOCKED FOR 12 MONTHS<br />
@@ -120,12 +120,12 @@ const activeTab = ref("my-transactions");
                     </div>
                   </div>
 
-                  <div class="col-span-1 bg-dialog-window p-4 rounded-[12px] space-y-3 border border-border">
+                  <div class="col-span-1 bg-surface-sunken p-4 rounded-[12px] space-y-3 border ">
                     <div class="text-caption-12 text-secondary">Private Price:</div>
                     <div class="text-mono-12">$0.030</div>
                   </div>
 
-                  <div class="col-span-1 bg-dialog-window p-4 rounded-[12px] space-y-3 border border-border">
+                  <div class="col-span-1 bg-surface-sunken p-4 rounded-[12px] space-y-3 border ">
                     <div class="text-caption-12 text-secondary">Limits:</div>
                     <div class="text-mono-12">
                       YOU CAN PARTICIPATE WITH<br />

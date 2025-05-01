@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
     <CardContent class="p-4">
       <div class="relative py-4">
         <div class="relative">
-          <div class="h-0.5 w-full bg-icon-secondary/29 mb-6"></div>
+          <div class="h-0.5 w-full bg-secondary/29 mb-6"></div>
 
           <div class="absolute top-0 left-0 h-0.5 bg-icon-green w-1/2"></div>
 

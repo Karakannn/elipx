@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useColorMode } from '@vueuse/core'
 
 const route = useRoute();
 
@@ -18,6 +19,14 @@ const navContainer = ref<HTMLElement | null>(null);
 const isDragging = ref(false);
 const startX = ref(0);
 const scrollLeft = ref(0);
+const mode = useColorMode()
+
+
+// Function to toggle theme
+const toggleTheme = (theme: 'light' | 'dark') => {
+  mode.value = theme;
+  localStorage.setItem('theme', theme);
+};
 
 const handleDragStart = (e: MouseEvent | TouchEvent) => {
   if (!navContainer.value) return;
@@ -139,7 +148,7 @@ const isActiveLink = (path: string) => {
 <template>
   <!-- Desktop Header -->
   <header
-    class="hidden md:block h-14 border-b border-border-on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
+    class="hidden md:block h-14 border-b -on-sunken fixed top-0 left-0 right-0 z-50 backdrop-blur-xl">
     <div class="h-full flex items-center">
       <img src="/public/logo.svg" alt="" class="w-6 h-6 ml-4 shrink-0" />
 
@@ -153,7 +162,7 @@ const isActiveLink = (path: string) => {
           </Button>
         </div>
       </div>
-      <div class="flex items-center gap-2 px-4 shrink-0 border-l border-border-on-sunken">
+      <div class="flex items-center gap-2 px-4 shrink-0 border-l -on-sunken">
         <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> DEPOSIT </Button>
         <Button variant="header" class="text-mono-12 uppercase hidden sm:inline-flex"> WITHDRAWAL </Button>
 
@@ -189,7 +198,7 @@ const isActiveLink = (path: string) => {
                   </Avatar>
                   <div class="space-y-0.5">
                     <div class="text-paragraph-14">John Doe</div>
-                    <div class="text-caption-12 text-secondary">John.doe@gmail.com</div>
+                    <div class="text-caption-12 text-secondary">john.doe@gmail.com</div>
                   </div>
                 </div>
 
@@ -203,12 +212,18 @@ const isActiveLink = (path: string) => {
                   <div class="flex justify-between gap-4 items-center">
                     <span class="p-3 uppercase text-mono-12">Theme:</span>
                     <div class="flex gap-2 items-center">
-                      <div class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer">
-                        <SvgIcon name="light-mode" class="size-5 text-primary" />
+                      <div 
+                        class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
+                        :class="{ 'bg-secondary/20': mode === 'light' }"
+                        @click="toggleTheme('light')">
+                        <SvgIcon name="light-mode" class="size-5" :class="mode === 'light' ? 'text-primary' : 'text-secondary'" />
                       </div>
                       <Separator orientation="vertical" />
-                      <div class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer">
-                        <SvgIcon name="dark-mode" class="size-5 text-primary" />
+                      <div 
+                        class="hover:bg-secondary/10 p-1 rounded-md cursor-pointer"
+                        :class="{ 'bg-secondary/20': mode === 'dark' }"
+                        @click="toggleTheme('dark')">
+                        <SvgIcon name="dark-mode" class="size-5" :class="mode === 'dark' ? 'text-primary' : 'text-secondary'" />
                       </div>
                     </div>
                   </div>
@@ -243,10 +258,9 @@ const isActiveLink = (path: string) => {
     </div>
   </header>
 
-  <!-- TODO: add border/seperator between icon buttons in mobile header -->
   <!-- Mobile Header -->
   <div class="md:hidden fixed top-0 left-0 right-0 z-50">
-    <header class="h-14 px-4 flex items-center justify-between border-b border-border-on-sunken backdrop-blur-xl">
+    <header class="h-14 px-4 flex items-center justify-between border-b -on-sunken backdrop-blur-xl">
       <SvgIcon name="logo" class="size-6" />
       <div class="flex items-center gap-4">
         <Button size="icon" variant="header-ghost">
@@ -275,18 +289,41 @@ const isActiveLink = (path: string) => {
       enter-to-class="opacity-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100"
       leave-to-class="opacity-0">
       <div v-if="isMenuOpen"
-        class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-center">
+        class="fixed inset-0 top-14 bg-surface-sunken/70 backdrop-blur-3xl z-40 flex flex-col justify-between">
         <nav class="px-4 py-8">
           <div class="flex flex-col space-y-4">
-            <RouterLİnk v-for="link in links" :key="link.name" :to="link.href"
-              class="text-headline-small font-normal text-center" :active="isActiveLink(link.href)">
+            <RouterLink v-for="link in links" :key="link.name" :to="link.href"
+              class="text-headline-small font-normal text-center" :class="{ 'font-medium': isActiveLink(link.href) }">
               {{ link.name }}
-            </RouterLİnk>
+            </RouterLink>
           </div>
         </nav>
-        <div class="p-4 flex gap-2 border-t border-border-on-sunken">
-          <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> DEPOSIT </Button>
-          <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> WITHDRAWAL </Button>
+        
+        <!-- Theme toggle in mobile menu -->
+        <div class="px-4 py-4 border-t -on-sunken">
+          <div class="flex justify-center items-center gap-2 mb-4">
+            <span class="uppercase text-mono-12">Theme:</span>
+            <div class="flex gap-2 items-center">
+              <div 
+                class="hover:bg-secondary/10 p-2 rounded-md cursor-pointer"
+                :class="{ 'bg-secondary/20': mode === 'light' }"
+                @click="toggleTheme('light')">
+                <SvgIcon name="light-mode" class="size-5" :class="mode === 'light' ? 'text-primary' : 'text-secondary'" />
+              </div>
+              <Separator orientation="vertical" />
+              <div 
+                class="hover:bg-secondary/10 p-2 rounded-md cursor-pointer"
+                :class="{ 'bg-secondary/20': mode === 'dark' }"
+                @click="toggleTheme('dark')">
+                <SvgIcon name="dark-mode" class="size-5" :class="mode === 'dark' ? 'text-primary' : 'text-secondary'" />
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex gap-2">
+            <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> DEPOSIT </Button>
+            <Button variant="secondary" class="flex-1 text-mono-12 uppercase gap-1"> WITHDRAWAL </Button>
+          </div>
         </div>
       </div>
     </Transition>
