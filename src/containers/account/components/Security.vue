@@ -10,7 +10,7 @@ import DisconnectApp from '@/components/dialogs/DisconnectApp.vue';
 import TerminateSession from '@/components/dialogs/TerminateSession.vue';
 import Passkeys from '@/components/dialogs/Passkeys.vue';
 import ChangePassword from '@/components/dialogs/ChangePassword.vue';
-
+import AuthenticatorApp from '@/components/dialogs/AuthenticatorApp.vue';
 
 const passKeyRef = ref(null);
 const authAppRef = ref(null);
@@ -20,7 +20,6 @@ const changeCountryRef = ref(null);
 const changePhoneRef = ref(null);
 const terminateSessionRef = ref(null);
 
-// 2FA bilgileri
 const twoFactorAuth = ref({
     passkeys: {
         status: 'PIN CODE',
@@ -43,7 +42,6 @@ const twoFactorAuth = ref({
     }
 });
 
-// Aktif oturumlar
 const activeSessions = ref([
     {
         ip: '85.15.90.451',
@@ -62,7 +60,6 @@ const activeSessions = ref([
     }
 ]);
 
-// Button click handlers
 const managePasskeys = () => {
     passKeyRef.value.openModal();
 };
@@ -146,7 +143,7 @@ const terminateSession = (index) => {
                 <template #action>
                     <div class="flex items-center gap-3">
                         <div class="text-mono-12 text-secondary">{{ twoFactorAuth.phone.status }}</div>
-                        <Button variant="secondary" size="sm">
+                        <Button variant="secondary" size="sm" @click="changePhoneNumber">
                             <span class="uppercase text-mono-12">ADD</span>
                         </Button>
                     </div>
@@ -221,7 +218,7 @@ const terminateSession = (index) => {
         <ChangeCountry ref="changeCountryRef" />
         <ChangePhoneNumber ref="changePhoneRef" />
         <TerminateSession ref="terminateSessionRef" />
-        <DisconnectApp ref="authAppRef" />
+        <AuthenticatorApp ref="authAppRef" />
 
     </div>
 </template>

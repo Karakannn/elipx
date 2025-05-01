@@ -3,9 +3,13 @@ import { ref } from 'vue';
 import SettingItem from '@/components/SettingItem.vue'
 import SvgIcon from '@/components/ui/svg-icon/SvgIcon.vue';
 import { Button } from "@/components/ui/button";
+import ScanQRCode from '@/components/dialogs/ScanQRCode.vue';
+import ChangeReferralLink from '@/components/dialogs/ChangeReferralLink.vue';
 
 const referralLink = ref('IEODASHBOARD.COM/FRIEND123');
 const totalEarned = ref(100);
+const scanQRRef = ref(null);
+const editReferralRef = ref(null);
 
 const referrals = ref([
   {
@@ -33,11 +37,11 @@ const copyLink = () => {
 };
 
 const editLink = () => {
-  console.log('Edit link clicked');
+  editReferralRef.value.openModal()
 };
 
 const showQrCode = () => {
-  console.log('Show QR code clicked');
+  scanQRRef.value.openModal()
 };
 </script>
 
@@ -83,5 +87,8 @@ const showQrCode = () => {
         </template>
       </SettingItem>
     </div>
+
+    <ScanQRCode ref="scanQRRef" />
+    <ChangeReferralLink ref="editReferralRef" />
   </div>
 </template>
