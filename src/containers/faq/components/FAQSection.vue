@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(section, sectionIndex) in faqSections" :key="sectionIndex" class="">
+  <div v-for="(section, sectionIndex) in faqSections" :key="sectionIndex" class="px-4">
     <h2 class="text-caption-12 text-secondary pt-5 pb-4">{{ section.title }}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">

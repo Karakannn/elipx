@@ -46,7 +46,6 @@ function triggerFileInput() {
 function handleFileChange(event) {
   const newFiles = Array.from(event.target.files);
   ticketForm.value.files = [...ticketForm.value.files, ...newFiles];
-  // Reset the input to allow selecting the same file again
   event.target.value = null;
 }
 
@@ -55,10 +54,7 @@ function removeFile(index) {
 }
 
 function submitTicket() {
-  // Here you would typically send the form data to your backend
-  console.log("Submitting ticket:", ticketForm.value);
 
-  // Add the new ticket to the list (for demo purposes)
   tickets.value.unshift({
     id: `2023-CS${Math.floor(Math.random() * 1000)}`,
     subject: ticketForm.value.subject,
@@ -67,7 +63,6 @@ function submitTicket() {
     date: new Date().toLocaleDateString("en-US", { day: "2-digit", month: "short" }).toUpperCase(),
   });
 
-  // Reset the form
   ticketForm.value = {
     subject: "",
     category: "",
@@ -75,7 +70,6 @@ function submitTicket() {
     files: [],
   };
 
-  // Show success message (in a real app)
   alert("Ticket submitted successfully!");
 }
 </script>
@@ -145,7 +139,7 @@ function submitTicket() {
       </Button>
     </form>
 
-    <div v-for="(ticket, index) in tickets" :key="index">
+    <div v-for="(ticket, index) in tickets" :key="index" class="px-4">
       <div class="py-5 text-caption-12 text-secondary">Ticket# {{ ticket.id }}</div>
 
       <div class="space-y-1 w-full py-4 border-b border-border">

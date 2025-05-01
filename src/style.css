@@ -265,35 +265,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-.custom-container {
-  width: 100%;
-}
 
-@media (width >= 40rem /* 640px */) {
-  .custom-container {
-    max-width: 40rem /* 640px */;
-  }
-}
-@media (width >= 48rem /* 768px */) {
-  .custom-container {
-    max-width: 48rem /* 768px */;
-  }
-}
-@media (width >= 64rem /* 1024px */) {
-  .custom-container {
-    max-width: 64rem /* 1024px */;
-  }
-}
-@media (width >= 80rem /* 1280px */) {
-  .custom-container {
-    max-width: 80rem /* 1280px */;
-  }
-}
-@media (width >= 90rem /* 1440px */) {
-  .custom-container {
-    max-width: 90rem /* 1440px */;
-  }
-}
 
 @layer base {
   .text-mono-10,
@@ -313,6 +285,19 @@
 }
 
 @layer components {
+
+  .app {
+    @apply h-screen flex flex-col w-screen
+  }
+  .custom-container {
+    @apply w-full mx-auto;
+    @apply sm:max-w-[40rem]; /* 640px */
+    @apply md:max-w-[48rem]; /* 768px */
+    @apply lg:max-w-[64rem]; /* 1024px */
+    @apply xl:max-w-[80rem]; /* 1280px */
+    @apply 2xl:max-w-[90rem]; /* 1440px, burada '2xl' kullanıyoruz varsayılan tailwind breakpoints'e göre */
+  }
+
   .custom-tab-trigger {
     @apply  uppercase py-3.5 px-1 hover:bg-gray-50 cursor-pointer flex items-center gap-1 text-secondary;
   }

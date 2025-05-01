@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container custom-container mx-auto">
     <div class="gradient-bg"></div>
     <AppHeader />
     <div class="sm:p-4 space-y-6">
