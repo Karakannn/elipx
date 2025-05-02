@@ -161,7 +161,7 @@ const disconnectWallet = (wallet) => {
             <SettingItem label="LINKED WALLET"
                 description="WE SUPPORT METAMASK, WALLETCONNECT, LEDGER, AND OTHER POPULAR WALLETS.">
                 <template #icon>
-                    <SvgIcon name="ledger" class="size-4" />
+                    <SvgIcon name="plus" class="size-4" />
                 </template>
                 <template #action>
                     <Button variant="secondary" size="sm">
